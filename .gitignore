@@ -1,0 +1,36 @@
+# ---------------------------------------------------------------------------
+# Datos: NO se versionan. El corpus original pesa 1,4 GB comprimido y 7,2 GB
+# como CSV, muy por encima del limite de 100 MB por archivo de GitHub. Todo lo
+# de data/processed/ se regenera corriendo R/01 y R/01b sobre el .rds.
+# ---------------------------------------------------------------------------
+*.rds
+*.parquet
+*.csv.gz
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Los CSV grandes del corpus, por si quedan en la raiz
+/tw_chile_social_crisis.csv
+/*.csv
+
+# ---------------------------------------------------------------------------
+# Salidas: las figuras PNG y las tablas chicas si se versionan, porque son el
+# resultado del analisis y no se pueden regenerar sin el corpus de 7 GB.
+# Los PDF vectoriales de la red pesan 23 MB entre los tres y salen de R/04.
+# ---------------------------------------------------------------------------
+output/figuras/*.pdf
+
+# ---------------------------------------------------------------------------
+# R y editores
+# ---------------------------------------------------------------------------
+.Rproj.user/
+.Rhistory
+.RData
+.RDataTmp
+.Ruserdata
+*.Rproj.bak
+.Renviron
+.DS_Store
+Thumbs.db
