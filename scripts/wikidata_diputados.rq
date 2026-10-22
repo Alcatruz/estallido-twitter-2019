@@ -1,0 +1,11 @@
+SELECT DISTINCT ?p ?pLabel ?inicio ?fin ?term ?termLabel ?distLabel ?partidoLabel ?tw WHERE {
+  ?p p:P39 ?st . ?st ps:P39 wd:Q18067639 .
+  OPTIONAL { ?st pq:P580 ?inicio }
+  OPTIONAL { ?st pq:P582 ?fin }
+  OPTIONAL { ?st pq:P2937 ?term }
+  OPTIONAL { ?st pq:P768 ?dist }
+  OPTIONAL { ?st pq:P4100 ?partido }
+  OPTIONAL { ?p wdt:P2002 ?tw }
+  FILTER( (BOUND(?inicio) && YEAR(?inicio) >= 2013) || (BOUND(?fin) && YEAR(?fin) >= 2018) || BOUND(?term) )
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "es,en". }
+}
