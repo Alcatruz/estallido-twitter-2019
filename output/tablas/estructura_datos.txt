@@ -1,0 +1,191 @@
+Archivo : C:/Users/alcacplt/Documents/estallido_data/tw_chile_social_crisis.rds 
+Filas   : 6.119.933 
+Columnas: 90 
+Memoria : 13.60 GB 
+
+                    columna           tipo    n_na pct_na n_unicos
+                     <char>         <char>   <num>  <num>    <num>
+ 1:                 user_id      character       0   0.00   698343
+ 2:               status_id      character       0   0.00  6119933
+ 3:              created_at POSIXct/POSIXt       0   0.00   988133
+ 4:             screen_name      character       0   0.00   701325
+ 5:                    text      character       0   0.00   755220
+ 6:                  source      character       0   0.00      739
+ 7:      display_text_width        numeric       0   0.00      314
+ 8:      reply_to_status_id      character 6035135  98.61    58516
+ 9:        reply_to_user_id      character 6015818  98.30    30683
+10:    reply_to_screen_name      character 6015818  98.30    30755
+11:                is_quote        logical       0   0.00        2
+12:              is_retweet        logical       0   0.00        2
+13:          favorite_count        integer       0   0.00     1838
+14:           retweet_count        integer       0   0.00     6171
+15:             quote_count        integer 6119933 100.00        1
+16:             reply_count        integer 6119933 100.00        1
+17:                hashtags           list 2100484  34.32       NA
+18:                 symbols           list 6119314  99.99       NA
+19:                urls_url           list 5767258  94.24       NA
+20:               urls_t.co           list 5767258  94.24       NA
+21:       urls_expanded_url           list 5767258  94.24       NA
+22:               media_url           list 4854122  79.32       NA
+23:              media_t.co           list 4854122  79.32       NA
+24:      media_expanded_url           list 4854122  79.32       NA
+25:              media_type           list 4854122  79.32       NA
+26:           ext_media_url           list 4854122  79.32       NA
+27:          ext_media_t.co           list 4854122  79.32       NA
+28:  ext_media_expanded_url           list 4854122  79.32       NA
+29:          ext_media_type      character 6119933 100.00        1
+30:        mentions_user_id           list  581766   9.51       NA
+31:    mentions_screen_name           list  581766   9.51       NA
+32:                    lang      character       0   0.00       49
+33:        quoted_status_id      character 5991677  97.90    58856
+34:             quoted_text      character 5991677  97.90    58832
+35:       quoted_created_at POSIXct/POSIXt 5991677  97.90    55949
+36:           quoted_source      character 5991677  97.90      176
+37:   quoted_favorite_count        integer 5991677  97.90    10477
+38:    quoted_retweet_count        integer 5991677  97.90     8418
+39:          quoted_user_id      character 5991677  97.90    27510
+40:      quoted_screen_name      character 5991677  97.90    27609
+41:             quoted_name      character 5991677  97.90    26644
+42:  quoted_followers_count        integer 5991677  97.90    41538
+43:    quoted_friends_count        integer 5991677  97.90     9442
+44:   quoted_statuses_count        integer 5991677  97.90    38961
+45:         quoted_location      character 5991677  97.90     6891
+46:      quoted_description      character 5991677  97.90    24904
+47:         quoted_verified        logical 5991677  97.90        3
+48:       retweet_status_id      character  764154  12.49   339294
+49:            retweet_text      character  764154  12.49   336522
+50:      retweet_created_at POSIXct/POSIXt  764154  12.49   246381
+51:          retweet_source      character  764154  12.49      234
+52:  retweet_favorite_count        integer  764154  12.49     7902
+53:   retweet_retweet_count        integer  764154  12.49     6171
+54:         retweet_user_id      character  764154  12.49    95607
+55:     retweet_screen_name      character  764154  12.49    96077
+56:            retweet_name      character  764154  12.49    89226
+57: retweet_followers_count        integer  764154  12.49    46895
+58:   retweet_friends_count        integer  764154  12.49    11932
+59:  retweet_statuses_count        integer  764154  12.49    75316
+60:        retweet_location      character  764154  12.49    18783
+61:     retweet_description      character  764154  12.49    82078
+62:        retweet_verified        logical  764154  12.49        3
+63:               place_url      character 6077611  99.31     1962
+64:              place_name      character 6077611  99.31     1856
+65:         place_full_name      character 6077611  99.31     1914
+66:              place_type      character 6077611  99.31        6
+67:                 country      character 6077611  99.31       73
+68:            country_code      character 6077612  99.31       72
+69:              geo_coords           list       0   0.00       NA
+70:           coords_coords           list       0   0.00       NA
+71:             bbox_coords           list       0   0.00       NA
+72:              status_url      character       0   0.00  6119933
+73:                    name      character       0   0.00   599245
+74:                location      character       0   0.00   118106
+75:             description      character       0   0.00   513971
+76:                     url      character 4968247  81.18   126509
+77:               protected        logical       0   0.00        1
+78:         followers_count        integer       0   0.00    40982
+79:           friends_count        integer       0   0.00    19403
+80:            listed_count        integer       0   0.00     2155
+81:          statuses_count        integer       0   0.00   188314
+82:        favourites_count        integer       0   0.00   133811
+83:      account_created_at POSIXct/POSIXt       0   0.00   696892
+84:                verified        logical       0   0.00        2
+85:             profile_url      character 4968247  81.18   126509
+86:    profile_expanded_url      character 4969949  81.21   125072
+87:            account_lang        logical 6119933 100.00        1
+88:      profile_banner_url      character 1316281  21.51   541630
+89:  profile_background_url      character 1644520  26.87       21
+90:       profile_image_url      character       0   0.00   697104
+                    columna           tipo    n_na pct_na n_unicos
+                                                          ejemplo
+                                                           <char>
+ 1:                                                    1626218322
+ 2:                                           1186702428441325569
+ 3:                                           2019-10-22 17:54:41
+ 4:                                                ArmamaterChile
+ 5:  Mi mamá no me deja salir de la casa sin importar la hora y n
+ 6:                                            Twitter for iPhone
+ 7:                                                           140
+ 8:                                           1186431900379955200
+ 9:                                           1157935527452119040
+10:                                                  arrobamestee
+11:                                                         FALSE
+12:                                                          TRUE
+13:                                                             0
+14:                                                           499
+15:                                                          <NA>
+16:                                                          <NA>
+17:   EstoPasaEnChileً|ChileSeCansó|FuerzaChilenos|ChileBajoAtaque
+18:                                                          doge
+19:                                   twitter.com/isjopping/stat…
+20:                                       https://t.co/L551auwpBS
+21:      https://twitter.com/isjopping/status/1186666099041013760
+22:  http://pbs.twimg.com/ext_tw_video_thumb/1186295773543260162/
+23:                                       https://t.co/jqBs2m3rmo
+24:  https://twitter.com/kontratuiteo/status/1186296017303605248/
+25:                                                         photo
+26:  http://pbs.twimg.com/ext_tw_video_thumb/1186295773543260162/
+27:                                       https://t.co/jqBs2m3rmo
+28:  https://twitter.com/kontratuiteo/status/1186296017303605248/
+29:                                                          <NA>
+30:                                                    2950115129
+31:                                                   mesiaspezoa
+32:                                                            es
+33:                                           1186666099041013760
+34:  Constanza Santa María manipulando info en pantalla, Polo Ram
+35:                                           2019-10-22 15:30:19
+36:                                           Twitter for Android
+37:                                                           256
+38:                                                           337
+39:                                            935709139833180161
+40:                                                     isjopping
+41:                                                        Rınα.🥀
+42:                                                           765
+43:                                                           528
+44:                                                         17547
+45:                                 shinee♡pulguita de mi kokoro 
+46: bruja terapeando el alma. Acá vive mi alter ego. ♓♒♒🏳️‍🌈ㅤㅤ
+47:                                                         FALSE
+48:                                           1186419494887022592
+49:  Mi mamá no me deja salir de la casa sin importar la hora y n
+50:                                           2019-10-21 23:10:24
+51:                                            Twitter for iPhone
+52:                                                           810
+53:                                                           499
+54:                                                    2950115129
+55:                                                   mesiaspezoa
+56:                                                            Ro
+57:                                                          6676
+58:                                                          4365
+59:                                                          3314
+60:                                                         Chile
+61:               Instagram: rociomesias ♡ \n4º de periodismo UAI
+62:                                                         FALSE
+63:      https://api.twitter.com/1.1/geo/id/01e6f0de7086875b.json
+64:                                                      Vitacura
+65:                                               Vitacura, Chile
+66:                                                          city
+67:                                                         Chile
+68:                                                            CL
+69:                                                         NA|NA
+70:                                                         NA|NA
+71:                                       NA|NA|NA|NA|NA|NA|NA|NA
+72:  https://twitter.com/ArmamaterChile/status/118670242844132556
+73:                                           👁‍🗨🔔 Miguel Morales😎
+74:                                         Provincia de Santiago
+75:        cumplimos 28 años apoyando a la gente con discapacidad
+76:                                       https://t.co/KA5kOpO30c
+77:                                                         FALSE
+78:                                                          2783
+79:                                                          2854
+80:                                                            11
+81:                                                         26417
+82:                                                          3123
+83:                                           2013-07-27 20:25:13
+84:                                                         FALSE
+85:                                       https://t.co/KA5kOpO30c
+86:                                       http://www.armamater.cl
+87:                                                          <NA>
+88:     https://pbs.twimg.com/profile_banners/26361990/1513560720
+89:              http://abs.twimg.com/images/themes/theme1/bg.png
+90:  http://pbs.twimg.com/profile_images/434791386651439104/k_pxp
+                                                          ejemplo
