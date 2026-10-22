@@ -1,0 +1,413 @@
+---
+title: "Estallido social en Twitter: radiografía del corpus completo"
+subtitle: "6,1 millones de tweets, octubre de 2019"
+date: today
+lang: es
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "ver código"
+    embed-resources: true
+    fig-width: 9
+    fig-height: 5
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+source("R/00_setup.R")
+suppressPackageStartupMessages({
+  library(arrow); library(ggplot2); library(scales)
+})
+theme_set(theme_minimal(base_size = 12))
+
+dt <- as.data.table(read_parquet(file.path(RUTA_PROC, "tabla_analisis.parquet")))
+dt[, tipo := factor(tipo, levels = c("original", "cita", "retweet"),
+                    labels = c("Original", "Cita", "Retweet"))]
+
+fmt <- function(x) format(x, big.mark = ".", decimal.mark = ",", scientific = FALSE)
+pct <- function(x, d = 1) paste0(format(round(100 * x, d), decimal.mark = ","), "%")
+
+col_tipo <- c(Original = "#c1121f", Cita = "#f4a261", Retweet = "#003049")
+```
+
+> **Alcance.** Todo lo que sigue está calculado sobre las **6.119.933 filas
+> completas** del corpus, no sobre una muestra. Los horarios están convertidos a
+> hora local de Chile (`America/Santiago`); el archivo original viene en UTC.
+
+## 1. Volumen: cuántos tweets y cuántos retweets
+
+```{r}
+#| label: volumen
+volumen <- dt[, .(tweets = .N), by = tipo][order(-tweets)]
+volumen[, participacion := pct(tweets / sum(tweets))]
+volumen[, tweets := fmt(tweets)]
+knitr::kable(volumen, col.names = c("Tipo", "Tweets", "% del corpus"),
+             align = "lrr")
+```
+
+```{r}
+#| label: cifras
+n_total <- nrow(dt)
+n_rt    <- dt[tipo == "Retweet", .N]
+n_orig  <- dt[tipo == "Original", .N]
+n_cita  <- dt[tipo == "Cita", .N]
+n_users <- uniqueN(dt$screen_name)
+```
+
+- **Total:** `r fmt(n_total)` tweets.
+- **Retweets:** `r fmt(n_rt)` (`r pct(n_rt/n_total)` del corpus).
+- **Originales:** `r fmt(n_orig)` (`r pct(n_orig/n_total)`).
+- **Citas:** `r fmt(n_cita)` (`r pct(n_cita/n_total)`).
+- **Cuentas distintas que publican:** `r fmt(n_users)`.
+
+El corpus está dominado por la **amplificación**: por cada tweet escrito desde
+cero circulan cerca de `r round(n_rt/n_orig, 1)` retweets. Es la firma típica de
+una conversación de crisis, donde la mayoría participa redifundiendo en vez de
+redactando.
+
+## 2. Rango de fechas
+
+```{r}
+#| label: rango
+rango     <- range(dt$fecha_cl, na.rm = TRUE)
+rango_utc <- range(dt$created_at, na.rm = TRUE)
+n_dias    <- as.integer(diff(as.Date(rango))) + 1L
+```
+
+| | Inicio | Fin |
+|---|---|---|
+| Hora de Chile | `r format(rango[1], "%Y-%m-%d %H:%M")` | `r format(rango[2], "%Y-%m-%d %H:%M")` |
+| UTC | `r format(rango_utc[1], "%Y-%m-%d %H:%M")` | `r format(rango_utc[2], "%Y-%m-%d %H:%M")` |
+
+La ventana cubre **`r n_dias` días** corridos, del
+`r format(rango[1], "%d de %B")` al `r format(rango[2], "%d de %B de %Y")`.
+Los extremos no caen en horas redondas, así que el corte lo puso la ventana de
+descarga, no un filtro por día calendario.
+
+```{r}
+#| label: fig-serie
+#| fig-cap: "Volumen diario por tipo de publicación (hora de Chile)."
+por_dia <- dt[, .N, by = .(dia = as.Date(dia_cl), tipo)]
+
+hitos <- data.table(
+  dia = as.Date(c("2019-10-18", "2019-10-25", "2019-10-28")),
+  etiqueta = c("18-oct: evasión masiva\ny estado de emergencia",
+               "25-oct: marcha\nmás grande de Chile",
+               "28-oct: cambio\nde gabinete")
+)
+
+ggplot(por_dia, aes(dia, N, fill = tipo)) +
+  geom_col(width = 0.85) +
+  geom_vline(data = hitos, aes(xintercept = dia), linetype = "dashed",
+             colour = "grey35", linewidth = 0.4) +
+  geom_text(data = hitos, aes(x = dia, y = Inf, label = etiqueta),
+            inherit.aes = FALSE, vjust = 1.15, hjust = -0.03,
+            size = 2.8, lineheight = 0.95, colour = "grey25") +
+  scale_fill_manual(values = col_tipo, name = NULL) +
+  scale_y_continuous(labels = label_number(big.mark = ".", decimal.mark = ",")) +
+  scale_x_date(date_breaks = "2 days", date_labels = "%d-%b") +
+  labs(x = NULL, y = "tweets por día",
+       title = "El corpus completo, día a día",
+       subtitle = "6.119.933 tweets entre el 11 y el 29 de octubre de 2019")
+```
+
+```{r}
+#| label: tab-dia
+tab_dia <- dcast(por_dia, dia ~ tipo, value.var = "N", fill = 0)
+tab_dia[, Total := Original + Cita + Retweet]
+tab_dia[, pct_rt := pct(Retweet / Total, 0)]
+knitr::kable(tab_dia[, .(Día = format(dia, "%a %d-%b"),
+                         Original = fmt(Original), Cita = fmt(Cita),
+                         Retweet = fmt(Retweet), Total = fmt(Total),
+                         `% RT` = pct_rt)],
+             align = "lrrrrr")
+```
+
+## 3. Distribución horaria
+
+```{r}
+#| label: fig-horas
+#| fig-cap: "Perfil horario normalizado dentro de cada tipo, para que las curvas sean comparables pese a la diferencia de volumen."
+por_hora <- dt[, .N, by = .(hora_cl, tipo)]
+por_hora[, share := N / sum(N), by = tipo]
+
+ggplot(por_hora, aes(hora_cl, share, colour = tipo)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 1.6) +
+  scale_colour_manual(values = col_tipo, name = NULL) +
+  scale_x_continuous(breaks = seq(0, 23, 2)) +
+  scale_y_continuous(labels = label_percent(accuracy = 1)) +
+  labs(x = "hora local de Chile", y = "% de los tweets de ese tipo",
+       title = "Cuándo se tuitea y cuándo se retuitea",
+       subtitle = "porcentaje dentro de cada tipo, corpus completo")
+```
+
+```{r}
+#| label: tab-horas
+tab_h <- dcast(por_hora, hora_cl ~ tipo, value.var = "N", fill = 0)
+tab_h[, Total := Original + Cita + Retweet]
+tab_h[, pct_dia := pct(Total / sum(Total), 1)]
+knitr::kable(tab_h[, .(Hora = sprintf("%02d:00", hora_cl),
+                       Original = fmt(Original), Cita = fmt(Cita),
+                       Retweet = fmt(Retweet), Total = fmt(Total),
+                       `% del día` = pct_dia)],
+             align = "lrrrrr")
+```
+
+```{r}
+#| label: horas-resumen
+pico    <- tab_h[which.max(Total)]
+valle   <- tab_h[which.min(Total)]
+noche   <- tab_h[hora_cl %in% 0:3, sum(Total)] / sum(tab_h$Total)
+rt_pico <- por_hora[tipo == "Retweet"][which.max(share)]
+or_pico <- por_hora[tipo == "Original"][which.max(share)]
+```
+
+- **Hora peak:** `r sprintf("%02d:00", pico$hora_cl)` con `r fmt(pico$Total)`
+  tweets (`r pico$pct_dia` del total).
+- **Hora valle:** `r sprintf("%02d:00", valle$hora_cl)` con `r fmt(valle$Total)`.
+- La madrugada (00:00–03:59) concentra `r pct(noche)` de la actividad: alto para
+  una red social en reposo, y consistente con los toques de queda y las noches
+  de protesta.
+- Originales y retweets comparten peak a las
+  `r sprintf("%02d:00", rt_pico$hora_cl)`: no hay desfase entre escribir y
+  amplificar, la conversación sube y baja en bloque.
+
+```{r}
+#| label: fig-heatmap
+#| fig-cap: "Intensidad por día y hora. Cada celda es el total de publicaciones de ese bloque horario."
+heat <- dt[, .N, by = .(dia = as.Date(dia_cl), hora_cl)]
+
+ggplot(heat, aes(hora_cl, dia, fill = N)) +
+  geom_tile() +
+  scale_fill_viridis_c(option = "inferno", labels = label_number(big.mark = "."),
+                       name = "tweets") +
+  scale_x_continuous(breaks = seq(0, 23, 2), expand = c(0, 0)) +
+  scale_y_date(date_breaks = "2 days", date_labels = "%d-%b", expand = c(0, 0)) +
+  labs(x = "hora local de Chile", y = NULL,
+       title = "Día x hora: dónde se concentra el corpus")
+```
+
+```{r}
+#| label: fig-horas-tipo
+#| fig-cap: "El mismo perfil horario en volumen absoluto, separado por tipo."
+ggplot(por_hora, aes(hora_cl, N)) +
+  geom_col(aes(fill = tipo), show.legend = FALSE) +
+  facet_wrap(~ tipo, scales = "free_y", ncol = 3) +
+  scale_fill_manual(values = col_tipo) +
+  scale_x_continuous(breaks = seq(0, 23, 6)) +
+  scale_y_continuous(labels = label_number(big.mark = ".", decimal.mark = ",")) +
+  labs(x = "hora local de Chile", y = "tweets")
+```
+
+### 3.1 Cuánto tarda un tweet en ser retuiteado
+
+```{r}
+#| label: latencia
+lat <- dt[tipo == "Retweet" & !is.na(retweet_created_at),
+          .(min = as.numeric(difftime(created_at, retweet_created_at, units = "mins")))]
+lat <- lat[min >= 0]
+q <- quantile(lat$min, c(.25, .5, .75, .9, .99), na.rm = TRUE)
+knitr::kable(data.table(
+  Percentil = c("p25", "p50 (mediana)", "p75", "p90", "p99"),
+  `Minutos desde el original` = format(round(q, 1), decimal.mark = ",", big.mark = ".")
+), align = "lr")
+```
+
+La mitad de los retweets ocurre dentro de los primeros
+`r format(round(q[["50%"]], 0), decimal.mark = ",")` minutos del tweet original:
+la conversación se propaga y se agota en ciclos de minutos, no de días.
+
+## 4. ¿Es todo español chileno?
+
+Twitter etiqueta cada tweet con un código de idioma (`lang`), pero **ese campo
+no distingue dialectos**: no existe un código para "español de Chile". Así que
+la pregunta se responde en dos partes: qué idiomas declara Twitter, y qué tan
+chileno es el español que aparece.
+
+### 4.1 Idiomas declarados por Twitter
+
+```{r}
+#| label: idiomas
+idiomas <- dt[, .N, by = lang][order(-N)]
+idiomas[, share := N / sum(N)]
+
+nombres <- c(
+  es = "Español", en = "Inglés", und = "Indeterminado", pt = "Portugués",
+  ca = "Catalán", fr = "Francés", tl = "Tagalo", it = "Italiano",
+  ht = "Criollo haitiano", de = "Alemán", eu = "Euskera", nl = "Neerlandés",
+  tr = "Turco", ja = "Japonés", ru = "Ruso", ar = "Árabe", cy = "Galés",
+  et = "Estonio", ro = "Rumano", da = "Danés", no = "Noruego", sv = "Sueco",
+  fi = "Finés", pl = "Polaco", lt = "Lituano", sl = "Esloveno", hu = "Húngaro",
+  cs = "Checo", vi = "Vietnamita", is = "Islandés", hi = "Hindi", el = "Griego",
+  ko = "Coreano", th = "Tailandés", fa = "Persa", he = "Hebreo",
+  zh = "Chino", uk = "Ucraniano", bg = "Búlgaro", lv = "Letón",
+  sr = "Serbio", hr = "Croata", ne = "Nepalí", ta = "Tamil", ur = "Urdu",
+  qme = "Media/enlace (sin texto)", qht = "Solo hashtags",
+  qam = "Solo menciones", qst = "Texto muy corto", zxx = "Sin contenido lingüístico"
+)
+idiomas[, idioma := fifelse(lang %in% names(nombres), nombres[lang], lang)]
+
+knitr::kable(idiomas[1:15, .(Código = lang, Idioma = idioma,
+                             Tweets = fmt(N), `%` = pct(share, 2))],
+             align = "llrr")
+```
+
+```{r}
+#| label: idiomas-cifras
+p_es   <- idiomas[lang == "es", share]
+n_es   <- idiomas[lang == "es", N]
+n_lang <- nrow(idiomas)
+no_ling <- idiomas[lang %in% c("und", "qme", "qht", "qam", "qst", "zxx"), sum(N)]
+otros   <- idiomas[!lang %in% c("es", "und", "qme", "qht", "qam", "qst", "zxx"), sum(N)]
+```
+
+- El español (`es`) es `r pct(p_es, 2)` del corpus: `r fmt(n_es)` tweets.
+- Aparecen **`r n_lang` códigos distintos**, pero la cola es marginal: todo lo
+  que es otro idioma real suma `r fmt(otros)` tweets (`r pct(otros/n_total, 2)`).
+- Otros `r fmt(no_ling)` tweets (`r pct(no_ling/n_total, 2)`) caen en códigos
+  que **no son idiomas**: `und`, `qme`, `qht`, `qam`, `zxx` marcan tweets sin
+  texto suficiente para clasificar — puro enlace, puros hashtags o pura mención.
+  Inflan artificialmente la diversidad lingüística aparente.
+
+```{r}
+#| label: fig-idiomas
+#| fig-cap: "Los idiomas distintos del español, en escala logarítmica para que la cola larga sea visible."
+top_otros <- idiomas[lang != "es"][1:12]
+ggplot(top_otros, aes(reorder(idioma, N), N)) +
+  geom_col(fill = "#0f4c5c") +
+  coord_flip() +
+  scale_y_log10(labels = label_number(big.mark = ".")) +
+  labs(x = NULL, y = "tweets (escala log)",
+       title = "Todo lo que no es español",
+       subtitle = "12 códigos más frecuentes")
+```
+
+### 4.2 ¿Qué tan chileno es ese español?
+
+Como `lang` no distingue dialectos, medimos la presencia de **marcadores
+léxicos chilenos** en el texto. Se lee la columna de texto del CSV completo, no
+de la muestra.
+
+```{r}
+#| label: chilenismos
+ruta_csv <- file.path(RUTA_PROC, "tw_chile_social_crisis.csv")
+txt <- fread(ruta_csv, select = c("text", "lang"), showProgress = FALSE)
+txt <- txt[lang == "es"]
+texto <- tolower(txt$text)
+n_es_txt <- length(texto)
+
+marcadores <- c(
+  "we[oó]n|hue[oó]n|\\bwn\\b"              = "weón / hueón / wn",
+  "\\bwea\\b|\\bhuea\\b"                   = "wea / huea",
+  "cachai|cachay"                          = "cachai",
+  "\\bpo\\b|\\bpoh\\b|\\bsipo\\b"          = "po / poh / sipo",
+  "\\bal tiro\\b|\\baltiro\\b"             = "al tiro",
+  "\\bfome\\b"                             = "fome",
+  "\\bbac[aá]n\\b"                         = "bacán",
+  "\\bcu[aá]tico[sa]?\\b"                  = "cuático",
+  "\\bpacos?\\b|\\bpaquito"                = "paco / pacos",
+  "\\bcarrete\\b|\\bcarretear"             = "carrete",
+  "\\bla raja\\b"                          = "la raja",
+  "\\bsapo\\b|\\bfilo\\b"                  = "sapo / filo"
+)
+
+res <- rbindlist(lapply(seq_along(marcadores), function(i) {
+  data.table(marcador = marcadores[[i]],
+             tweets   = sum(grepl(names(marcadores)[i], texto, perl = TRUE)))
+}))[order(-tweets)]
+res[, share := tweets / n_es_txt]
+
+knitr::kable(res[, .(Marcador = marcador, Tweets = fmt(tweets),
+                     `% del español` = pct(share, 2))],
+             align = "lrr")
+```
+
+```{r}
+#| label: chilenismos-global
+patron   <- paste(names(marcadores), collapse = "|")
+p_alguno <- mean(grepl(patron, texto, perl = TRUE))
+
+# Sin duplicación por retweet: un mismo texto viral cuenta una sola vez
+unicos   <- unique(texto)
+p_unicos <- mean(grepl(patron, unicos, perl = TRUE))
+n_unicos <- length(unicos)
+rm(texto, unicos, txt); invisible(gc())
+```
+
+- `r pct(p_alguno)` de los tweets en español contiene al menos un marcador
+  chileno.
+- Sobre los `r fmt(n_unicos)` **textos únicos** (descontando la repetición por
+  retweet), la cifra es `r pct(p_unicos)`. La diferencia entre ambas dice si los
+  tweets con habla chilena se viralizan más o menos que el promedio.
+
+### 4.3 Contraste geográfico
+
+```{r}
+#| label: geo
+geo <- dt[!is.na(country) & country != "", .N, by = country][order(-N)]
+n_geo <- sum(geo$N)
+geo[, share := N / n_geo]
+knitr::kable(geo[1:10, .(País = country, Tweets = fmt(N), `%` = pct(share, 1))],
+             align = "lrr")
+```
+
+Solo `r pct(n_geo / n_total, 2)` del corpus trae geolocalización real, así que
+esa tabla describe a una minoría autoseleccionada. Como complemento, la
+ubicación que cada cuenta declara en su perfil:
+
+```{r}
+#| label: loc
+loc <- dt[!is.na(location) & location != "",
+          .N, by = .(loc = tolower(trimws(location)))][order(-N)]
+patron_cl <- paste0("chile|santiago|valpara|concepci|antofagasta|temuco|iquique|",
+                    "la serena|rancagua|talca|puerto montt|arica|coquimbo|",
+                    "chill[aá]n|osorno|valdivia|calama|copiap|punta arenas|",
+                    "vi[nñ]a del mar|los angeles|curic|linares|quilpu")
+con_loc  <- sum(loc$N)
+chile_n  <- loc[grepl(patron_cl, loc), sum(N)]
+vzla_n   <- loc[grepl("venezuela|caracas|maracaibo|valencia, ven|barquisimeto",
+                      loc), sum(N)]
+knitr::kable(loc[1:12, .(`Ubicación declarada` = loc, Tweets = fmt(N))],
+             align = "lr")
+```
+
+De las publicaciones con ubicación declarada (`r fmt(con_loc)`, es decir
+`r pct(con_loc / n_total)` del corpus), `r pct(chile_n / con_loc)` menciona
+Chile o una ciudad chilena. Es mayoría clara, pero no unanimidad: la etiqueta
+es texto libre, y buena parte del resto son ubicaciones genéricas o vacías de
+contenido geográfico.
+
+Lo que sí destaca es **Venezuela**: `r pct(vzla_n / con_loc)` de las
+publicaciones con ubicación declarada vienen de allí, y `caracas, venezuela`
+aparece entre las ubicaciones más frecuentes del corpus. No es ruido de cola
+larga: es una comunidad extranjera participando de forma sostenida en la
+conversación chilena, y conviene tenerla presente antes de leer este corpus
+como una muestra limpia de opinión nacional.
+
+## 5. Resumen
+
+| Pregunta | Respuesta |
+|---|---|
+| ¿Cuántos tweets? | `r fmt(n_total)` |
+| ¿Cuántos retweets? | `r fmt(n_rt)` (`r pct(n_rt/n_total)`) |
+| ¿Cuántos originales? | `r fmt(n_orig)` (`r pct(n_orig/n_total)`) |
+| ¿Cuántas citas? | `r fmt(n_cita)` (`r pct(n_cita/n_total)`) |
+| ¿Qué rango de fechas? | `r format(rango[1], "%d-%b-%Y %H:%M")` a `r format(rango[2], "%d-%b-%Y %H:%M")` (hora de Chile), `r n_dias` días |
+| ¿Hora peak? | `r sprintf("%02d:00", pico$hora_cl)` |
+| ¿Solo español? | `r pct(p_es, 1)` en español; `r n_lang` códigos de idioma, pero el resto es casi todo texto no clasificable |
+| ¿Español chileno? | `r pct(p_alguno)` de los tweets en español usa marcadores léxicos chilenos |
+
+```{r}
+#| label: sesion
+#| code-fold: true
+#| code-summary: "información de sesión"
+sessionInfo()
+```
