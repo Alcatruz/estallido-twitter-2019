@@ -15,6 +15,9 @@ data/processed/*
 /tw_chile_social_crisis.csv
 /*.csv
 
+# El paquete de publicacion se genera con R/13 y se deposita en Zenodo/OSF:
+# pesa 86 MB y no tiene por que vivir en el repositorio. El codebook si.
+
 # ---------------------------------------------------------------------------
 # Salidas: las figuras PNG y las tablas chicas si se versionan, porque son el
 # resultado del analisis y no se pueden regenerar sin el corpus de 7 GB.
