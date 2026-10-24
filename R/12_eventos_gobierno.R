@@ -119,8 +119,11 @@ print(res)
 # los dias de evento. La serie relevante es la razon observado/esperado.
 x[, min_dia := as.integer(format(h, "%H")) * 60L + as.integer(format(h, "%M"))]
 x[, bin_dia := floor(min_dia / BIN_MIN) * BIN_MIN]
-x[, dia := as.Date(h)]
-dias_evento <- unique(as.Date(c(eventos$ancla - 86400, eventos$ancla, eventos$ancla + 86400)))
+# as.Date() sobre POSIXct usa UTC: formatear primero para que el dia sea el
+# chileno y los dias de evento se excluyan por su frontera real.
+x[, dia := as.Date(format(h, "%Y-%m-%d"))]
+dias_evento <- unique(as.Date(format(c(eventos$ancla - 86400, eventos$ancla,
+                                       eventos$ancla + 86400), "%Y-%m-%d")))
 
 perfil <- x[!dia %in% dias_evento, .N, by = .(dia, bin_dia)][
   , .(esperado = median(N)), by = bin_dia]

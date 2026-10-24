@@ -60,7 +60,10 @@ if (!is.na(col_fecha)) {
   message("\n== Rango temporal ==")
   print(range(m$.fecha, na.rm = TRUE))
 
-  por_dia <- m[!is.na(.fecha), .N, by = .(dia = as.Date(.fecha))][order(dia)]
+  # as.Date() sobre POSIXct usa UTC y no el tzone del objeto: hay que formatear
+  # primero o la serie diaria queda corrida tres horas.
+  por_dia <- m[!is.na(.fecha), .N,
+               by = .(dia = as.Date(format(.fecha, "%Y-%m-%d")))][order(dia)]
   guardar_tab(por_dia, "muestra_tweets_por_dia")
 
   p <- ggplot(por_dia, aes(dia, N)) +
