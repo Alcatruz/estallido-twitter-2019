@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>El estallido en Twitter</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-aec56763922ac3b0a1202fa1d4b1164c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">El estallido en Twitter</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">El corpus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./metodo.html"> 
+<span class="menu-text">Cómo se recolectó</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./red.html"> 
+<span class="menu-text">La red del 18-O</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./contagio.html"> 
+<span class="menu-text">Comunidades contagiadas</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./politicos.html"> 
+<span class="menu-text">La clase política</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./datos.html"> 
+<span class="menu-text">Datos y código</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#seis-millones-de-tweets-755-mil-textos" id="toc-seis-millones-de-tweets-755-mil-textos" class="nav-link active" data-scroll-target="#seis-millones-de-tweets-755-mil-textos">Seis millones de tweets, 755 mil textos</a></li>
+  <li><a href="#los-19-días" id="toc-los-19-días" class="nav-link" data-scroll-target="#los-19-días">Los 19 días</a></li>
+  <li><a href="#dos-bordes-que-no-hay-que-leer-como-actividad" id="toc-dos-bordes-que-no-hay-que-leer-como-actividad" class="nav-link" data-scroll-target="#dos-bordes-que-no-hay-que-leer-como-actividad">Dos bordes que no hay que leer como actividad</a></li>
+  <li><a href="#qué-hay-en-este-sitio" id="toc-qué-hay-en-este-sitio" class="nav-link" data-scroll-target="#qué-hay-en-este-sitio">Qué hay en este sitio</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">El estallido en Twitter</h1>
+<p class="subtitle lead">6.119.933 tweets recolectados en tiempo real durante octubre de 2019</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>El 18 de octubre de 2019 Chile entró en la mayor crisis social desde el retorno a la democracia. Estos datos se recolectaron mientras ocurría, día a día, sin saber en qué iba a terminar. Hoy no se pueden volver a obtener: la API de X ya no permite ir hacia atrás a octubre de 2019.</p>
+<div class="tarjetas">
+<div class="tarjeta">
+<div class="cifra">
+<p>6.119.933</p>
+</div>
+<div class="cifra-pie">
+<p>tweets</p>
+</div>
+</div>
+<div class="tarjeta">
+<div class="cifra">
+<p>701.325</p>
+</div>
+<div class="cifra-pie">
+<p>cuentas</p>
+</div>
+</div>
+<div class="tarjeta">
+<div class="cifra">
+<p>87,5%</p>
+</div>
+<div class="cifra-pie">
+<p>son retweets</p>
+</div>
+</div>
+<div class="tarjeta">
+<div class="cifra">
+<p>19</p>
+</div>
+<div class="cifra-pie">
+<p>días, 11 al 29 de octubre</p>
+</div>
+</div>
+</div>
+<section id="seis-millones-de-tweets-755-mil-textos" class="level2">
+<h2 class="anchored" data-anchor-id="seis-millones-de-tweets-755-mil-textos">Seis millones de tweets, 755 mil textos</h2>
+<p>La cifra grande engaña si se lee mal. De los 6.119.933 tweets, solo <strong>764.154 fueron compuestos por alguien</strong>; el resto son retweets de esos mismos textos. Los textos distintos son 755.220.</p>
+<p>De las 701.325 cuentas, apenas <strong>178.474 escribieron algo propio</strong>. Tres de cada cuatro aparecen únicamente amplificando o siendo amplificadas.</p>
+<p>La distinción no es cosmética: define el denominador. Para estudiar difusión —quién amplifica a quién, a qué velocidad— cada retweet es un evento y el denominador son los 6,1 millones. Para estudiar discurso, el denominador son los 755.220 textos, o un tweet viral con 5.000 retweets pesaría 5.000 veces.</p>
+</section>
+<section id="los-19-días" class="level2">
+<h2 class="anchored" data-anchor-id="los-19-días">Los 19 días</h2>
+<p><img src="figuras/global_distribucion.png" class="img-fluid"></p>
+<div class="cell">
+<details class="code-fold">
+<summary>ver código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabla</span>(dia[, .(Día <span class="ot">=</span> <span class="fu">format</span>(<span class="fu">as.Date</span>(dia), <span class="st">"%a %d-%b"</span>), Original, Cita, Retweet,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              Total, <span class="st">`</span><span class="at">% RT</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pc</span>(pct_rt, <span class="dv">1</span>))], <span class="at">align =</span> <span class="st">"lrrrrr"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
+'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso
+Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
+'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso
+Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
+'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso
+Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
+'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso</code></pre>
+</div>
+<div id="tbl-dias" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;1: Volumen diario por tipo de publicación, hora de Chile.
+</figcaption>
+<div aria-describedby="tbl-dias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Día</th>
+<th style="text-align: right;">Original</th>
+<th style="text-align: right;">Cita</th>
+<th style="text-align: right;">Retweet</th>
+<th style="text-align: right;">Total</th>
+<th style="text-align: right;">% RT</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">vie. 11-oct.</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">168</td>
+<td style="text-align: right;">92,3%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sáb. 12-oct.</td>
+<td style="text-align: right;">3.465</td>
+<td style="text-align: right;">1.096</td>
+<td style="text-align: right;">44.552</td>
+<td style="text-align: right;">49.113</td>
+<td style="text-align: right;">90,7%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dom. 13-oct.</td>
+<td style="text-align: right;">2.542</td>
+<td style="text-align: right;">788</td>
+<td style="text-align: right;">52.416</td>
+<td style="text-align: right;">55.746</td>
+<td style="text-align: right;">94,0%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lun. 14-oct.</td>
+<td style="text-align: right;">345</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">2.681</td>
+<td style="text-align: right;">3.059</td>
+<td style="text-align: right;">87,6%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mar. 15-oct.</td>
+<td style="text-align: right;">4.112</td>
+<td style="text-align: right;">426</td>
+<td style="text-align: right;">28.363</td>
+<td style="text-align: right;">32.901</td>
+<td style="text-align: right;">86,2%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mié. 16-oct.</td>
+<td style="text-align: right;">3.598</td>
+<td style="text-align: right;">724</td>
+<td style="text-align: right;">34.104</td>
+<td style="text-align: right;">38.426</td>
+<td style="text-align: right;">88,8%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">jue. 17-oct.</td>
+<td style="text-align: right;">18.609</td>
+<td style="text-align: right;">1.603</td>
+<td style="text-align: right;">113.140</td>
+<td style="text-align: right;">133.352</td>
+<td style="text-align: right;">84,8%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">vie. 18-oct.</td>
+<td style="text-align: right;">65.020</td>
+<td style="text-align: right;">8.313</td>
+<td style="text-align: right;">451.195</td>
+<td style="text-align: right;">524.528</td>
+<td style="text-align: right;">86,0%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sáb. 19-oct.</td>
+<td style="text-align: right;">121.669</td>
+<td style="text-align: right;">16.183</td>
+<td style="text-align: right;">958.724</td>
+<td style="text-align: right;">1.096.576</td>
+<td style="text-align: right;">87,4%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">dom. 20-oct.</td>
+<td style="text-align: right;">80.295</td>
+<td style="text-align: right;">13.895</td>
+<td style="text-align: right;">704.695</td>
+<td style="text-align: right;">798.885</td>
+<td style="text-align: right;">88,2%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">lun. 21-oct.</td>
+<td style="text-align: right;">87.591</td>
+<td style="text-align: right;">21.572</td>
+<td style="text-align: right;">818.606</td>
+<td style="text-align: right;">927.769</td>
+<td style="text-align: right;">88,2%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">mar. 22-oct.</td>
+<td style="text-align: right;">74.344</td>
+<td style="text-align: right;">16.043</td>
+<td style="text-align: right;">578.727</td>
+<td style="text-align: right;">669.114</td>
+<td style="text-align: right;">86,5%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mié. 23-oct.</td>
+<td style="text-align: right;">53.029</td>
+<td style="text-align: right;">17.254</td>
+<td style="text-align: right;">524.948</td>
+<td style="text-align: right;">595.231</td>
+<td style="text-align: right;">88,2%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">jue. 24-oct.</td>
+<td style="text-align: right;">18.701</td>
+<td style="text-align: right;">5.421</td>
+<td style="text-align: right;">173.249</td>
+<td style="text-align: right;">197.371</td>
+<td style="text-align: right;">87,8%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">vie. 25-oct.</td>
+<td style="text-align: right;">14.165</td>
+<td style="text-align: right;">4.026</td>
+<td style="text-align: right;">94.621</td>
+<td style="text-align: right;">112.812</td>
+<td style="text-align: right;">83,9%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sáb. 26-oct.</td>
+<td style="text-align: right;">32.941</td>
+<td style="text-align: right;">9.105</td>
+<td style="text-align: right;">304.857</td>
+<td style="text-align: right;">346.903</td>
+<td style="text-align: right;">87,9%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">dom. 27-oct.</td>
+<td style="text-align: right;">18.369</td>
+<td style="text-align: right;">7.015</td>
+<td style="text-align: right;">231.293</td>
+<td style="text-align: right;">256.677</td>
+<td style="text-align: right;">90,1%</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">lun. 28-oct.</td>
+<td style="text-align: right;">37.018</td>
+<td style="text-align: right;">4.738</td>
+<td style="text-align: right;">235.343</td>
+<td style="text-align: right;">277.099</td>
+<td style="text-align: right;">84,9%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">mar. 29-oct.</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">4.110</td>
+<td style="text-align: right;">4.203</td>
+<td style="text-align: right;">97,8%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>El peak no es el 18 de octubre sino el <strong>19</strong>, con 1.096.576 publicaciones, el doble del 18. La explosión ocurre el viernes por la noche y se descarga el sábado.</p>
+<p>Lo estable es la mezcla: entre 84% y 90% de lo publicado son retweets todos los días. El volumen sube 300 veces entre el 14 y el 19 de octubre y la proporción apenas se mueve. La estructura de participación no cambia con la intensidad.</p>
+</section>
+<section id="dos-bordes-que-no-hay-que-leer-como-actividad" class="level2">
+<h2 class="anchored" data-anchor-id="dos-bordes-que-no-hay-que-leer-como-actividad">Dos bordes que no hay que leer como actividad</h2>
+<p>El 11 y el 29 de octubre están <strong>truncados</strong> por la ventana de descarga: 168 y 4.203 tweets. No son días tranquilos, son días cortados.</p>
+<p>Y el 25 de octubre, día de la marcha más grande de Chile, registra 112.812 tweets, menos que el día anterior. Eso no es plausible como actividad real. La explicación está en <a href="./metodo.html">cómo se recolectó</a>: la lista de términos se fijó en la primera semana y para el 25 el vocabulario ya había cambiado.</p>
+</section>
+<section id="qué-hay-en-este-sitio" class="level2">
+<h2 class="anchored" data-anchor-id="qué-hay-en-este-sitio">Qué hay en este sitio</h2>
+<ul>
+<li><a href="./metodo.html">Cómo se recolectó</a> — la consulta original, perdida y reconstruida desde los datos</li>
+<li><a href="./red.html">La red del 18-O</a> — 56.724 cuentas, 143 comunidades</li>
+<li><a href="./contagio.html">Comunidades contagiadas</a> — quiénes entraron por la puerta equivocada</li>
+<li><a href="./politicos.html">La clase política</a> — 171 cargos identificados y su peso real</li>
+<li><a href="./datos.html">Datos y código</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alcatruz\.github\.io\/estallido-twitter-2019");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Daniel Alcatruz · corpus recolectado en octubre de 2019</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

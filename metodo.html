@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Cómo se recolectó – El estallido en Twitter</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-aec56763922ac3b0a1202fa1d4b1164c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">El estallido en Twitter</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">El corpus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./metodo.html" aria-current="page"> 
+<span class="menu-text">Cómo se recolectó</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./red.html"> 
+<span class="menu-text">La red del 18-O</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./contagio.html"> 
+<span class="menu-text">Comunidades contagiadas</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./politicos.html"> 
+<span class="menu-text">La clase política</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./datos.html"> 
+<span class="menu-text">Datos y código</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#reconstruirla-desde-los-datos" id="toc-reconstruirla-desde-los-datos" class="nav-link active" data-scroll-target="#reconstruirla-desde-los-datos">Reconstruirla desde los datos</a></li>
+  <li><a href="#la-validación" id="toc-la-validación" class="nav-link" data-scroll-target="#la-validación">La validación</a></li>
+  <li><a href="#el-límite-del-método-medido" id="toc-el-límite-del-método-medido" class="nav-link" data-scroll-target="#el-límite-del-método-medido">El límite del método, medido</a></li>
+  <li><a href="#la-lista-completa" id="toc-la-lista-completa" class="nav-link" data-scroll-target="#la-lista-completa">La lista completa</a></li>
+  <li><a href="#por-qué-importa-para-quien-reutilice-estos-datos" id="toc-por-qué-importa-para-quien-reutilice-estos-datos" class="nav-link" data-scroll-target="#por-qué-importa-para-quien-reutilice-estos-datos">Por qué importa para quien reutilice estos datos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Cómo se recolectó</h1>
+<p class="subtitle lead">La consulta estaba perdida y se reconstruyó desde los propios datos</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>El corpus llegó como un único archivo con las 90 columnas estándar de <code>rtweet</code> y <strong>ninguna que dijera por qué consulta entró cada tweet</strong>. Sin eso no se puede interpretar nada: un corpus recolectado por términos contiene lo que esos términos atrajeron, incluido lo que no tiene que ver con el tema.</p>
+<section id="reconstruirla-desde-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="reconstruirla-desde-los-datos">Reconstruirla desde los datos</h2>
+<p>Si un corpus se arma siguiendo una lista de términos, casi todo tweet tiene que contener al menos uno. Se extraen los hashtags de los 6,1 millones de textos y se resuelve una cobertura glotona: en cada paso, el hashtag que cubre más tweets todavía no cubiertos.</p>
+<p><img src="figuras/cobertura_terminos.png" class="img-fluid"></p>
+<p>No hay un corte limpio entre “término de consulta” y “vocabulario emergente”: la ganancia marginal cae de forma gradual, de 11,2% el primero a 0,1% el número 40. Ese gradiente ya es un hallazgo — se rastreó una lista larga, no dos o tres hashtags. Cuarenta términos cubren el <strong>91,5%</strong> del corpus.</p>
+</section>
+<section id="la-validación" class="level2">
+<h2 class="anchored" data-anchor-id="la-validación">La validación</h2>
+<p>Después aparecieron los archivos originales de recolección: 53 archivos, uno por consulta, con fechas del 17 al 29 de octubre de 2019, y un script de consolidación que asignaba una columna <code>consulta</code> a cada uno. Eso permitió contrastar la reconstrucción contra la lista real.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>ver código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabla</span>(val[, .(<span class="st">`</span><span class="at">#</span><span class="st">`</span> <span class="ot">=</span> paso, Término <span class="ot">=</span> termino, <span class="st">`</span><span class="at">Tweets que aporta</span><span class="st">`</span> <span class="ot">=</span> tweets_nuevos,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">`</span><span class="at">Cobertura acum.</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pc</span>(pct_acumulado, <span class="dv">1</span>), <span class="at">Familia =</span> familia,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">`</span><span class="at">¿Consulta real?</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">fifelse</span>(en_originales, <span class="st">"sí"</span>, <span class="st">"no"</span>))],</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">align =</span> <span class="st">"rlrrll"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
+'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso
+Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
+'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso</code></pre>
+</div>
+<div id="tbl-val" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-val-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;1: Los 40 términos reconstruidos a ciegas, contra la lista real de consultas.
+</figcaption>
+<div aria-describedby="tbl-val-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 31%">
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">#</th>
+<th style="text-align: left;">Término</th>
+<th style="text-align: right;">Tweets que aporta</th>
+<th style="text-align: right;">Cobertura acum.</th>
+<th style="text-align: left;">Familia</th>
+<th style="text-align: left;">¿Consulta real?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">#estopasaenchile</td>
+<td style="text-align: right;">682.397</td>
+<td style="text-align: right;">11,2%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">#chiledesperto</td>
+<td style="text-align: right;">629.628</td>
+<td style="text-align: right;">21,4%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">#evasionmasivatodoeldia</td>
+<td style="text-align: right;">477.114</td>
+<td style="text-align: right;">29,2%</td>
+<td style="text-align: left;">evasion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">#estonohaterminado</td>
+<td style="text-align: right;">403.954</td>
+<td style="text-align: right;">35,8%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">#toquedequeda</td>
+<td style="text-align: right;">396.336</td>
+<td style="text-align: right;">42,3%</td>
+<td style="text-align: left;">movilizacion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">#chileviolateshumanrights</td>
+<td style="text-align: right;">380.601</td>
+<td style="text-align: right;">48,5%</td>
+<td style="text-align: left;">ddhh</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">#cambiodegabinete</td>
+<td style="text-align: right;">249.360</td>
+<td style="text-align: right;">52,6%</td>
+<td style="text-align: left;">gobierno</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">#evasionmasiva</td>
+<td style="text-align: right;">226.098</td>
+<td style="text-align: right;">56,3%</td>
+<td style="text-align: left;">evasion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">#chilesecanso</td>
+<td style="text-align: right;">200.988</td>
+<td style="text-align: right;">59,6%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">#22oct</td>
+<td style="text-align: right;">196.509</td>
+<td style="text-align: right;">62,8%</td>
+<td style="text-align: left;">fecha</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">#19oct</td>
+<td style="text-align: right;">178.014</td>
+<td style="text-align: right;">65,7%</td>
+<td style="text-align: left;">fecha</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">#21oct</td>
+<td style="text-align: right;">164.416</td>
+<td style="text-align: right;">68,4%</td>
+<td style="text-align: left;">fecha</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">#20oct</td>
+<td style="text-align: right;">153.511</td>
+<td style="text-align: right;">70,9%</td>
+<td style="text-align: left;">fecha</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">#quesevayanlosmilicos</td>
+<td style="text-align: right;">141.493</td>
+<td style="text-align: right;">73,2%</td>
+<td style="text-align: left;">ddhh</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">#17oct</td>
+<td style="text-align: right;">135.216</td>
+<td style="text-align: right;">75,4%</td>
+<td style="text-align: left;">fecha</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">#18oct</td>
+<td style="text-align: right;">113.780</td>
+<td style="text-align: right;">77,3%</td>
+<td style="text-align: left;">fecha</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">#renunciapiñera</td>
+<td style="text-align: right;">106.848</td>
+<td style="text-align: right;">79,0%</td>
+<td style="text-align: left;">gobierno</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">#noestamosenguerra</td>
+<td style="text-align: right;">87.413</td>
+<td style="text-align: right;">80,4%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">#chilesomostodos</td>
+<td style="text-align: right;">82.300</td>
+<td style="text-align: right;">81,8%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">#chiledespertó</td>
+<td style="text-align: right;">71.062</td>
+<td style="text-align: right;">83,0%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">#chadwickasesino</td>
+<td style="text-align: right;">68.369</td>
+<td style="text-align: right;">84,1%</td>
+<td style="text-align: left;">ddhh</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">#acusacionconstitucionalpiñera</td>
+<td style="text-align: right;">68.043</td>
+<td style="text-align: right;">85,2%</td>
+<td style="text-align: left;">gobierno</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">#chileencrisis</td>
+<td style="text-align: right;">64.470</td>
+<td style="text-align: right;">86,2%</td>
+<td style="text-align: left;">otro</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">#renunciapiñeraahora</td>
+<td style="text-align: right;">34.253</td>
+<td style="text-align: right;">86,8%</td>
+<td style="text-align: left;">gobierno</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">#chileprotests</td>
+<td style="text-align: right;">30.444</td>
+<td style="text-align: right;">87,3%</td>
+<td style="text-align: left;">ingles</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">26</td>
+<td style="text-align: left;">#paronacional</td>
+<td style="text-align: right;">27.963</td>
+<td style="text-align: right;">87,8%</td>
+<td style="text-align: left;">movilizacion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">27</td>
+<td style="text-align: left;">#chileresiste</td>
+<td style="text-align: right;">26.923</td>
+<td style="text-align: right;">88,2%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">#marchadelmillon</td>
+<td style="text-align: right;">26.769</td>
+<td style="text-align: right;">88,6%</td>
+<td style="text-align: left;">movilizacion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">#evasiónmasiva</td>
+<td style="text-align: right;">26.387</td>
+<td style="text-align: right;">89,1%</td>
+<td style="text-align: left;">evasion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">#renunciapiñeraculiao</td>
+<td style="text-align: right;">24.651</td>
+<td style="text-align: right;">89,5%</td>
+<td style="text-align: left;">gobierno</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">31</td>
+<td style="text-align: left;">#evasionmasivatodoeldía</td>
+<td style="text-align: right;">19.271</td>
+<td style="text-align: right;">89,8%</td>
+<td style="text-align: left;">evasion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">#chalecosamarillos</td>
+<td style="text-align: right;">18.720</td>
+<td style="text-align: right;">90,1%</td>
+<td style="text-align: left;">movilizacion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">#chileprotesta</td>
+<td style="text-align: right;">17.366</td>
+<td style="text-align: right;">90,4%</td>
+<td style="text-align: left;">ingles</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">34</td>
+<td style="text-align: left;">#chilesecansó</td>
+<td style="text-align: right;">12.384</td>
+<td style="text-align: right;">90,6%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">35</td>
+<td style="text-align: left;">#congreso</td>
+<td style="text-align: right;">11.966</td>
+<td style="text-align: right;">90,8%</td>
+<td style="text-align: left;">gobierno</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">#pazparachile</td>
+<td style="text-align: right;">11.054</td>
+<td style="text-align: right;">91,0%</td>
+<td style="text-align: left;">consigna</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">37</td>
+<td style="text-align: left;">#apagalatele</td>
+<td style="text-align: right;">9.920</td>
+<td style="text-align: right;">91,1%</td>
+<td style="text-align: left;">movilizacion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">38</td>
+<td style="text-align: left;">#chile</td>
+<td style="text-align: right;">9.374</td>
+<td style="text-align: right;">91,3%</td>
+<td style="text-align: left;">otro</td>
+<td style="text-align: left;">no</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">39</td>
+<td style="text-align: left;">#acusaciónconstitucionalpiñera</td>
+<td style="text-align: right;">9.326</td>
+<td style="text-align: right;">91,4%</td>
+<td style="text-align: left;">gobierno</td>
+<td style="text-align: left;">sí</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">#marchadelmillón</td>
+<td style="text-align: right;">6.958</td>
+<td style="text-align: right;">91,5%</td>
+<td style="text-align: left;">movilizacion</td>
+<td style="text-align: left;">sí</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>37 de 40 (92%)</strong> son consulta original, y explican el <strong>87,9%</strong> del corpus.</p>
+</div>
+</div>
+</div>
+<p>Los tres que no coinciden son casi aciertos. La reconstrucción encontró <code>#QueSeVayanLosMilicos</code> y <code>#ChadwickAsesino</code>; las consultas fueron <code>#VayanseMilicos</code> y la palabra <code>chadwick</code>. En esos casos la reconstrucción describe mejor el contenido del corpus que la consulta que lo generó.</p>
+</section>
+<section id="el-límite-del-método-medido" class="level2">
+<h2 class="anchored" data-anchor-id="el-límite-del-método-medido">El límite del método, medido</h2>
+<p>De las 49 consultas originales, 18 no se recuperan. Son sobre todo las que <strong>no eran hashtags sino palabras sueltas</strong>: <code>INDH</code>, <code>congreso</code>, <code>chadwick</code>, <code>Saqueos</code>, <code>Disparos institucionales</code>, <code>NO HAY DEBASTECIMIENTO</code>. Una reconstrucción basada en hashtags es ciega a las consultas por palabra clave.</p>
+</section>
+<section id="la-lista-completa" class="level2">
+<h2 class="anchored" data-anchor-id="la-lista-completa">La lista completa</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>ver código</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabla</span>(cons[<span class="fu">order</span>(origen, consulta), .(<span class="at">Consulta =</span> consulta, <span class="at">Fuente =</span> origen)])</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-cons" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;2: Las 49 consultas con que se recolectó el corpus.
+</figcaption>
+<div aria-describedby="tbl-cons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Consulta</th>
+<th style="text-align: left;">Fuente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">#17oct</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#18Oct</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#19Oct</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#20Oct</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#21Oct</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#22Oct</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#AcusaciónConstitucionalPiñera</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#Apagalatele</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#CambiodeGabinete</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#ChalecosAmarillos</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#ChileDesperto</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#ChileProtesta</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#ChileProtests</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#ChileResiste</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#ChileSeCanso</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#ChileSomosTodos</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#ChileViolatesHumanRights</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#EstoNoHaTerminado</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#EstoPasaEnChile</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#EvasionMasiva</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#EvasionMasivaTodoElDia</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#HabraConsecuencias</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#LaMoneda</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#MarchaDelMillon</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#NosQuierenRobarHastaLaMarcha</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#ParoNacional</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#RenunciaPiñera</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#RenunciaPiñeraAhora</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#RenunciaPiñeraCuliao</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#RenunciaPiñeractm</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#VayanseMilicos</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#YoApoyoAlPresidente</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#autogolpe</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#noestamosenguerra</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">#pazParaChile</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">#toquedequeda</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ChileEnCrisis</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Disparos institucionales</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">INDH</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NO HAY DEBASTECIMIENTO</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Saqueos</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">chadwick</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">congreso</td>
+<td style="text-align: left;">columna consulta</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">df_saqueos_diparos</td>
+<td style="text-align: left;">nombre de archivo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">df_tweets</td>
+<td style="text-align: left;">nombre de archivo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">metro1</td>
+<td style="text-align: left;">nombre de archivo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">metro3</td>
+<td style="text-align: left;">nombre de archivo</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">pinera_renuncia</td>
+<td style="text-align: left;">nombre de archivo</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">veinte1</td>
+<td style="text-align: left;">nombre de archivo</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="por-qué-importa-para-quien-reutilice-estos-datos" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-importa-para-quien-reutilice-estos-datos">Por qué importa para quien reutilice estos datos</h2>
+<p>Seis de esas consultas son <strong>hashtags de fecha</strong> (<code>#17oct</code> a <code>#22Oct</code>) y explican 941.446 tweets, el 15,4% del corpus. Son términos que cualquiera en el mundo usa ese día. Por ahí entró contenido que no tiene nada que ver con Chile — y es <a href="./contagio.html">medible</a>.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alcatruz\.github\.io\/estallido-twitter-2019");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Daniel Alcatruz · corpus recolectado en octubre de 2019</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
