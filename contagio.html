@@ -140,6 +140,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Comunidades contagiadas</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./polos.html"> 
+<span class="menu-text">El polo que desapareció</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./politicos.html"> 
 <span class="menu-text">La clase política</span></a>
   </li>  
@@ -166,6 +170,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#un-índice-de-contagio" id="toc-un-índice-de-contagio" class="nav-link active" data-scroll-target="#un-índice-de-contagio">Un índice de contagio</a></li>
   <li><a href="#lo-que-ya-se-veía-en-la-red" id="toc-lo-que-ya-se-veía-en-la-red" class="nav-link" data-scroll-target="#lo-que-ya-se-veía-en-la-red">Lo que ya se veía en la red</a></li>
   <li><a href="#presencia-no-es-influencia" id="toc-presencia-no-es-influencia" class="nav-link" data-scroll-target="#presencia-no-es-influencia">Presencia no es influencia</a></li>
+  <li><a href="#el-subconjunto-limpio" id="toc-el-subconjunto-limpio" class="nav-link" data-scroll-target="#el-subconjunto-limpio">El subconjunto limpio</a>
+  <ul class="collapse">
+  <li><a href="#una-sobre-exclusión-que-hay-que-declarar" id="toc-una-sobre-exclusión-que-hay-que-declarar" class="nav-link" data-scroll-target="#una-sobre-exclusión-que-hay-que-declarar">Una sobre-exclusión que hay que declarar</a></li>
+  </ul></li>
   <li><a href="#por-qué-esto-es-generalizable" id="toc-por-qué-esto-es-generalizable" class="nav-link" data-scroll-target="#por-qué-esto-es-generalizable">Por qué esto es generalizable</a></li>
   </ul>
 </nav>
@@ -338,6 +346,117 @@ Tabla&nbsp;1: Índice de contagio por comunidad, 18 de octubre.
 </tbody>
 </table>
 <p>Presencia del 19%, influencia del 0,4%. Es un circuito paralelo que habla solo.</p>
+</section>
+<section id="el-subconjunto-limpio" class="level2">
+<h2 class="anchored" data-anchor-id="el-subconjunto-limpio">El subconjunto limpio</h2>
+<p>El corpus no se entrega solo con la advertencia: se entrega con el corte hecho y validado, para que quien investigue el estallido no tenga que decidir el criterio ni replicarlo.</p>
+<p>La exclusión opera en dos reglas, guardadas por separado para poder aplicarse sueltas:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Regla</th>
+<th>Excluye</th>
+<th>Corpus restante</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(a) hashtag de fecha y ningún término chileno</td>
+<td>867.656</td>
+<td>5.252.277 (85,8%)</td>
+</tr>
+<tr class="even">
+<td>(b) cuenta de las comunidades 1, 2 u 8</td>
+<td>938.325</td>
+<td>5.181.608 (84,7%)</td>
+</tr>
+<tr class="odd">
+<td><strong>ambas</strong> (recomendado)</td>
+<td>1.124.628</td>
+<td><strong>4.995.305 (81,6%)</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details class="code-fold">
+<summary>ver código</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sv <span class="ot">&lt;-</span> <span class="fu">leer</span>(<span class="st">"subconjunto_validacion.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tabla</span>(<span class="fu">t</span>(sv[, .(conjunto, <span class="st">`</span><span class="at">País = Chile (geo.)</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">pais = Chile (geolocalizadas)</span><span class="st">`</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Ubic. declara Chile</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ubicacion declara Chile</span><span class="st">`</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Ubic. declara Venezuela</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">ubicacion declara Venezuela</span><span class="st">`</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Marcador chileno</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">marcador lexico chileno</span><span class="st">`</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">`</span><span class="at">Marcador venezolano</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">marcador venezolano</span><span class="st">`</span>)]))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-val" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-val-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabla&nbsp;2: Indicadores que NO intervienen en la regla de exclusión, para que el contraste no sea circular.
+</figcaption>
+<div aria-describedby="tbl-val-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 35%">
+<col style="width: 23%">
+<col style="width: 27%">
+<col style="width: 13%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">conjunto</td>
+<td style="text-align: left;">Corpus completo</td>
+<td style="text-align: left;">Subconjunto limpio</td>
+<td style="text-align: left;">Excluido</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">País = Chile (geo.)</td>
+<td style="text-align: left;">85.0</td>
+<td style="text-align: left;">90.6</td>
+<td style="text-align: left;">17.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Ubic. declara Chile</td>
+<td style="text-align: left;">55.6</td>
+<td style="text-align: left;">66.2</td>
+<td style="text-align: left;">5.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ubic. declara Venezuela</td>
+<td style="text-align: left;">10.5</td>
+<td style="text-align: left;">1.2</td>
+<td style="text-align: left;">55.1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Marcador chileno</td>
+<td style="text-align: left;">6.79</td>
+<td style="text-align: left;">8.21</td>
+<td style="text-align: left;">0.48</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Marcador venezolano</td>
+<td style="text-align: left;">7.84</td>
+<td style="text-align: left;">0.92</td>
+<td style="text-align: left;">38.60</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><img src="figuras/subconjunto_validacion.png" class="img-fluid"></p>
+<p>El material excluido es <strong>55,1% venezolano</strong> por ubicación declarada y 38,6% por léxico, contra 1,2% y 0,9% en el subconjunto. La separación opera en los dos sentidos: lo retirado es mayoritariamente ajeno, y lo retenido es más chileno que el corpus de partida.</p>
+<section id="una-sobre-exclusión-que-hay-que-declarar" class="level3">
+<h3 class="anchored" data-anchor-id="una-sobre-exclusión-que-hay-que-declarar">Una sobre-exclusión que hay que declarar</h3>
+<p>La regla (b) retira <em>toda</em> la actividad de esas cuentas, incluida la que sí trata de Chile. Entre lo excluido quedan <strong>66.680 usos de <code>#toquedequeda</code> y 50.569 de <code>#ChileDesperto</code></strong>, casi todos de la comunidad 1 — medios estatales venezolanos que cubrieron el episodio, cuyo índice de contaminación es 89,9% y no 100%.</p>
+<p>Tratar esa cobertura como ajena a la conversación chilena es una decisión interpretativa, no técnica. Quien sostenga que forma parte del fenómeno aplica únicamente la regla (a), y queda adentro.</p>
+</section>
 </section>
 <section id="por-qué-esto-es-generalizable" class="level2">
 <h2 class="anchored" data-anchor-id="por-qué-esto-es-generalizable">Por qué esto es generalizable</h2>

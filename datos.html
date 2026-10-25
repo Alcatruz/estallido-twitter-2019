@@ -105,6 +105,10 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Comunidades contagiadas</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./polos.html"> 
+<span class="menu-text">El polo que desapareció</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./politicos.html"> 
 <span class="menu-text">La clase política</span></a>
   </li>  
@@ -128,10 +132,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#el-código" id="toc-el-código" class="nav-link active" data-scroll-target="#el-código">El código</a></li>
-  <li><a href="#los-datos" id="toc-los-datos" class="nav-link" data-scroll-target="#los-datos">Los datos</a></li>
+  <li><a href="#el-paquete-de-datos" id="toc-el-paquete-de-datos" class="nav-link active" data-scroll-target="#el-paquete-de-datos">El paquete de datos</a></li>
+  <li><a href="#dos-usos-declarados" id="toc-dos-usos-declarados" class="nav-link" data-scroll-target="#dos-usos-declarados">Dos usos declarados</a></li>
   <li><a href="#variables-propias" id="toc-variables-propias" class="nav-link" data-scroll-target="#variables-propias">Variables propias</a></li>
-  <li><a href="#limitaciones-que-cualquier-reutilización-debe-declarar" id="toc-limitaciones-que-cualquier-reutilización-debe-declarar" class="nav-link" data-scroll-target="#limitaciones-que-cualquier-reutilización-debe-declarar">Limitaciones que cualquier reutilización debe declarar</a></li>
+  <li><a href="#seudonimización" id="toc-seudonimización" class="nav-link" data-scroll-target="#seudonimización">Seudonimización</a></li>
+  <li><a href="#el-código" id="toc-el-código" class="nav-link" data-scroll-target="#el-código">El código</a></li>
+  <li><a href="#limitaciones" id="toc-limitaciones" class="nav-link" data-scroll-target="#limitaciones">Limitaciones</a></li>
   <li><a href="#cómo-citar" id="toc-cómo-citar" class="nav-link" data-scroll-target="#cómo-citar">Cómo citar</a></li>
   </ul>
 </nav>
@@ -158,144 +164,107 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="el-código" class="level2">
-<h2 class="anchored" data-anchor-id="el-código">El código</h2>
-<p>Todo el procesamiento está en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>, en R. Catorce scripts numerados, de la lectura del archivo original a la construcción del paquete de publicación.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Script</th>
-<th>Qué hace</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>00_setup.R</code></td>
-<td>rutas, parámetros y utilidades comunes</td>
-</tr>
-<tr class="even">
-<td><code>01_rds_a_csv.R</code></td>
-<td>lee el archivo original, exporta CSV y muestra</td>
-</tr>
-<tr class="odd">
-<td><code>01b_tabla_analisis.R</code></td>
-<td>tabla liviana en parquet</td>
-</tr>
-<tr class="even">
-<td><code>02_explorar_muestra.R</code></td>
-<td>exploración descriptiva</td>
-</tr>
-<tr class="odd">
-<td><code>03_red_18oct.R</code></td>
-<td>red de retweets, comunidades y layout</td>
-</tr>
-<tr class="even">
-<td><code>04_red_pdf.R</code></td>
-<td>versiones vectoriales de la red</td>
-</tr>
-<tr class="odd">
-<td><code>05_corpus_comunidades.R</code></td>
-<td>corpus y vocabulario por comunidad</td>
-</tr>
-<tr class="even">
-<td><code>06_distribucion_global.R</code></td>
-<td>series de los 19 días</td>
-</tr>
-<tr class="odd">
-<td><code>07</code>–<code>08a</code>–<code>08</code></td>
-<td>padrón parlamentario y cuentas de X</td>
-</tr>
-<tr class="even">
-<td><code>09_clasificar_cuentas.R</code></td>
-<td>clases de cuenta y amplificación</td>
-</tr>
-<tr class="odd">
-<td><code>10_terminos_recoleccion.R</code></td>
-<td>reconstrucción de la consulta</td>
-</tr>
-<tr class="even">
-<td><code>11_discurso_comunidades.R</code></td>
-<td>índice de contagio y discurso</td>
-</tr>
-<tr class="odd">
-<td><code>12_eventos_gobierno.R</code></td>
-<td>estudio de eventos</td>
-</tr>
-<tr class="even">
-<td><code>13_paquete_publicacion.R</code></td>
-<td>paquete redistribuible</td>
-</tr>
-<tr class="odd">
-<td><code>14_procedencia_consultas.R</code></td>
-<td>procedencia y validación</td>
-</tr>
-</tbody>
-</table>
-<p>Las tablas y figuras del sitio están versionadas en el repositorio, así que <strong>este sitio se reconstruye sin el corpus</strong>.</p>
-</section>
-<section id="los-datos" class="level2">
-<h2 class="anchored" data-anchor-id="los-datos">Los datos</h2>
-<p>El corpus no se publica como tal. Los términos de servicio de X restringen la redistribución del contenido de los tweets y de los campos de perfil.</p>
-<p>El <a href="https://doi.org/10.1177/20539517261419333">análisis de referencia sobre el tema</a> (Golland et al., <em>Big Data &amp; Society</em>, 2026) revisó ~4.000 datasets de Twitter registrados en DataCite: el 66% publica solo identificadores, y los propios autores concluyen que esos datasets quedan <em>“practically rendered useless for most purposes”</em>, porque rehidratarlos ya no es viable. Un estudio en <em>Political Analysis</em> midió que solo un tercio de los tweets de datasets sensibles sigue recuperable.</p>
-<p>Por eso el paquete previsto combina tres niveles:</p>
+<section id="el-paquete-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="el-paquete-de-datos">El paquete de datos</h2>
+<p>El corpus no se publica como tal: los términos de servicio de X restringen la redistribución del contenido de las publicaciones. Lo que se entrega son los identificadores más <strong>derivados que no son contenido</strong>, incluidas las capas de anotación construidas para este trabajo.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Nivel</th>
+<th>Archivo</th>
 <th>Contenido</th>
-<th>Alcance</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Abierto</td>
-<td>identificadores, tiempos, tipo, idioma, cliente, red, comunidad, clase, hashtags, métricas, y todos los derivados propios</td>
-<td>todas las cuentas, seudonimizadas</td>
+<td><code>tweet_ids.txt.gz</code></td>
+<td>los 6.119.933 identificadores</td>
 </tr>
 <tr class="even">
-<td>Abierto</td>
-<td>lo anterior más texto e identificador real</td>
-<td>las 125 cuentas de <strong>cargos públicos</strong></td>
+<td><code>subconjunto_limpio.csv.gz</code></td>
+<td>marca de pertenencia al subconjunto recomendado</td>
 </tr>
 <tr class="odd">
-<td>Bajo solicitud</td>
-<td>texto de cuentas ciudadanas</td>
-<td>uso declarado</td>
+<td><code>cuentas.csv</code></td>
+<td>702.103 cuentas seudonimizadas, con clase y antigüedad</td>
+</tr>
+<tr class="even">
+<td><code>red_retweets_18oct.csv</code></td>
+<td>407.387 aristas ponderadas</td>
+</tr>
+<tr class="odd">
+<td><code>nodos_18oct.csv</code></td>
+<td>56.724 nodos con comunidad y layout</td>
+</tr>
+<tr class="even">
+<td><code>cuentas_politicas.csv</code></td>
+<td>171 cargos en ejercicio, con fuente de identificación</td>
+</tr>
+<tr class="odd">
+<td><code>padron_diputados_2018_2022.csv</code></td>
+<td>162 personas del período</td>
+</tr>
+<tr class="even">
+<td><code>terminos_recoleccion.csv</code></td>
+<td>las consultas con su aporte</td>
+</tr>
+<tr class="odd">
+<td>series y frecuencias</td>
+<td>volumen por día y hora, hashtags, contagio, polos</td>
 </tr>
 </tbody>
 </table>
-<p>El criterio del corte es quién actuaba en público. Un parlamentario tuiteando sobre el estallido producía registro político; una persona que tuiteó esa semana y después borró su cuenta esperaba que eso desapareciera.</p>
-<p>Esa tensión no se resuelve, se administra: el valor archivístico del corpus viene justamente de preservar lo que ya no existe, y esa misma propiedad es el problema de privacidad.</p>
+<p>Son 132 MB. El depósito con DOI está en preparación.</p>
+</section>
+<section id="dos-usos-declarados" class="level2">
+<h2 class="anchored" data-anchor-id="dos-usos-declarados">Dos usos declarados</h2>
+<p>El corpus se entrega completo <strong>y</strong> etiquetado, lo que habilita dos cosas distintas sin forzar a elegir:</p>
+<ul>
+<li>Quien investigue <strong>el estallido</strong> se restringe al subconjunto recomendado, 4.995.305 publicaciones validadas como chilenas.</li>
+<li>Quien estudie <strong>el artefacto de recolección</strong> —cómo una consulta con términos ambiguos captura conversaciones paralelas— dispone del material íntegro con la contaminación marcada publicación por publicación.</li>
+</ul>
+<p>Entregar solo la versión limpia cerraría la segunda puerta sin abrir ninguna.</p>
 </section>
 <section id="variables-propias" class="level2">
 <h2 class="anchored" data-anchor-id="variables-propias">Variables propias</h2>
-<p>Lo que no existe en ningún otro corpus chileno de este período:</p>
+<p>Lo que no existe en ningún otro corpus chileno del período:</p>
 <ul>
-<li><code>consulta</code> — el término por el que entró cada tweet, recuperado</li>
-<li><code>comunidad_18oct</code> — comunidad en la red del 18 de octubre</li>
+<li><code>consulta</code> — el término por el que ingresó cada publicación</li>
+<li><code>comunidad_18oct</code> — comunidad en la red de retweets</li>
 <li><code>clase_cuenta</code> — política, medio o ciudadana</li>
 <li><code>es_cargo_publico</code>, <code>partido</code> — para los 171 cargos identificados</li>
-<li><code>solo_hashtag_fecha</code> — índice de contagio a nivel de tweet</li>
+<li><code>limpio</code>, <code>solo_fecha</code>, <code>cuenta_contaminada</code> — marcas de calidad</li>
 <li><code>latencia_retweet_min</code> — minutos entre el original y su retweet</li>
 </ul>
 </section>
-<section id="limitaciones-que-cualquier-reutilización-debe-declarar" class="level2">
-<h2 class="anchored" data-anchor-id="limitaciones-que-cualquier-reutilización-debe-declarar">Limitaciones que cualquier reutilización debe declarar</h2>
+<section id="seudonimización" class="level2">
+<h2 class="anchored" data-anchor-id="seudonimización">Seudonimización</h2>
+<p>Las cuentas de cargos públicos conservan su identificador: un cargo público actuando en público no tiene expectativa de anonimato, y su trazabilidad es parte del valor del dato. Las otras 701.978 pasan a un hash estable con sal, consistente entre archivos para que la red siga siendo analizable.</p>
+<p>La antigüedad de cuenta va en año y los seguidores en orden de magnitud, porque su combinación exacta permite reidentificar una cuenta aunque se oculte el nombre.</p>
+<p>Hay una tensión que no se resuelve y conviene nombrar: el valor archivístico del corpus viene de preservar material que ya no existe en la plataforma —cuentas borradas, suspendidas, arrepentidas— y esa misma propiedad es el problema de privacidad.</p>
+</section>
+<section id="el-código" class="level2">
+<h2 class="anchored" data-anchor-id="el-código">El código</h2>
+<p>Dieciocho scripts en R, de la lectura del archivo original a la construcción del paquete, en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+<p>Las tablas y figuras están versionadas en el repositorio, de modo que <strong>este sitio y el manuscrito se reconstruyen sin el corpus</strong>.</p>
+</section>
+<section id="limitaciones" class="level2">
+<h2 class="anchored" data-anchor-id="limitaciones">Limitaciones</h2>
 <ol type="1">
-<li><strong>Días truncados.</strong> El 11 y el 29 de octubre están cortados por la ventana de descarga.</li>
-<li><strong>Sesgo hacia la primera semana.</strong> La lista de términos se fijó temprano y el vocabulario de la protesta cambió; el 25 de octubre está subrepresentado.</li>
-<li><strong>Contaminación por hashtags de fecha.</strong> 15,4% del corpus entró por <code>#17oct</code>–<code>#22Oct</code>, y tres comunidades enteras no contienen vocabulario chileno.</li>
+<li><strong>Días truncados.</strong> El 11 y el 29 de octubre están cortados por la ventana de recolección: 168 y 4.203 publicaciones.</li>
+<li><strong>Sesgo hacia la primera semana.</strong> La lista de consultas se fijó temprano y el vocabulario de la protesta cambió; el 25 de octubre está subrepresentado.</li>
+<li><strong>Contaminación por consulta ambigua.</strong> 15,4% del corpus entró por <code>#17oct</code>–<code>#22Oct</code>. Marcada y excluible.</li>
 <li><strong>La clase “medio” es heurística</strong>, no un registro: se equivoca en ambas direcciones.</li>
+<li><strong>La clasificación de polos es léxica, no ideológica.</strong></li>
+<li><strong>Cobertura del padrón incompleta</strong>: 135 de 156 diputados, 6 de 16 ministros.</li>
 </ol>
 </section>
 <section id="cómo-citar" class="level2">
 <h2 class="anchored" data-anchor-id="cómo-citar">Cómo citar</h2>
-<p>Mientras no haya DOI, citar el repositorio. El depósito con DOI y el data descriptor están en preparación.</p>
+<p>Mientras no haya DOI, citar el repositorio. El artículo de datos está en preparación.</p>
 
 
 </section>

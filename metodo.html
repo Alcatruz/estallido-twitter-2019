@@ -140,6 +140,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Comunidades contagiadas</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./polos.html"> 
+<span class="menu-text">El polo que desapareció</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./politicos.html"> 
 <span class="menu-text">La clase política</span></a>
   </li>  
@@ -163,11 +167,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">En esta página</h2>
    
   <ul>
-  <li><a href="#reconstruirla-desde-los-datos" id="toc-reconstruirla-desde-los-datos" class="nav-link active" data-scroll-target="#reconstruirla-desde-los-datos">Reconstruirla desde los datos</a></li>
-  <li><a href="#la-validación" id="toc-la-validación" class="nav-link" data-scroll-target="#la-validación">La validación</a></li>
-  <li><a href="#el-límite-del-método-medido" id="toc-el-límite-del-método-medido" class="nav-link" data-scroll-target="#el-límite-del-método-medido">El límite del método, medido</a></li>
-  <li><a href="#la-lista-completa" id="toc-la-lista-completa" class="nav-link" data-scroll-target="#la-lista-completa">La lista completa</a></li>
-  <li><a href="#por-qué-importa-para-quien-reutilice-estos-datos" id="toc-por-qué-importa-para-quien-reutilice-estos-datos" class="nav-link" data-scroll-target="#por-qué-importa-para-quien-reutilice-estos-datos">Por qué importa para quien reutilice estos datos</a></li>
+  <li><a href="#las-49-consultas" id="toc-las-49-consultas" class="nav-link active" data-scroll-target="#las-49-consultas">Las 49 consultas</a></li>
+  <li><a href="#cuánto-aporta-cada-una" id="toc-cuánto-aporta-cada-una" class="nav-link" data-scroll-target="#cuánto-aporta-cada-una">Cuánto aporta cada una</a></li>
+  <li><a href="#una-nota-sobre-la-lista" id="toc-una-nota-sobre-la-lista" class="nav-link" data-scroll-target="#una-nota-sobre-la-lista">Una nota sobre la lista</a></li>
+  <li><a href="#verificación" id="toc-verificación" class="nav-link" data-scroll-target="#verificación">Verificación</a></li>
   </ul>
 </nav>
     </div>
@@ -177,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Cómo se recolectó</h1>
-<p class="subtitle lead">La consulta estaba perdida y se reconstruyó desde los propios datos</p>
+<p class="subtitle lead">49 consultas, una por archivo, todos los días del episodio</p>
 </div>
 
 
@@ -194,411 +197,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>El corpus llegó como un único archivo con las 90 columnas estándar de <code>rtweet</code> y <strong>ninguna que dijera por qué consulta entró cada tweet</strong>. Sin eso no se puede interpretar nada: un corpus recolectado por términos contiene lo que esos términos atrajeron, incluido lo que no tiene que ver con el tema.</p>
-<section id="reconstruirla-desde-los-datos" class="level2">
-<h2 class="anchored" data-anchor-id="reconstruirla-desde-los-datos">Reconstruirla desde los datos</h2>
-<p>Si un corpus se arma siguiendo una lista de términos, casi todo tweet tiene que contener al menos uno. Se extraen los hashtags de los 6,1 millones de textos y se resuelve una cobertura glotona: en cada paso, el hashtag que cubre más tweets todavía no cubiertos.</p>
-<p><img src="figuras/cobertura_terminos.png" class="img-fluid"></p>
-<p>No hay un corte limpio entre “término de consulta” y “vocabulario emergente”: la ganancia marginal cae de forma gradual, de 11,2% el primero a 0,1% el número 40. Ese gradiente ya es un hallazgo — se rastreó una lista larga, no dos o tres hashtags. Cuarenta términos cubren el <strong>91,5%</strong> del corpus.</p>
-</section>
-<section id="la-validación" class="level2">
-<h2 class="anchored" data-anchor-id="la-validación">La validación</h2>
-<p>Después aparecieron los archivos originales de recolección: 53 archivos, uno por consulta, con fechas del 17 al 29 de octubre de 2019, y un script de consolidación que asignaba una columna <code>consulta</code> a cada uno. Eso permitió contrastar la reconstrucción contra la lista real.</p>
+<p>El corpus se recolectó con el paquete <code>rtweet</code> sobre la API de búsqueda de Twitter, con <strong>una consulta por archivo y ejecución diaria</strong> entre el 17 y el 29 de octubre de 2019. Cada archivo conserva en una columna la consulta que lo originó.</p>
+<p>Se preservaron 53 archivos con 49 consultas distintas, que suman 15.185.311 filas. Una misma publicación aparece en varios archivos cuando satisface más de una consulta; al consolidar se deduplica por identificador, quedando 6.714.876 únicas, y un filtro temporal deja el conjunto final en 6.119.933.</p>
+<section id="las-49-consultas" class="level2">
+<h2 class="anchored" data-anchor-id="las-49-consultas">Las 49 consultas</h2>
 <div class="cell">
 <details class="code-fold">
 <summary>ver código</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabla</span>(val[, .(<span class="st">`</span><span class="at">#</span><span class="st">`</span> <span class="ot">=</span> paso, Término <span class="ot">=</span> termino, <span class="st">`</span><span class="at">Tweets que aporta</span><span class="st">`</span> <span class="ot">=</span> tweets_nuevos,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">`</span><span class="at">Cobertura acum.</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">pc</span>(pct_acumulado, <span class="dv">1</span>), <span class="at">Familia =</span> familia,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">`</span><span class="at">¿Consulta real?</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">fifelse</span>(en_originales, <span class="st">"sí"</span>, <span class="st">"no"</span>))],</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">align =</span> <span class="st">"rlrrll"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
-'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso
-Warning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :
-'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso</code></pre>
-</div>
-<div id="tbl-val" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-val-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabla&nbsp;1: Los 40 términos reconstruidos a ciegas, contra la lista real de consultas.
-</figcaption>
-<div aria-describedby="tbl-val-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 3%">
-<col style="width: 31%">
-<col style="width: 18%">
-<col style="width: 16%">
-<col style="width: 13%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">#</th>
-<th style="text-align: left;">Término</th>
-<th style="text-align: right;">Tweets que aporta</th>
-<th style="text-align: right;">Cobertura acum.</th>
-<th style="text-align: left;">Familia</th>
-<th style="text-align: left;">¿Consulta real?</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">#estopasaenchile</td>
-<td style="text-align: right;">682.397</td>
-<td style="text-align: right;">11,2%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: left;">#chiledesperto</td>
-<td style="text-align: right;">629.628</td>
-<td style="text-align: right;">21,4%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">#evasionmasivatodoeldia</td>
-<td style="text-align: right;">477.114</td>
-<td style="text-align: right;">29,2%</td>
-<td style="text-align: left;">evasion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: left;">#estonohaterminado</td>
-<td style="text-align: right;">403.954</td>
-<td style="text-align: right;">35,8%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: left;">#toquedequeda</td>
-<td style="text-align: right;">396.336</td>
-<td style="text-align: right;">42,3%</td>
-<td style="text-align: left;">movilizacion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: left;">#chileviolateshumanrights</td>
-<td style="text-align: right;">380.601</td>
-<td style="text-align: right;">48,5%</td>
-<td style="text-align: left;">ddhh</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: left;">#cambiodegabinete</td>
-<td style="text-align: right;">249.360</td>
-<td style="text-align: right;">52,6%</td>
-<td style="text-align: left;">gobierno</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: left;">#evasionmasiva</td>
-<td style="text-align: right;">226.098</td>
-<td style="text-align: right;">56,3%</td>
-<td style="text-align: left;">evasion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: left;">#chilesecanso</td>
-<td style="text-align: right;">200.988</td>
-<td style="text-align: right;">59,6%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">10</td>
-<td style="text-align: left;">#22oct</td>
-<td style="text-align: right;">196.509</td>
-<td style="text-align: right;">62,8%</td>
-<td style="text-align: left;">fecha</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">11</td>
-<td style="text-align: left;">#19oct</td>
-<td style="text-align: right;">178.014</td>
-<td style="text-align: right;">65,7%</td>
-<td style="text-align: left;">fecha</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">12</td>
-<td style="text-align: left;">#21oct</td>
-<td style="text-align: right;">164.416</td>
-<td style="text-align: right;">68,4%</td>
-<td style="text-align: left;">fecha</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">13</td>
-<td style="text-align: left;">#20oct</td>
-<td style="text-align: right;">153.511</td>
-<td style="text-align: right;">70,9%</td>
-<td style="text-align: left;">fecha</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">14</td>
-<td style="text-align: left;">#quesevayanlosmilicos</td>
-<td style="text-align: right;">141.493</td>
-<td style="text-align: right;">73,2%</td>
-<td style="text-align: left;">ddhh</td>
-<td style="text-align: left;">no</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">15</td>
-<td style="text-align: left;">#17oct</td>
-<td style="text-align: right;">135.216</td>
-<td style="text-align: right;">75,4%</td>
-<td style="text-align: left;">fecha</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">16</td>
-<td style="text-align: left;">#18oct</td>
-<td style="text-align: right;">113.780</td>
-<td style="text-align: right;">77,3%</td>
-<td style="text-align: left;">fecha</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">17</td>
-<td style="text-align: left;">#renunciapiñera</td>
-<td style="text-align: right;">106.848</td>
-<td style="text-align: right;">79,0%</td>
-<td style="text-align: left;">gobierno</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">18</td>
-<td style="text-align: left;">#noestamosenguerra</td>
-<td style="text-align: right;">87.413</td>
-<td style="text-align: right;">80,4%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">19</td>
-<td style="text-align: left;">#chilesomostodos</td>
-<td style="text-align: right;">82.300</td>
-<td style="text-align: right;">81,8%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">20</td>
-<td style="text-align: left;">#chiledespertó</td>
-<td style="text-align: right;">71.062</td>
-<td style="text-align: right;">83,0%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">21</td>
-<td style="text-align: left;">#chadwickasesino</td>
-<td style="text-align: right;">68.369</td>
-<td style="text-align: right;">84,1%</td>
-<td style="text-align: left;">ddhh</td>
-<td style="text-align: left;">no</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">22</td>
-<td style="text-align: left;">#acusacionconstitucionalpiñera</td>
-<td style="text-align: right;">68.043</td>
-<td style="text-align: right;">85,2%</td>
-<td style="text-align: left;">gobierno</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">23</td>
-<td style="text-align: left;">#chileencrisis</td>
-<td style="text-align: right;">64.470</td>
-<td style="text-align: right;">86,2%</td>
-<td style="text-align: left;">otro</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">24</td>
-<td style="text-align: left;">#renunciapiñeraahora</td>
-<td style="text-align: right;">34.253</td>
-<td style="text-align: right;">86,8%</td>
-<td style="text-align: left;">gobierno</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">25</td>
-<td style="text-align: left;">#chileprotests</td>
-<td style="text-align: right;">30.444</td>
-<td style="text-align: right;">87,3%</td>
-<td style="text-align: left;">ingles</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">26</td>
-<td style="text-align: left;">#paronacional</td>
-<td style="text-align: right;">27.963</td>
-<td style="text-align: right;">87,8%</td>
-<td style="text-align: left;">movilizacion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">27</td>
-<td style="text-align: left;">#chileresiste</td>
-<td style="text-align: right;">26.923</td>
-<td style="text-align: right;">88,2%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">28</td>
-<td style="text-align: left;">#marchadelmillon</td>
-<td style="text-align: right;">26.769</td>
-<td style="text-align: right;">88,6%</td>
-<td style="text-align: left;">movilizacion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">29</td>
-<td style="text-align: left;">#evasiónmasiva</td>
-<td style="text-align: right;">26.387</td>
-<td style="text-align: right;">89,1%</td>
-<td style="text-align: left;">evasion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">30</td>
-<td style="text-align: left;">#renunciapiñeraculiao</td>
-<td style="text-align: right;">24.651</td>
-<td style="text-align: right;">89,5%</td>
-<td style="text-align: left;">gobierno</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">31</td>
-<td style="text-align: left;">#evasionmasivatodoeldía</td>
-<td style="text-align: right;">19.271</td>
-<td style="text-align: right;">89,8%</td>
-<td style="text-align: left;">evasion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">32</td>
-<td style="text-align: left;">#chalecosamarillos</td>
-<td style="text-align: right;">18.720</td>
-<td style="text-align: right;">90,1%</td>
-<td style="text-align: left;">movilizacion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">33</td>
-<td style="text-align: left;">#chileprotesta</td>
-<td style="text-align: right;">17.366</td>
-<td style="text-align: right;">90,4%</td>
-<td style="text-align: left;">ingles</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">34</td>
-<td style="text-align: left;">#chilesecansó</td>
-<td style="text-align: right;">12.384</td>
-<td style="text-align: right;">90,6%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">35</td>
-<td style="text-align: left;">#congreso</td>
-<td style="text-align: right;">11.966</td>
-<td style="text-align: right;">90,8%</td>
-<td style="text-align: left;">gobierno</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">36</td>
-<td style="text-align: left;">#pazparachile</td>
-<td style="text-align: right;">11.054</td>
-<td style="text-align: right;">91,0%</td>
-<td style="text-align: left;">consigna</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">37</td>
-<td style="text-align: left;">#apagalatele</td>
-<td style="text-align: right;">9.920</td>
-<td style="text-align: right;">91,1%</td>
-<td style="text-align: left;">movilizacion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">38</td>
-<td style="text-align: left;">#chile</td>
-<td style="text-align: right;">9.374</td>
-<td style="text-align: right;">91,3%</td>
-<td style="text-align: left;">otro</td>
-<td style="text-align: left;">no</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">39</td>
-<td style="text-align: left;">#acusaciónconstitucionalpiñera</td>
-<td style="text-align: right;">9.326</td>
-<td style="text-align: right;">91,4%</td>
-<td style="text-align: left;">gobierno</td>
-<td style="text-align: left;">sí</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">40</td>
-<td style="text-align: left;">#marchadelmillón</td>
-<td style="text-align: right;">6.958</td>
-<td style="text-align: right;">91,5%</td>
-<td style="text-align: left;">movilizacion</td>
-<td style="text-align: left;">sí</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</figure>
-</div>
-</div>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><strong>37 de 40 (92%)</strong> son consulta original, y explican el <strong>87,9%</strong> del corpus.</p>
-</div>
-</div>
-</div>
-<p>Los tres que no coinciden son casi aciertos. La reconstrucción encontró <code>#QueSeVayanLosMilicos</code> y <code>#ChadwickAsesino</code>; las consultas fueron <code>#VayanseMilicos</code> y la palabra <code>chadwick</code>. En esos casos la reconstrucción describe mejor el contenido del corpus que la consulta que lo generó.</p>
-</section>
-<section id="el-límite-del-método-medido" class="level2">
-<h2 class="anchored" data-anchor-id="el-límite-del-método-medido">El límite del método, medido</h2>
-<p>De las 49 consultas originales, 18 no se recuperan. Son sobre todo las que <strong>no eran hashtags sino palabras sueltas</strong>: <code>INDH</code>, <code>congreso</code>, <code>chadwick</code>, <code>Saqueos</code>, <code>Disparos institucionales</code>, <code>NO HAY DEBASTECIMIENTO</code>. Una reconstrucción basada en hashtags es ciega a las consultas por palabra clave.</p>
-</section>
-<section id="la-lista-completa" class="level2">
-<h2 class="anchored" data-anchor-id="la-lista-completa">La lista completa</h2>
-<div class="cell">
-<details class="code-fold">
-<summary>ver código</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabla</span>(cons[<span class="fu">order</span>(origen, consulta), .(<span class="at">Consulta =</span> consulta, <span class="at">Fuente =</span> origen)])</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tabla</span>(cons[<span class="fu">order</span>(origen, consulta), .(<span class="at">Consulta =</span> consulta, <span class="at">Fuente =</span> origen)])</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="tbl-cons" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabla&nbsp;2: Las 49 consultas con que se recolectó el corpus.
+Tabla&nbsp;1: Lista completa de los términos con que se construyó el corpus.
 </figcaption>
 <div aria-describedby="tbl-cons-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -813,10 +424,24 @@ Tabla&nbsp;2: Las 49 consultas con que se recolectó el corpus.
 </figure>
 </div>
 </div>
+<p>Combinan hashtags de consigna (<code>#ChileDesperto</code>, <code>#EstoPasaEnChile</code>), de episodio (<code>#EvasionMasiva</code>, <code>#CambiodeGabinete</code>), de derechos humanos (<code>#ChileViolatesHumanRights</code>), de fecha (<code>#17oct</code> a <code>#22Oct</code>) y, en menor medida, palabras sueltas (<code>INDH</code>, <code>congreso</code>, <code>Saqueos</code>).</p>
 </section>
-<section id="por-qué-importa-para-quien-reutilice-estos-datos" class="level2">
-<h2 class="anchored" data-anchor-id="por-qué-importa-para-quien-reutilice-estos-datos">Por qué importa para quien reutilice estos datos</h2>
-<p>Seis de esas consultas son <strong>hashtags de fecha</strong> (<code>#17oct</code> a <code>#22Oct</code>) y explican 941.446 tweets, el 15,4% del corpus. Son términos que cualquiera en el mundo usa ese día. Por ahí entró contenido que no tiene nada que ver con Chile — y es <a href="./contagio.html">medible</a>.</p>
+<section id="cuánto-aporta-cada-una" class="level2">
+<h2 class="anchored" data-anchor-id="cuánto-aporta-cada-una">Cuánto aporta cada una</h2>
+<p><img src="figuras/cobertura_terminos.png" class="img-fluid"></p>
+<p>No aportan en partes iguales. <code>#ChileDesperto</code> contribuye 658.153 publicaciones y <code>#HabraConsecuencias</code>, 61. Diez términos explican más de la mitad del corpus y la distribución decae de forma continua, sin un corte natural.</p>
+<p>Esto importa para el uso: un análisis restringido a consignas cubre una porción distinta del corpus que uno que incluya los hashtags de fecha. Y esa diferencia no es solo de volumen, sino de contenido — es el tema de <a href="./contagio.html">comunidades contagiadas</a>.</p>
+</section>
+<section id="una-nota-sobre-la-lista" class="level2">
+<h2 class="anchored" data-anchor-id="una-nota-sobre-la-lista">Una nota sobre la lista</h2>
+<p>La lista de términos <strong>se fijó durante los primeros días</strong> del episodio y no se actualizó. Eso tiene una consecuencia medible: el 25 de octubre, día de la marcha más grande de Chile, registra 112.812 publicaciones, menos que la víspera. La consulta <code>#MarchaDelMillon</code> aporta 48.558 frente a las 603.398 de <code>#ChileDesperto</code>.</p>
+<p>El corpus subrepresenta sistemáticamente la segunda semana del ciclo. No es un defecto oculto: es una propiedad que cualquier reutilización debe declarar.</p>
+</section>
+<section id="verificación" class="level2">
+<h2 class="anchored" data-anchor-id="verificación">Verificación</h2>
+<p>Para comprobar que la documentación de consultas está completa se hizo un contraste independiente: extraer los hashtags de los 6,1 millones de textos y resolver una cobertura glotona —en cada paso, el hashtag presente en más publicaciones aún no cubiertas— sin mirar la lista declarada.</p>
+<p>De los 40 términos así obtenidos, <strong>37 corresponden a consultas efectivas</strong> y explican el 87,9% del corpus. Los tres restantes son variantes que la gente usó realmente frente a la forma registrada: <code>#QueSeVayanLosMilicos</code> por <code>#VayanseMilicos</code>, <code>#ChadwickAsesino</code> por la palabra <code>chadwick</code>.</p>
+<p>El contraste no recupera las consultas por palabra suelta, por estar restringido a hashtags. Confirma la documentación sin sustituirla.</p>
 
 
 </section>

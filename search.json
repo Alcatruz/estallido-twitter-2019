@@ -35,123 +35,39 @@
     "text": "Vocabulario propio de cada comunidad\n\nMedido por sobrerrepresentación frente al resto del día, no por frecuencia bruta: las palabras más frecuentes serían las mismas en todas las comunidades."
   },
   {
-    "objectID": "metodo.html",
-    "href": "metodo.html",
-    "title": "Cómo se recolectó",
+    "objectID": "politicos.html",
+    "href": "politicos.html",
+    "title": "La clase política",
     "section": "",
-    "text": "El corpus llegó como un único archivo con las 90 columnas estándar de rtweet y ninguna que dijera por qué consulta entró cada tweet. Sin eso no se puede interpretar nada: un corpus recolectado por términos contiene lo que esos términos atrajeron, incluido lo que no tiene que ver con el tema."
+    "text": "Identificar a los políticos en un corpus de 702.103 cuentas no se hace adivinando handles. Se parte del padrón real —diputados, senadores, ministros, Presidente y presidentes de partido en ejercicio en octubre de 2019— y se cruza contra tres fuentes: las reseñas biográficas de la Biblioteca del Congreso Nacional, Wikidata, y búsqueda por nombre validada contra la biografía.\nver código\ng &lt;- pol[, .(Cuentas = .N), by = .(Cargo = cargo)][order(-Cuentas)]\ntabla(g)\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 1: Cuentas identificadas por cargo.\n\n\n\n\n\n\nCargo\nCuentas\n\n\n\n\ndiputado\n135\n\n\nsenador\n28\n\n\nministro-desde-28oct\n3\n\n\nministro\n2\n\n\nministro-hasta-28oct\n1\n\n\npresidente\n1\n\n\npresidente-partido\n1\nDe los 156 diputados en ejercicio durante la ventana del corpus, 135 tienen cuenta identificada (87%), 65 confirmadas por dos fuentes independientes."
   },
   {
-    "objectID": "metodo.html#reconstruirla-desde-los-datos",
-    "href": "metodo.html#reconstruirla-desde-los-datos",
-    "title": "Cómo se recolectó",
-    "section": "Reconstruirla desde los datos",
-    "text": "Reconstruirla desde los datos\nSi un corpus se arma siguiendo una lista de términos, casi todo tweet tiene que contener al menos uno. Se extraen los hashtags de los 6,1 millones de textos y se resuelve una cobertura glotona: en cada paso, el hashtag que cubre más tweets todavía no cubiertos.\n\nNo hay un corte limpio entre “término de consulta” y “vocabulario emergente”: la ganancia marginal cae de forma gradual, de 11,2% el primero a 0,1% el número 40. Ese gradiente ya es un hallazgo — se rastreó una lista larga, no dos o tres hashtags. Cuarenta términos cubren el 91,5% del corpus."
+    "objectID": "politicos.html#el-peso-real",
+    "href": "politicos.html#el-peso-real",
+    "title": "La clase política",
+    "section": "El peso real",
+    "text": "El peso real\n\n\nver código\ntabla(cl[order(-rt_recibidos),\n         .(Clase = clase, Cuentas = cuentas, `% cuentas` = pct_cuentas,\n           `% tweets` = pct_tweets, `% retweets` = pct_rt,\n           `RT por cuenta` = rt_por_cuenta)], align = \"lrrrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 2: Las tres clases de cuenta y su participación.\n\n\n\n\n\n\nClase\nCuentas\n% cuentas\n% tweets\n% retweets\nRT por cuenta\n\n\n\n\nciudadana\n672.258\n95.75\n95.35\n78.75\n6.3\n\n\nmedio\n29.720\n4.23\n4.63\n19.02\n34.3\n\n\npolitica\n125\n0.02\n0.02\n2.23\n955.9\n\n\n\n\n\n\n\n\n\nDos lecturas que apuntan en direcciones opuestas y las dos son ciertas:\nUna cuenta política recibe 956 retweets, una ciudadana 6. Es una ventaja de 152 veces por cuenta.\nPero la clase política concentra apenas el 2,2% de la amplificación total. De las 15 cuentas más retuiteadas del corpus completo, una sola es de un cargo electo. El estallido amplificó abrumadoramente a cuentas sin cargo."
   },
   {
-    "objectID": "metodo.html#la-validación",
-    "href": "metodo.html#la-validación",
-    "title": "Cómo se recolectó",
-    "section": "La validación",
-    "text": "La validación\nDespués aparecieron los archivos originales de recolección: 53 archivos, uno por consulta, con fechas del 17 al 29 de octubre de 2019, y un script de consolidación que asignaba una columna consulta a cada uno. Eso permitió contrastar la reconstrucción contra la lista real.\n\n\nver código\ntabla(val[, .(`#` = paso, Término = termino, `Tweets que aporta` = tweets_nuevos,\n              `Cobertura acum.` = pc(pct_acumulado, 1), Familia = familia,\n              `¿Consulta real?` = fifelse(en_originales, \"sí\", \"no\"))],\n      align = \"rlrrll\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 1: Los 40 términos reconstruidos a ciegas, contra la lista real de consultas.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n#\nTérmino\nTweets que aporta\nCobertura acum.\nFamilia\n¿Consulta real?\n\n\n\n\n1\n#estopasaenchile\n682.397\n11,2%\nconsigna\nsí\n\n\n2\n#chiledesperto\n629.628\n21,4%\nconsigna\nsí\n\n\n3\n#evasionmasivatodoeldia\n477.114\n29,2%\nevasion\nsí\n\n\n4\n#estonohaterminado\n403.954\n35,8%\nconsigna\nsí\n\n\n5\n#toquedequeda\n396.336\n42,3%\nmovilizacion\nsí\n\n\n6\n#chileviolateshumanrights\n380.601\n48,5%\nddhh\nsí\n\n\n7\n#cambiodegabinete\n249.360\n52,6%\ngobierno\nsí\n\n\n8\n#evasionmasiva\n226.098\n56,3%\nevasion\nsí\n\n\n9\n#chilesecanso\n200.988\n59,6%\nconsigna\nsí\n\n\n10\n#22oct\n196.509\n62,8%\nfecha\nsí\n\n\n11\n#19oct\n178.014\n65,7%\nfecha\nsí\n\n\n12\n#21oct\n164.416\n68,4%\nfecha\nsí\n\n\n13\n#20oct\n153.511\n70,9%\nfecha\nsí\n\n\n14\n#quesevayanlosmilicos\n141.493\n73,2%\nddhh\nno\n\n\n15\n#17oct\n135.216\n75,4%\nfecha\nsí\n\n\n16\n#18oct\n113.780\n77,3%\nfecha\nsí\n\n\n17\n#renunciapiñera\n106.848\n79,0%\ngobierno\nsí\n\n\n18\n#noestamosenguerra\n87.413\n80,4%\nconsigna\nsí\n\n\n19\n#chilesomostodos\n82.300\n81,8%\nconsigna\nsí\n\n\n20\n#chiledespertó\n71.062\n83,0%\nconsigna\nsí\n\n\n21\n#chadwickasesino\n68.369\n84,1%\nddhh\nno\n\n\n22\n#acusacionconstitucionalpiñera\n68.043\n85,2%\ngobierno\nsí\n\n\n23\n#chileencrisis\n64.470\n86,2%\notro\nsí\n\n\n24\n#renunciapiñeraahora\n34.253\n86,8%\ngobierno\nsí\n\n\n25\n#chileprotests\n30.444\n87,3%\ningles\nsí\n\n\n26\n#paronacional\n27.963\n87,8%\nmovilizacion\nsí\n\n\n27\n#chileresiste\n26.923\n88,2%\nconsigna\nsí\n\n\n28\n#marchadelmillon\n26.769\n88,6%\nmovilizacion\nsí\n\n\n29\n#evasiónmasiva\n26.387\n89,1%\nevasion\nsí\n\n\n30\n#renunciapiñeraculiao\n24.651\n89,5%\ngobierno\nsí\n\n\n31\n#evasionmasivatodoeldía\n19.271\n89,8%\nevasion\nsí\n\n\n32\n#chalecosamarillos\n18.720\n90,1%\nmovilizacion\nsí\n\n\n33\n#chileprotesta\n17.366\n90,4%\ningles\nsí\n\n\n34\n#chilesecansó\n12.384\n90,6%\nconsigna\nsí\n\n\n35\n#congreso\n11.966\n90,8%\ngobierno\nsí\n\n\n36\n#pazparachile\n11.054\n91,0%\nconsigna\nsí\n\n\n37\n#apagalatele\n9.920\n91,1%\nmovilizacion\nsí\n\n\n38\n#chile\n9.374\n91,3%\notro\nno\n\n\n39\n#acusaciónconstitucionalpiñera\n9.326\n91,4%\ngobierno\nsí\n\n\n40\n#marchadelmillón\n6.958\n91,5%\nmovilizacion\nsí\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n37 de 40 (92%) son consulta original, y explican el 87,9% del corpus.\n\n\n\nLos tres que no coinciden son casi aciertos. La reconstrucción encontró #QueSeVayanLosMilicos y #ChadwickAsesino; las consultas fueron #VayanseMilicos y la palabra chadwick. En esos casos la reconstrucción describe mejor el contenido del corpus que la consulta que lo generó."
+    "objectID": "politicos.html#escriben-poco-y-viaja-lejos",
+    "href": "politicos.html#escriben-poco-y-viaja-lejos",
+    "title": "La clase política",
+    "section": "Escriben poco y viaja lejos",
+    "text": "Escriben poco y viaja lejos\n\n\nver código\ntabla(rend[order(-circulacion_por_texto),\n           .(Clase = grupo, `Textos únicos` = textos, Circulación = circulacion,\n             `Circulación por texto` = circulacion_por_texto)], align = \"lrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 3: Textos únicos producidos y circulación obtenida.\n\n\n\n\n\n\nClase\nTextos únicos\nCirculación\nCirculación por texto\n\n\n\n\npolitica\n451\n119.921\n265.9\n\n\nmedio\n89.059\n1.107.919\n12.4\n\n\nciudadana\n665.994\n4.892.093\n7.3\n\n\n\n\n\n\n\n\nLa clase política produce 451 textos únicos en 19 días y obtiene 119.921 retweets. Un texto suyo circula 36 veces más que uno ciudadano. No amplifica por volumen sino por rendimiento.\nEso tiene una consecuencia metodológica incómoda: con 451 textos no se puede construir un perfil léxico. La especificidad termina premiando rarezas de dos o tres tweets virales. Esa medición está calculada en el repositorio pero marcada como no interpretable."
   },
   {
-    "objectID": "metodo.html#el-límite-del-método-medido",
-    "href": "metodo.html#el-límite-del-método-medido",
-    "title": "Cómo se recolectó",
-    "section": "El límite del método, medido",
-    "text": "El límite del método, medido\nDe las 49 consultas originales, 18 no se recuperan. Son sobre todo las que no eran hashtags sino palabras sueltas: INDH, congreso, chadwick, Saqueos, Disparos institucionales, NO HAY DEBASTECIMIENTO. Una reconstrucción basada en hashtags es ciega a las consultas por palabra clave."
+    "objectID": "politicos.html#dónde-están-en-la-red",
+    "href": "politicos.html#dónde-están-en-la-red",
+    "title": "La clase política",
+    "section": "Dónde están en la red",
+    "text": "Dónde están en la red\nLas 125 cuentas políticas presentes el 18 de octubre están todas dentro de una sola comunidad, la 10, donde son el 8,8% de los tweets. Cero en las otras siete."
   },
   {
-    "objectID": "metodo.html#la-lista-completa",
-    "href": "metodo.html#la-lista-completa",
-    "title": "Cómo se recolectó",
-    "section": "La lista completa",
-    "text": "La lista completa\n\n\nver código\ntabla(cons[order(origen, consulta), .(Consulta = consulta, Fuente = origen)])\n\n\n\n\nTabla 2: Las 49 consultas con que se recolectó el corpus.\n\n\n\n\n\n\nConsulta\nFuente\n\n\n\n\n#17oct\ncolumna consulta\n\n\n#18Oct\ncolumna consulta\n\n\n#19Oct\ncolumna consulta\n\n\n#20Oct\ncolumna consulta\n\n\n#21Oct\ncolumna consulta\n\n\n#22Oct\ncolumna consulta\n\n\n#AcusaciónConstitucionalPiñera\ncolumna consulta\n\n\n#Apagalatele\ncolumna consulta\n\n\n#CambiodeGabinete\ncolumna consulta\n\n\n#ChalecosAmarillos\ncolumna consulta\n\n\n#ChileDesperto\ncolumna consulta\n\n\n#ChileProtesta\ncolumna consulta\n\n\n#ChileProtests\ncolumna consulta\n\n\n#ChileResiste\ncolumna consulta\n\n\n#ChileSeCanso\ncolumna consulta\n\n\n#ChileSomosTodos\ncolumna consulta\n\n\n#ChileViolatesHumanRights\ncolumna consulta\n\n\n#EstoNoHaTerminado\ncolumna consulta\n\n\n#EstoPasaEnChile\ncolumna consulta\n\n\n#EvasionMasiva\ncolumna consulta\n\n\n#EvasionMasivaTodoElDia\ncolumna consulta\n\n\n#HabraConsecuencias\ncolumna consulta\n\n\n#LaMoneda\ncolumna consulta\n\n\n#MarchaDelMillon\ncolumna consulta\n\n\n#NosQuierenRobarHastaLaMarcha\ncolumna consulta\n\n\n#ParoNacional\ncolumna consulta\n\n\n#RenunciaPiñera\ncolumna consulta\n\n\n#RenunciaPiñeraAhora\ncolumna consulta\n\n\n#RenunciaPiñeraCuliao\ncolumna consulta\n\n\n#RenunciaPiñeractm\ncolumna consulta\n\n\n#VayanseMilicos\ncolumna consulta\n\n\n#YoApoyoAlPresidente\ncolumna consulta\n\n\n#autogolpe\ncolumna consulta\n\n\n#noestamosenguerra\ncolumna consulta\n\n\n#pazParaChile\ncolumna consulta\n\n\n#toquedequeda\ncolumna consulta\n\n\nChileEnCrisis\ncolumna consulta\n\n\nDisparos institucionales\ncolumna consulta\n\n\nINDH\ncolumna consulta\n\n\nNO HAY DEBASTECIMIENTO\ncolumna consulta\n\n\nSaqueos\ncolumna consulta\n\n\nchadwick\ncolumna consulta\n\n\ncongreso\ncolumna consulta\n\n\ndf_saqueos_diparos\nnombre de archivo\n\n\ndf_tweets\nnombre de archivo\n\n\nmetro1\nnombre de archivo\n\n\nmetro3\nnombre de archivo\n\n\npinera_renuncia\nnombre de archivo\n\n\nveinte1\nnombre de archivo"
-  },
-  {
-    "objectID": "metodo.html#por-qué-importa-para-quien-reutilice-estos-datos",
-    "href": "metodo.html#por-qué-importa-para-quien-reutilice-estos-datos",
-    "title": "Cómo se recolectó",
-    "section": "Por qué importa para quien reutilice estos datos",
-    "text": "Por qué importa para quien reutilice estos datos\nSeis de esas consultas son hashtags de fecha (#17oct a #22Oct) y explican 941.446 tweets, el 15,4% del corpus. Son términos que cualquiera en el mundo usa ese día. Por ahí entró contenido que no tiene nada que ver con Chile — y es medible."
-  },
-  {
-    "objectID": "datos.html",
-    "href": "datos.html",
-    "title": "Datos y código",
-    "section": "",
-    "text": "Todo el procesamiento está en github.com/Alcatruz/estallido-twitter-2019, en R. Catorce scripts numerados, de la lectura del archivo original a la construcción del paquete de publicación.\n\n\n\nScript\nQué hace\n\n\n\n\n00_setup.R\nrutas, parámetros y utilidades comunes\n\n\n01_rds_a_csv.R\nlee el archivo original, exporta CSV y muestra\n\n\n01b_tabla_analisis.R\ntabla liviana en parquet\n\n\n02_explorar_muestra.R\nexploración descriptiva\n\n\n03_red_18oct.R\nred de retweets, comunidades y layout\n\n\n04_red_pdf.R\nversiones vectoriales de la red\n\n\n05_corpus_comunidades.R\ncorpus y vocabulario por comunidad\n\n\n06_distribucion_global.R\nseries de los 19 días\n\n\n07–08a–08\npadrón parlamentario y cuentas de X\n\n\n09_clasificar_cuentas.R\nclases de cuenta y amplificación\n\n\n10_terminos_recoleccion.R\nreconstrucción de la consulta\n\n\n11_discurso_comunidades.R\níndice de contagio y discurso\n\n\n12_eventos_gobierno.R\nestudio de eventos\n\n\n13_paquete_publicacion.R\npaquete redistribuible\n\n\n14_procedencia_consultas.R\nprocedencia y validación\n\n\n\nLas tablas y figuras del sitio están versionadas en el repositorio, así que este sitio se reconstruye sin el corpus."
-  },
-  {
-    "objectID": "datos.html#el-código",
-    "href": "datos.html#el-código",
-    "title": "Datos y código",
-    "section": "",
-    "text": "Todo el procesamiento está en github.com/Alcatruz/estallido-twitter-2019, en R. Catorce scripts numerados, de la lectura del archivo original a la construcción del paquete de publicación.\n\n\n\nScript\nQué hace\n\n\n\n\n00_setup.R\nrutas, parámetros y utilidades comunes\n\n\n01_rds_a_csv.R\nlee el archivo original, exporta CSV y muestra\n\n\n01b_tabla_analisis.R\ntabla liviana en parquet\n\n\n02_explorar_muestra.R\nexploración descriptiva\n\n\n03_red_18oct.R\nred de retweets, comunidades y layout\n\n\n04_red_pdf.R\nversiones vectoriales de la red\n\n\n05_corpus_comunidades.R\ncorpus y vocabulario por comunidad\n\n\n06_distribucion_global.R\nseries de los 19 días\n\n\n07–08a–08\npadrón parlamentario y cuentas de X\n\n\n09_clasificar_cuentas.R\nclases de cuenta y amplificación\n\n\n10_terminos_recoleccion.R\nreconstrucción de la consulta\n\n\n11_discurso_comunidades.R\níndice de contagio y discurso\n\n\n12_eventos_gobierno.R\nestudio de eventos\n\n\n13_paquete_publicacion.R\npaquete redistribuible\n\n\n14_procedencia_consultas.R\nprocedencia y validación\n\n\n\nLas tablas y figuras del sitio están versionadas en el repositorio, así que este sitio se reconstruye sin el corpus."
-  },
-  {
-    "objectID": "datos.html#los-datos",
-    "href": "datos.html#los-datos",
-    "title": "Datos y código",
-    "section": "Los datos",
-    "text": "Los datos\nEl corpus no se publica como tal. Los términos de servicio de X restringen la redistribución del contenido de los tweets y de los campos de perfil.\nEl análisis de referencia sobre el tema (Golland et al., Big Data & Society, 2026) revisó ~4.000 datasets de Twitter registrados en DataCite: el 66% publica solo identificadores, y los propios autores concluyen que esos datasets quedan “practically rendered useless for most purposes”, porque rehidratarlos ya no es viable. Un estudio en Political Analysis midió que solo un tercio de los tweets de datasets sensibles sigue recuperable.\nPor eso el paquete previsto combina tres niveles:\n\n\n\n\n\n\n\n\nNivel\nContenido\nAlcance\n\n\n\n\nAbierto\nidentificadores, tiempos, tipo, idioma, cliente, red, comunidad, clase, hashtags, métricas, y todos los derivados propios\ntodas las cuentas, seudonimizadas\n\n\nAbierto\nlo anterior más texto e identificador real\nlas 125 cuentas de cargos públicos\n\n\nBajo solicitud\ntexto de cuentas ciudadanas\nuso declarado\n\n\n\nEl criterio del corte es quién actuaba en público. Un parlamentario tuiteando sobre el estallido producía registro político; una persona que tuiteó esa semana y después borró su cuenta esperaba que eso desapareciera.\nEsa tensión no se resuelve, se administra: el valor archivístico del corpus viene justamente de preservar lo que ya no existe, y esa misma propiedad es el problema de privacidad."
-  },
-  {
-    "objectID": "datos.html#variables-propias",
-    "href": "datos.html#variables-propias",
-    "title": "Datos y código",
-    "section": "Variables propias",
-    "text": "Variables propias\nLo que no existe en ningún otro corpus chileno de este período:\n\nconsulta — el término por el que entró cada tweet, recuperado\ncomunidad_18oct — comunidad en la red del 18 de octubre\nclase_cuenta — política, medio o ciudadana\nes_cargo_publico, partido — para los 171 cargos identificados\nsolo_hashtag_fecha — índice de contagio a nivel de tweet\nlatencia_retweet_min — minutos entre el original y su retweet"
-  },
-  {
-    "objectID": "datos.html#limitaciones-que-cualquier-reutilización-debe-declarar",
-    "href": "datos.html#limitaciones-que-cualquier-reutilización-debe-declarar",
-    "title": "Datos y código",
-    "section": "Limitaciones que cualquier reutilización debe declarar",
-    "text": "Limitaciones que cualquier reutilización debe declarar\n\nDías truncados. El 11 y el 29 de octubre están cortados por la ventana de descarga.\nSesgo hacia la primera semana. La lista de términos se fijó temprano y el vocabulario de la protesta cambió; el 25 de octubre está subrepresentado.\nContaminación por hashtags de fecha. 15,4% del corpus entró por #17oct–#22Oct, y tres comunidades enteras no contienen vocabulario chileno.\nLa clase “medio” es heurística, no un registro: se equivoca en ambas direcciones."
-  },
-  {
-    "objectID": "datos.html#cómo-citar",
-    "href": "datos.html#cómo-citar",
-    "title": "Datos y código",
-    "section": "Cómo citar",
-    "text": "Cómo citar\nMientras no haya DOI, citar el repositorio. El depósito con DOI y el data descriptor están en preparación."
-  },
-  {
-    "objectID": "contagio.html",
-    "href": "contagio.html",
-    "title": "Comunidades contagiadas",
-    "section": "",
-    "text": "Seis de las 49 consultas con que se armó el corpus son hashtags de fecha: #17oct, #18Oct, #19Oct, #20Oct, #21Oct, #22Oct. Explican 941.446 tweets, el 15,4% del total. Y son términos que cualquiera en el mundo usa ese día, hable de lo que hable.\nLa pregunta es cuánto de este corpus de protesta chilena no habla de protesta chilena."
-  },
-  {
-    "objectID": "contagio.html#un-índice-de-contagio",
-    "href": "contagio.html#un-índice-de-contagio",
-    "title": "Comunidades contagiadas",
-    "section": "Un índice de contagio",
-    "text": "Un índice de contagio\nPara cada comunidad se mide qué fracción de sus tweets trae hashtag de fecha pero ningún término chileno de la consulta. Si una comunidad entró por el vocabulario del estallido, esa fracción es cercana a cero. Si entró por la puerta genérica, es cercana a uno.\n\n\nver código\ntabla(cg[order(-pct_solo_fecha),\n         .(Comunidad = comunidad, Tweets = tweets,\n           `% con hashtag de fecha` = pct_con_fecha,\n           `% con término chileno` = pct_con_chile,\n           `% SOLO fecha` = pct_solo_fecha)], align = \"rrrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 1: Índice de contagio por comunidad, 18 de octubre.\n\n\n\n\n\n\n\n\n\n\n\n\n\nComunidad\nTweets\n% con hashtag de fecha\n% con término chileno\n% SOLO fecha\n\n\n\n\n8\n3.901\n100.0\n0.0\n100.0\n\n\n2\n41.264\n99.6\n1.3\n98.7\n\n\n1\n60.107\n92.2\n10.1\n89.9\n\n\n6\n11.610\n0.6\n99.4\n0.6\n\n\n5\n14.898\n0.7\n98.8\n0.5\n\n\n11\n19.983\n0.4\n99.9\n0.1\n\n\n10\n186.425\n3.6\n99.9\n0.0\n\n\n7\n157.772\n0.1\n100.0\n0.0\n\n\n\n\n\n\n\n\n\nLa separación es total. No hay zona gris:\n\nComunidad 8 — Guardia Nacional Bolivariana de Venezuela. Cero tweets con vocabulario chileno. El 100% entró por hashtag de fecha.\nComunidad 2 — medios venezolanos opositores. 98,7%.\nComunidad 1 — medios estatales chavistas, incluido teleSUR. 89,9%.\nComunidades chilenas — entre 0,0% y 0,6%."
-  },
-  {
-    "objectID": "contagio.html#lo-que-ya-se-veía-en-la-red",
-    "href": "contagio.html#lo-que-ya-se-veía-en-la-red",
-    "title": "Comunidades contagiadas",
-    "section": "Lo que ya se veía en la red",
-    "text": "Lo que ya se veía en la red\nEsas tres comunidades eran justamente las que aparecían aisladas en la matriz de diálogo: 97%, 97% y 91% de retweets internos. Lo que ahí se leía como aislamiento estructural, acá tiene una causa concreta: no estaban en la misma conversación porque nunca entraron a ella.\nSus hashtags lo confirman. La comunidad 1 empuja #VenezuelaEsDDHH con 24.047 menciones y tweets que dicen literalmente “¡LA ETIQUETA DEL DÍA!”. La comunidad 2 habla de presos políticos venezolanos y de lluvias en Caracas.\nEn total son 10.828 cuentas y 74.130 retweets que conviene excluir antes de cualquier análisis sustantivo del estallido."
-  },
-  {
-    "objectID": "contagio.html#presencia-no-es-influencia",
-    "href": "contagio.html#presencia-no-es-influencia",
-    "title": "Comunidades contagiadas",
-    "section": "Presencia no es influencia",
-    "text": "Presencia no es influencia\nEl bloque suma el 19,1% de los nodos de la red y el 18,9% del volumen de retweets. Pero su penetración en la conversación chilena es:\n\n\n\nRetweets del bloque que llegan a cuentas chilenas\n1,99%\n\n\nRetweets chilenos que amplifican cuentas del bloque\n0,42%\n\n\n\nPresencia del 19%, influencia del 0,4%. Es un circuito paralelo que habla solo."
-  },
-  {
-    "objectID": "contagio.html#por-qué-esto-es-generalizable",
-    "href": "contagio.html#por-qué-esto-es-generalizable",
-    "title": "Comunidades contagiadas",
-    "section": "Por qué esto es generalizable",
-    "text": "Por qué esto es generalizable\nEl método no depende de este corpus. Cualquier dataset recolectado por hashtags —y los de protesta casi siempre incluyen hashtags de fecha— puede medir qué fracción de sus datos entró por términos ambiguos. Hasta donde sabemos, ningún corpus público de Twitter publica ese diagnóstico."
+    "objectID": "politicos.html#asimetría-por-partido",
+    "href": "politicos.html#asimetría-por-partido",
+    "title": "La clase política",
+    "section": "Asimetría por partido",
+    "text": "Asimetría por partido\n\n\nver código\nd &lt;- dip[en_ejercicio_oct2019 == TRUE]\nab &lt;- c(\"Partido Comunista de Chile\"=\"PC\",\"Revolución Democrática\"=\"RD\",\n        \"Convergencia Social\"=\"CS\",\"Partido Humanista\"=\"PH\",\n        \"Partido Renovación Nacional\"=\"RN\",\"Partido Unión Demócrata Independiente\"=\"UDI\",\n        \"Partido Evolución Política\"=\"Evópoli\",\"Partido Socialista de Chile\"=\"PS\",\n        \"Partido por la Democracia\"=\"PPD\",\"Partido Demócrata Cristiano\"=\"DC\")\nd[, P := fifelse(partido %in% names(ab), ab[partido], \"otros/sin dato\")]\nt &lt;- d[, .(Diputados = .N, `En el corpus` = sum(presente_corpus),\n           RT = sum(rt_recibidos, na.rm = TRUE)), by = P]\nt[, `% presentes` := round(100 * `En el corpus` / Diputados)]\nt[, `RT por diputado` := round(RT / Diputados)]\ntabla(t[Diputados &gt;= 4][order(-`RT por diputado`)], align = \"lrrrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 4: Diputados en ejercicio: presencia en el corpus y amplificación.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nP\nDiputados\nEn el corpus\nRT\n% presentes\nRT por diputado\n\n\n\n\nPC\n8\n8\n36.218\n100\n4.527\n\n\nRD\n8\n8\n23.534\n100\n2.942\n\n\notros/sin dato\n39\n20\n8.273\n51\n212\n\n\nEvópoli\n6\n4\n1.190\n67\n198\n\n\nRN\n31\n14\n3.493\n45\n113\n\n\nDC\n14\n10\n678\n71\n48\n\n\nPS\n17\n16\n805\n94\n47\n\n\nUDI\n24\n6\n522\n25\n22\n\n\nPPD\n6\n2\n0\n33\n0\n\n\n\n\n\n\n\n\nLa lectura fácil sería “la derecha no estaba”, pero no se sostiene: RN supera al PPD, la DC y el PS. Lo que muestran los datos es otra cosa — la conversación amplificó al PC y al Frente Amplio, y dejó afuera por igual al gobierno y a la ex-Concertación.\nY hay dos formas distintas de quedar fuera. El PS tiene al 94% de sus diputados presentes en el corpus pero casi nadie los retuitea: tuitearon y no los escucharon. La UDI tiene al 25%: directamente no estaban."
   },
   {
     "objectID": "index.html",
@@ -186,41 +102,181 @@
     "href": "index.html#qué-hay-en-este-sitio",
     "title": "El estallido en Twitter",
     "section": "Qué hay en este sitio",
-    "text": "Qué hay en este sitio\n\nCómo se recolectó — la consulta original, perdida y reconstruida desde los datos\nLa red del 18-O — 56.724 cuentas, 143 comunidades\nComunidades contagiadas — quiénes entraron por la puerta equivocada\nLa clase política — 171 cargos identificados y su peso real\nDatos y código"
+    "text": "Qué hay en este sitio\n\nCómo se recolectó — las 49 consultas, y cuánto aporta cada una\nLa red del 18-O — 56.724 cuentas, 143 comunidades\nComunidades contagiadas — quiénes entraron por la puerta equivocada, y el subconjunto limpio\nEl polo que desapareció — cuándo dejó de existir la contraparte progobierno\nLa clase política — 171 cargos identificados y su peso real\nDatos y código"
   },
   {
-    "objectID": "politicos.html",
-    "href": "politicos.html",
-    "title": "La clase política",
+    "objectID": "contagio.html",
+    "href": "contagio.html",
+    "title": "Comunidades contagiadas",
     "section": "",
-    "text": "Identificar a los políticos en un corpus de 702.103 cuentas no se hace adivinando handles. Se parte del padrón real —diputados, senadores, ministros, Presidente y presidentes de partido en ejercicio en octubre de 2019— y se cruza contra tres fuentes: las reseñas biográficas de la Biblioteca del Congreso Nacional, Wikidata, y búsqueda por nombre validada contra la biografía.\nver código\ng &lt;- pol[, .(Cuentas = .N), by = .(Cargo = cargo)][order(-Cuentas)]\ntabla(g)\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 1: Cuentas identificadas por cargo.\n\n\n\n\n\n\nCargo\nCuentas\n\n\n\n\ndiputado\n135\n\n\nsenador\n28\n\n\nministro-desde-28oct\n3\n\n\nministro\n2\n\n\nministro-hasta-28oct\n1\n\n\npresidente\n1\n\n\npresidente-partido\n1\nDe los 156 diputados en ejercicio durante la ventana del corpus, 135 tienen cuenta identificada (87%), 65 confirmadas por dos fuentes independientes."
+    "text": "Seis de las 49 consultas con que se armó el corpus son hashtags de fecha: #17oct, #18Oct, #19Oct, #20Oct, #21Oct, #22Oct. Explican 941.446 tweets, el 15,4% del total. Y son términos que cualquiera en el mundo usa ese día, hable de lo que hable.\nLa pregunta es cuánto de este corpus de protesta chilena no habla de protesta chilena."
   },
   {
-    "objectID": "politicos.html#el-peso-real",
-    "href": "politicos.html#el-peso-real",
-    "title": "La clase política",
-    "section": "El peso real",
-    "text": "El peso real\n\n\nver código\ntabla(cl[order(-rt_recibidos),\n         .(Clase = clase, Cuentas = cuentas, `% cuentas` = pct_cuentas,\n           `% tweets` = pct_tweets, `% retweets` = pct_rt,\n           `RT por cuenta` = rt_por_cuenta)], align = \"lrrrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 2: Las tres clases de cuenta y su participación.\n\n\n\n\n\n\nClase\nCuentas\n% cuentas\n% tweets\n% retweets\nRT por cuenta\n\n\n\n\nciudadana\n672.258\n95.75\n95.35\n78.75\n6.3\n\n\nmedio\n29.720\n4.23\n4.63\n19.02\n34.3\n\n\npolitica\n125\n0.02\n0.02\n2.23\n955.9\n\n\n\n\n\n\n\n\n\nDos lecturas que apuntan en direcciones opuestas y las dos son ciertas:\nUna cuenta política recibe 956 retweets, una ciudadana 6. Es una ventaja de 152 veces por cuenta.\nPero la clase política concentra apenas el 2,2% de la amplificación total. De las 15 cuentas más retuiteadas del corpus completo, una sola es de un cargo electo. El estallido amplificó abrumadoramente a cuentas sin cargo."
+    "objectID": "contagio.html#un-índice-de-contagio",
+    "href": "contagio.html#un-índice-de-contagio",
+    "title": "Comunidades contagiadas",
+    "section": "Un índice de contagio",
+    "text": "Un índice de contagio\nPara cada comunidad se mide qué fracción de sus tweets trae hashtag de fecha pero ningún término chileno de la consulta. Si una comunidad entró por el vocabulario del estallido, esa fracción es cercana a cero. Si entró por la puerta genérica, es cercana a uno.\n\n\nver código\ntabla(cg[order(-pct_solo_fecha),\n         .(Comunidad = comunidad, Tweets = tweets,\n           `% con hashtag de fecha` = pct_con_fecha,\n           `% con término chileno` = pct_con_chile,\n           `% SOLO fecha` = pct_solo_fecha)], align = \"rrrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 1: Índice de contagio por comunidad, 18 de octubre.\n\n\n\n\n\n\n\n\n\n\n\n\n\nComunidad\nTweets\n% con hashtag de fecha\n% con término chileno\n% SOLO fecha\n\n\n\n\n8\n3.901\n100.0\n0.0\n100.0\n\n\n2\n41.264\n99.6\n1.3\n98.7\n\n\n1\n60.107\n92.2\n10.1\n89.9\n\n\n6\n11.610\n0.6\n99.4\n0.6\n\n\n5\n14.898\n0.7\n98.8\n0.5\n\n\n11\n19.983\n0.4\n99.9\n0.1\n\n\n10\n186.425\n3.6\n99.9\n0.0\n\n\n7\n157.772\n0.1\n100.0\n0.0\n\n\n\n\n\n\n\n\n\nLa separación es total. No hay zona gris:\n\nComunidad 8 — Guardia Nacional Bolivariana de Venezuela. Cero tweets con vocabulario chileno. El 100% entró por hashtag de fecha.\nComunidad 2 — medios venezolanos opositores. 98,7%.\nComunidad 1 — medios estatales chavistas, incluido teleSUR. 89,9%.\nComunidades chilenas — entre 0,0% y 0,6%."
   },
   {
-    "objectID": "politicos.html#escriben-poco-y-viaja-lejos",
-    "href": "politicos.html#escriben-poco-y-viaja-lejos",
-    "title": "La clase política",
-    "section": "Escriben poco y viaja lejos",
-    "text": "Escriben poco y viaja lejos\n\n\nver código\ntabla(rend[order(-circulacion_por_texto),\n           .(Clase = grupo, `Textos únicos` = textos, Circulación = circulacion,\n             `Circulación por texto` = circulacion_por_texto)], align = \"lrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 3: Textos únicos producidos y circulación obtenida.\n\n\n\n\n\n\nClase\nTextos únicos\nCirculación\nCirculación por texto\n\n\n\n\npolitica\n451\n119.921\n265.9\n\n\nmedio\n89.059\n1.107.919\n12.4\n\n\nciudadana\n665.994\n4.892.093\n7.3\n\n\n\n\n\n\n\n\nLa clase política produce 451 textos únicos en 19 días y obtiene 119.921 retweets. Un texto suyo circula 36 veces más que uno ciudadano. No amplifica por volumen sino por rendimiento.\nEso tiene una consecuencia metodológica incómoda: con 451 textos no se puede construir un perfil léxico. La especificidad termina premiando rarezas de dos o tres tweets virales. Esa medición está calculada en el repositorio pero marcada como no interpretable."
+    "objectID": "contagio.html#lo-que-ya-se-veía-en-la-red",
+    "href": "contagio.html#lo-que-ya-se-veía-en-la-red",
+    "title": "Comunidades contagiadas",
+    "section": "Lo que ya se veía en la red",
+    "text": "Lo que ya se veía en la red\nEsas tres comunidades eran justamente las que aparecían aisladas en la matriz de diálogo: 97%, 97% y 91% de retweets internos. Lo que ahí se leía como aislamiento estructural, acá tiene una causa concreta: no estaban en la misma conversación porque nunca entraron a ella.\nSus hashtags lo confirman. La comunidad 1 empuja #VenezuelaEsDDHH con 24.047 menciones y tweets que dicen literalmente “¡LA ETIQUETA DEL DÍA!”. La comunidad 2 habla de presos políticos venezolanos y de lluvias en Caracas.\nEn total son 10.828 cuentas y 74.130 retweets que conviene excluir antes de cualquier análisis sustantivo del estallido."
   },
   {
-    "objectID": "politicos.html#dónde-están-en-la-red",
-    "href": "politicos.html#dónde-están-en-la-red",
-    "title": "La clase política",
-    "section": "Dónde están en la red",
-    "text": "Dónde están en la red\nLas 125 cuentas políticas presentes el 18 de octubre están todas dentro de una sola comunidad, la 10, donde son el 8,8% de los tweets. Cero en las otras siete."
+    "objectID": "contagio.html#presencia-no-es-influencia",
+    "href": "contagio.html#presencia-no-es-influencia",
+    "title": "Comunidades contagiadas",
+    "section": "Presencia no es influencia",
+    "text": "Presencia no es influencia\nEl bloque suma el 19,1% de los nodos de la red y el 18,9% del volumen de retweets. Pero su penetración en la conversación chilena es:\n\n\n\nRetweets del bloque que llegan a cuentas chilenas\n1,99%\n\n\nRetweets chilenos que amplifican cuentas del bloque\n0,42%\n\n\n\nPresencia del 19%, influencia del 0,4%. Es un circuito paralelo que habla solo."
   },
   {
-    "objectID": "politicos.html#asimetría-por-partido",
-    "href": "politicos.html#asimetría-por-partido",
-    "title": "La clase política",
-    "section": "Asimetría por partido",
-    "text": "Asimetría por partido\n\n\nver código\nd &lt;- dip[en_ejercicio_oct2019 == TRUE]\nab &lt;- c(\"Partido Comunista de Chile\"=\"PC\",\"Revolución Democrática\"=\"RD\",\n        \"Convergencia Social\"=\"CS\",\"Partido Humanista\"=\"PH\",\n        \"Partido Renovación Nacional\"=\"RN\",\"Partido Unión Demócrata Independiente\"=\"UDI\",\n        \"Partido Evolución Política\"=\"Evópoli\",\"Partido Socialista de Chile\"=\"PS\",\n        \"Partido por la Democracia\"=\"PPD\",\"Partido Demócrata Cristiano\"=\"DC\")\nd[, P := fifelse(partido %in% names(ab), ab[partido], \"otros/sin dato\")]\nt &lt;- d[, .(Diputados = .N, `En el corpus` = sum(presente_corpus),\n           RT = sum(rt_recibidos, na.rm = TRUE)), by = P]\nt[, `% presentes` := round(100 * `En el corpus` / Diputados)]\nt[, `RT por diputado` := round(RT / Diputados)]\ntabla(t[Diputados &gt;= 4][order(-`RT por diputado`)], align = \"lrrrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 4: Diputados en ejercicio: presencia en el corpus y amplificación.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nP\nDiputados\nEn el corpus\nRT\n% presentes\nRT por diputado\n\n\n\n\nPC\n8\n8\n36.218\n100\n4.527\n\n\nRD\n8\n8\n23.534\n100\n2.942\n\n\notros/sin dato\n39\n20\n8.273\n51\n212\n\n\nEvópoli\n6\n4\n1.190\n67\n198\n\n\nRN\n31\n14\n3.493\n45\n113\n\n\nDC\n14\n10\n678\n71\n48\n\n\nPS\n17\n16\n805\n94\n47\n\n\nUDI\n24\n6\n522\n25\n22\n\n\nPPD\n6\n2\n0\n33\n0\n\n\n\n\n\n\n\n\nLa lectura fácil sería “la derecha no estaba”, pero no se sostiene: RN supera al PPD, la DC y el PS. Lo que muestran los datos es otra cosa — la conversación amplificó al PC y al Frente Amplio, y dejó afuera por igual al gobierno y a la ex-Concertación.\nY hay dos formas distintas de quedar fuera. El PS tiene al 94% de sus diputados presentes en el corpus pero casi nadie los retuitea: tuitearon y no los escucharon. La UDI tiene al 25%: directamente no estaban."
+    "objectID": "contagio.html#el-subconjunto-limpio",
+    "href": "contagio.html#el-subconjunto-limpio",
+    "title": "Comunidades contagiadas",
+    "section": "El subconjunto limpio",
+    "text": "El subconjunto limpio\nEl corpus no se entrega solo con la advertencia: se entrega con el corte hecho y validado, para que quien investigue el estallido no tenga que decidir el criterio ni replicarlo.\nLa exclusión opera en dos reglas, guardadas por separado para poder aplicarse sueltas:\n\n\n\n\n\n\n\n\nRegla\nExcluye\nCorpus restante\n\n\n\n\n(a) hashtag de fecha y ningún término chileno\n867.656\n5.252.277 (85,8%)\n\n\n(b) cuenta de las comunidades 1, 2 u 8\n938.325\n5.181.608 (84,7%)\n\n\nambas (recomendado)\n1.124.628\n4.995.305 (81,6%)\n\n\n\n\n\nver código\nsv &lt;- leer(\"subconjunto_validacion.csv\")\ntabla(t(sv[, .(conjunto, `País = Chile (geo.)` = `pais = Chile (geolocalizadas)`,\n               `Ubic. declara Chile` = `ubicacion declara Chile`,\n               `Ubic. declara Venezuela` = `ubicacion declara Venezuela`,\n               `Marcador chileno` = `marcador lexico chileno`,\n               `Marcador venezolano` = `marcador venezolano`)]))\n\n\n\n\nTabla 2: Indicadores que NO intervienen en la regla de exclusión, para que el contraste no sea circular.\n\n\n\n\n\n\n\n\n\n\n\n\nconjunto\nCorpus completo\nSubconjunto limpio\nExcluido\n\n\nPaís = Chile (geo.)\n85.0\n90.6\n17.1\n\n\nUbic. declara Chile\n55.6\n66.2\n5.1\n\n\nUbic. declara Venezuela\n10.5\n1.2\n55.1\n\n\nMarcador chileno\n6.79\n8.21\n0.48\n\n\nMarcador venezolano\n7.84\n0.92\n38.60\n\n\n\n\n\n\n\n\n\nEl material excluido es 55,1% venezolano por ubicación declarada y 38,6% por léxico, contra 1,2% y 0,9% en el subconjunto. La separación opera en los dos sentidos: lo retirado es mayoritariamente ajeno, y lo retenido es más chileno que el corpus de partida.\n\nUna sobre-exclusión que hay que declarar\nLa regla (b) retira toda la actividad de esas cuentas, incluida la que sí trata de Chile. Entre lo excluido quedan 66.680 usos de #toquedequeda y 50.569 de #ChileDesperto, casi todos de la comunidad 1 — medios estatales venezolanos que cubrieron el episodio, cuyo índice de contaminación es 89,9% y no 100%.\nTratar esa cobertura como ajena a la conversación chilena es una decisión interpretativa, no técnica. Quien sostenga que forma parte del fenómeno aplica únicamente la regla (a), y queda adentro."
+  },
+  {
+    "objectID": "contagio.html#por-qué-esto-es-generalizable",
+    "href": "contagio.html#por-qué-esto-es-generalizable",
+    "title": "Comunidades contagiadas",
+    "section": "Por qué esto es generalizable",
+    "text": "Por qué esto es generalizable\nEl método no depende de este corpus. Cualquier dataset recolectado por hashtags —y los de protesta casi siempre incluyen hashtags de fecha— puede medir qué fracción de sus datos entró por términos ambiguos. Hasta donde sabemos, ningún corpus público de Twitter publica ese diagnóstico."
+  },
+  {
+    "objectID": "datos.html",
+    "href": "datos.html",
+    "title": "Datos y código",
+    "section": "",
+    "text": "El corpus no se publica como tal: los términos de servicio de X restringen la redistribución del contenido de las publicaciones. Lo que se entrega son los identificadores más derivados que no son contenido, incluidas las capas de anotación construidas para este trabajo.\n\n\n\n\n\n\n\nArchivo\nContenido\n\n\n\n\ntweet_ids.txt.gz\nlos 6.119.933 identificadores\n\n\nsubconjunto_limpio.csv.gz\nmarca de pertenencia al subconjunto recomendado\n\n\ncuentas.csv\n702.103 cuentas seudonimizadas, con clase y antigüedad\n\n\nred_retweets_18oct.csv\n407.387 aristas ponderadas\n\n\nnodos_18oct.csv\n56.724 nodos con comunidad y layout\n\n\ncuentas_politicas.csv\n171 cargos en ejercicio, con fuente de identificación\n\n\npadron_diputados_2018_2022.csv\n162 personas del período\n\n\nterminos_recoleccion.csv\nlas consultas con su aporte\n\n\nseries y frecuencias\nvolumen por día y hora, hashtags, contagio, polos\n\n\n\nSon 132 MB. El depósito con DOI está en preparación."
+  },
+  {
+    "objectID": "datos.html#el-paquete-de-datos",
+    "href": "datos.html#el-paquete-de-datos",
+    "title": "Datos y código",
+    "section": "",
+    "text": "El corpus no se publica como tal: los términos de servicio de X restringen la redistribución del contenido de las publicaciones. Lo que se entrega son los identificadores más derivados que no son contenido, incluidas las capas de anotación construidas para este trabajo.\n\n\n\n\n\n\n\nArchivo\nContenido\n\n\n\n\ntweet_ids.txt.gz\nlos 6.119.933 identificadores\n\n\nsubconjunto_limpio.csv.gz\nmarca de pertenencia al subconjunto recomendado\n\n\ncuentas.csv\n702.103 cuentas seudonimizadas, con clase y antigüedad\n\n\nred_retweets_18oct.csv\n407.387 aristas ponderadas\n\n\nnodos_18oct.csv\n56.724 nodos con comunidad y layout\n\n\ncuentas_politicas.csv\n171 cargos en ejercicio, con fuente de identificación\n\n\npadron_diputados_2018_2022.csv\n162 personas del período\n\n\nterminos_recoleccion.csv\nlas consultas con su aporte\n\n\nseries y frecuencias\nvolumen por día y hora, hashtags, contagio, polos\n\n\n\nSon 132 MB. El depósito con DOI está en preparación."
+  },
+  {
+    "objectID": "datos.html#dos-usos-declarados",
+    "href": "datos.html#dos-usos-declarados",
+    "title": "Datos y código",
+    "section": "Dos usos declarados",
+    "text": "Dos usos declarados\nEl corpus se entrega completo y etiquetado, lo que habilita dos cosas distintas sin forzar a elegir:\n\nQuien investigue el estallido se restringe al subconjunto recomendado, 4.995.305 publicaciones validadas como chilenas.\nQuien estudie el artefacto de recolección —cómo una consulta con términos ambiguos captura conversaciones paralelas— dispone del material íntegro con la contaminación marcada publicación por publicación.\n\nEntregar solo la versión limpia cerraría la segunda puerta sin abrir ninguna."
+  },
+  {
+    "objectID": "datos.html#variables-propias",
+    "href": "datos.html#variables-propias",
+    "title": "Datos y código",
+    "section": "Variables propias",
+    "text": "Variables propias\nLo que no existe en ningún otro corpus chileno del período:\n\nconsulta — el término por el que ingresó cada publicación\ncomunidad_18oct — comunidad en la red de retweets\nclase_cuenta — política, medio o ciudadana\nes_cargo_publico, partido — para los 171 cargos identificados\nlimpio, solo_fecha, cuenta_contaminada — marcas de calidad\nlatencia_retweet_min — minutos entre el original y su retweet"
+  },
+  {
+    "objectID": "datos.html#seudonimización",
+    "href": "datos.html#seudonimización",
+    "title": "Datos y código",
+    "section": "Seudonimización",
+    "text": "Seudonimización\nLas cuentas de cargos públicos conservan su identificador: un cargo público actuando en público no tiene expectativa de anonimato, y su trazabilidad es parte del valor del dato. Las otras 701.978 pasan a un hash estable con sal, consistente entre archivos para que la red siga siendo analizable.\nLa antigüedad de cuenta va en año y los seguidores en orden de magnitud, porque su combinación exacta permite reidentificar una cuenta aunque se oculte el nombre.\nHay una tensión que no se resuelve y conviene nombrar: el valor archivístico del corpus viene de preservar material que ya no existe en la plataforma —cuentas borradas, suspendidas, arrepentidas— y esa misma propiedad es el problema de privacidad."
+  },
+  {
+    "objectID": "datos.html#el-código",
+    "href": "datos.html#el-código",
+    "title": "Datos y código",
+    "section": "El código",
+    "text": "El código\nDieciocho scripts en R, de la lectura del archivo original a la construcción del paquete, en github.com/Alcatruz/estallido-twitter-2019.\nLas tablas y figuras están versionadas en el repositorio, de modo que este sitio y el manuscrito se reconstruyen sin el corpus."
+  },
+  {
+    "objectID": "datos.html#limitaciones",
+    "href": "datos.html#limitaciones",
+    "title": "Datos y código",
+    "section": "Limitaciones",
+    "text": "Limitaciones\n\nDías truncados. El 11 y el 29 de octubre están cortados por la ventana de recolección: 168 y 4.203 publicaciones.\nSesgo hacia la primera semana. La lista de consultas se fijó temprano y el vocabulario de la protesta cambió; el 25 de octubre está subrepresentado.\nContaminación por consulta ambigua. 15,4% del corpus entró por #17oct–#22Oct. Marcada y excluible.\nLa clase “medio” es heurística, no un registro: se equivoca en ambas direcciones.\nLa clasificación de polos es léxica, no ideológica.\nCobertura del padrón incompleta: 135 de 156 diputados, 6 de 16 ministros."
+  },
+  {
+    "objectID": "datos.html#cómo-citar",
+    "href": "datos.html#cómo-citar",
+    "title": "Datos y código",
+    "section": "Cómo citar",
+    "text": "Cómo citar\nMientras no haya DOI, citar el repositorio. El artículo de datos está en preparación."
+  },
+  {
+    "objectID": "metodo.html",
+    "href": "metodo.html",
+    "title": "Cómo se recolectó",
+    "section": "",
+    "text": "El corpus se recolectó con el paquete rtweet sobre la API de búsqueda de Twitter, con una consulta por archivo y ejecución diaria entre el 17 y el 29 de octubre de 2019. Cada archivo conserva en una columna la consulta que lo originó.\nSe preservaron 53 archivos con 49 consultas distintas, que suman 15.185.311 filas. Una misma publicación aparece en varios archivos cuando satisface más de una consulta; al consolidar se deduplica por identificador, quedando 6.714.876 únicas, y un filtro temporal deja el conjunto final en 6.119.933."
+  },
+  {
+    "objectID": "metodo.html#las-49-consultas",
+    "href": "metodo.html#las-49-consultas",
+    "title": "Cómo se recolectó",
+    "section": "Las 49 consultas",
+    "text": "Las 49 consultas\n\n\nver código\ntabla(cons[order(origen, consulta), .(Consulta = consulta, Fuente = origen)])\n\n\n\n\nTabla 1: Lista completa de los términos con que se construyó el corpus.\n\n\n\n\n\n\nConsulta\nFuente\n\n\n\n\n#17oct\ncolumna consulta\n\n\n#18Oct\ncolumna consulta\n\n\n#19Oct\ncolumna consulta\n\n\n#20Oct\ncolumna consulta\n\n\n#21Oct\ncolumna consulta\n\n\n#22Oct\ncolumna consulta\n\n\n#AcusaciónConstitucionalPiñera\ncolumna consulta\n\n\n#Apagalatele\ncolumna consulta\n\n\n#CambiodeGabinete\ncolumna consulta\n\n\n#ChalecosAmarillos\ncolumna consulta\n\n\n#ChileDesperto\ncolumna consulta\n\n\n#ChileProtesta\ncolumna consulta\n\n\n#ChileProtests\ncolumna consulta\n\n\n#ChileResiste\ncolumna consulta\n\n\n#ChileSeCanso\ncolumna consulta\n\n\n#ChileSomosTodos\ncolumna consulta\n\n\n#ChileViolatesHumanRights\ncolumna consulta\n\n\n#EstoNoHaTerminado\ncolumna consulta\n\n\n#EstoPasaEnChile\ncolumna consulta\n\n\n#EvasionMasiva\ncolumna consulta\n\n\n#EvasionMasivaTodoElDia\ncolumna consulta\n\n\n#HabraConsecuencias\ncolumna consulta\n\n\n#LaMoneda\ncolumna consulta\n\n\n#MarchaDelMillon\ncolumna consulta\n\n\n#NosQuierenRobarHastaLaMarcha\ncolumna consulta\n\n\n#ParoNacional\ncolumna consulta\n\n\n#RenunciaPiñera\ncolumna consulta\n\n\n#RenunciaPiñeraAhora\ncolumna consulta\n\n\n#RenunciaPiñeraCuliao\ncolumna consulta\n\n\n#RenunciaPiñeractm\ncolumna consulta\n\n\n#VayanseMilicos\ncolumna consulta\n\n\n#YoApoyoAlPresidente\ncolumna consulta\n\n\n#autogolpe\ncolumna consulta\n\n\n#noestamosenguerra\ncolumna consulta\n\n\n#pazParaChile\ncolumna consulta\n\n\n#toquedequeda\ncolumna consulta\n\n\nChileEnCrisis\ncolumna consulta\n\n\nDisparos institucionales\ncolumna consulta\n\n\nINDH\ncolumna consulta\n\n\nNO HAY DEBASTECIMIENTO\ncolumna consulta\n\n\nSaqueos\ncolumna consulta\n\n\nchadwick\ncolumna consulta\n\n\ncongreso\ncolumna consulta\n\n\ndf_saqueos_diparos\nnombre de archivo\n\n\ndf_tweets\nnombre de archivo\n\n\nmetro1\nnombre de archivo\n\n\nmetro3\nnombre de archivo\n\n\npinera_renuncia\nnombre de archivo\n\n\nveinte1\nnombre de archivo\n\n\n\n\n\n\n\n\nCombinan hashtags de consigna (#ChileDesperto, #EstoPasaEnChile), de episodio (#EvasionMasiva, #CambiodeGabinete), de derechos humanos (#ChileViolatesHumanRights), de fecha (#17oct a #22Oct) y, en menor medida, palabras sueltas (INDH, congreso, Saqueos)."
+  },
+  {
+    "objectID": "metodo.html#cuánto-aporta-cada-una",
+    "href": "metodo.html#cuánto-aporta-cada-una",
+    "title": "Cómo se recolectó",
+    "section": "Cuánto aporta cada una",
+    "text": "Cuánto aporta cada una\n\nNo aportan en partes iguales. #ChileDesperto contribuye 658.153 publicaciones y #HabraConsecuencias, 61. Diez términos explican más de la mitad del corpus y la distribución decae de forma continua, sin un corte natural.\nEsto importa para el uso: un análisis restringido a consignas cubre una porción distinta del corpus que uno que incluya los hashtags de fecha. Y esa diferencia no es solo de volumen, sino de contenido — es el tema de comunidades contagiadas."
+  },
+  {
+    "objectID": "metodo.html#una-nota-sobre-la-lista",
+    "href": "metodo.html#una-nota-sobre-la-lista",
+    "title": "Cómo se recolectó",
+    "section": "Una nota sobre la lista",
+    "text": "Una nota sobre la lista\nLa lista de términos se fijó durante los primeros días del episodio y no se actualizó. Eso tiene una consecuencia medible: el 25 de octubre, día de la marcha más grande de Chile, registra 112.812 publicaciones, menos que la víspera. La consulta #MarchaDelMillon aporta 48.558 frente a las 603.398 de #ChileDesperto.\nEl corpus subrepresenta sistemáticamente la segunda semana del ciclo. No es un defecto oculto: es una propiedad que cualquier reutilización debe declarar."
+  },
+  {
+    "objectID": "metodo.html#verificación",
+    "href": "metodo.html#verificación",
+    "title": "Cómo se recolectó",
+    "section": "Verificación",
+    "text": "Verificación\nPara comprobar que la documentación de consultas está completa se hizo un contraste independiente: extraer los hashtags de los 6,1 millones de textos y resolver una cobertura glotona —en cada paso, el hashtag presente en más publicaciones aún no cubiertas— sin mirar la lista declarada.\nDe los 40 términos así obtenidos, 37 corresponden a consultas efectivas y explican el 87,9% del corpus. Los tres restantes son variantes que la gente usó realmente frente a la forma registrada: #QueSeVayanLosMilicos por #VayanseMilicos, #ChadwickAsesino por la palabra chadwick.\nEl contraste no recupera las consultas por palabra suelta, por estar restringido a hashtags. Confirma la documentación sin sustituirla."
+  },
+  {
+    "objectID": "polos.html",
+    "href": "polos.html",
+    "title": "El polo que desapareció",
+    "section": "",
+    "text": "Una conversación política tiene normalmente dos polos que se ignoran mutuamente. En este corpus eso ocurre solo en algunos días, y se puede fechar con precisión cuándo deja de ocurrir.\nLa medición usa dos repertorios de consigna verificados en el corpus — progobierno: #YoApoyoAlPresidente, #CondenamosLaDelincuencia, #PazParaChile; antigobierno: #RenunciaPiñera, #PiñeraDictador, #QueSeVayanLosMilicos, #ChileViolatesHumanRights— expresados como tasa por cada 10.000 publicaciones, para neutralizar la enorme variación de volumen entre días."
+  },
+  {
+    "objectID": "polos.html#en-las-consignas",
+    "href": "polos.html#en-las-consignas",
+    "title": "El polo que desapareció",
+    "section": "En las consignas",
+    "text": "En las consignas\n\n\nver código\ntabla(pol[, .(Día = format(dia, \"%d-%b\"), Total = total,\n              `Progob.` = pro_x10mil, `Antigob.` = anti_x10mil,\n              `Razón` = razon)], align = \"lrrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 1: Consignas de cada polo por cada 10.000 publicaciones.\n\n\n\n\n\n\nDía\nTotal\nProgob.\nAntigob.\nRazón\n\n\n\n\n11-oct.\n168\n0.0\n238.1\n4.0\n\n\n12-oct.\n49.113\n10.6\n0.6\n0.1\n\n\n13-oct.\n55.746\n1.3\n4.3\n3.4\n\n\n14-oct.\n3.059\n0.0\n19.6\n6.0\n\n\n15-oct.\n32.901\n0.0\n3.6\n12.0\n\n\n16-oct.\n38.426\n0.0\n13.3\n51.0\n\n\n17-oct.\n133.352\n0.1\n10.7\n143.0\n\n\n18-oct.\n524.528\n0.1\n76.8\n805.2\n\n\n19-oct.\n1.096.576\n26.0\n799.3\n30.7\n\n\n20-oct.\n798.885\n71.3\n1.258.3\n17.6\n\n\n21-oct.\n927.769\n201.8\n3.613.6\n17.9\n\n\n22-oct.\n669.114\n39.5\n4.165.3\n105.3\n\n\n23-oct.\n595.231\n15.0\n6.454.4\n431.2\n\n\n24-oct.\n197.371\n9.6\n5.076.6\n530.1\n\n\n25-oct.\n112.812\n10.2\n3.244.5\n318.3\n\n\n26-oct.\n346.903\n2.1\n1.083.8\n508.1\n\n\n27-oct.\n256.677\n4.2\n1.066.3\n251.1\n\n\n28-oct.\n277.099\n2.5\n463.7\n186.2\n\n\n29-oct.\n4.203\n2.4\n233.2\n98.0\n\n\n\n\n\n\n\n\n\nEl 12 de octubre, antes del estallido, las consignas progobierno superaban a las opositoras. El 17 y el 18 desaparecen, con razones de 143 a 1 y 805 a 1. Reaparecen el 19 al 21 —la contramovilización tras los saqueos y el estado de emergencia— y el 21 alcanzan su máximo absoluto, 201,8 por diez mil. Desde el 22 se derrumban: 431 a 1 el día 23, 508 a 1 el día 26.\nEn el conjunto del corpus son 31.431 publicaciones progobierno (0,51%) frente a 1.405.307 antigobierno (22,96%)."
+  },
+  {
+    "objectID": "polos.html#en-la-estructura-de-la-red",
+    "href": "polos.html#en-la-estructura-de-la-red",
+    "title": "El polo que desapareció",
+    "section": "En la estructura de la red",
+    "text": "En la estructura de la red\nMás decisivo que el conteo es si el polo existe como comunidad. Se reconstruyó la red de retweets de cada uno de los 16 días con volumen suficiente y se clasificó cada comunidad por la composición de polo del contenido que escriben sus miembros.\n\n\nver código\ntabla(red[, .(Día = format(dia, \"%d-%b\"), Nodos = nodos,\n              Comunidades = comunidades,\n              `Comun. progob.` = com_progobierno,\n              `% de la red` = pct_progobierno,\n              Modularidad = modularidad)], align = \"lrrrrr\")\n\n\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\nWarning in prettyNum(.Internal(format(x, trim, digits, nsmall, width, 3L, :\n'big.mark' y 'decimal.mark' son ambos '.', lo cual puede ser confuso\n\n\n\n\nTabla 2: Presencia estructural del polo progobierno, por día.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDía\nNodos\nComunidades\nComun. progob.\n% de la red\nModularidad\n\n\n\n\n12-oct.\n7.218\n14\n1\n20.66\n0.498\n\n\n13-oct.\n8.720\n19\n0\n0.00\n0.499\n\n\n15-oct.\n4.910\n14\n0\n0.00\n0.383\n\n\n16-oct.\n5.470\n14\n0\n0.00\n0.445\n\n\n17-oct.\n14.864\n49\n0\n0.00\n0.706\n\n\n18-oct.\n56.724\n152\n0\n0.00\n0.504\n\n\n19-oct.\n107.293\n163\n0\n0.00\n0.453\n\n\n20-oct.\n90.994\n132\n2\n18.62\n0.525\n\n\n21-oct.\n100.778\n115\n1\n6.13\n0.494\n\n\n22-oct.\n75.801\n93\n0\n0.00\n0.571\n\n\n23-oct.\n68.899\n33\n0\n0.00\n0.423\n\n\n24-oct.\n30.181\n39\n0\n0.00\n0.547\n\n\n25-oct.\n16.054\n26\n0\n0.00\n0.550\n\n\n26-oct.\n40.859\n20\n0\n0.00\n0.356\n\n\n27-oct.\n34.659\n29\n0\n0.00\n0.383\n\n\n28-oct.\n36.372\n19\n0\n0.00\n0.374\n\n\n\n\n\n\n\n\n\nUna comunidad progobierno aparece en exactamente tres días: el 12 de octubre (20,7% de la red), el 20 (18,6%) y el 21 (6,1%). Cero en los otros trece.\nEn las láminas se ve directo. El 17 y el 19 no hay un solo punto negro con estructura. El 21 hay un cúmulo denso abajo a la derecha, una comunidad reconocible. Del 23 en adelante quedan puntos negros sueltos, dispersos, sin agruparse en ninguna parte."
+  },
+  {
+    "objectID": "polos.html#desapareció-dos-veces",
+    "href": "polos.html#desapareció-dos-veces",
+    "title": "El polo que desapareció",
+    "section": "Desapareció dos veces",
+    "text": "Desapareció dos veces\nEsa es la forma del fenómeno, y es más interesante que una sola fecha. El polo se evapora cuando estalla la crisis (13 al 19 de octubre), vuelve durante el estado de emergencia, y se extingue definitivamente desde el 22."
+  },
+  {
+    "objectID": "polos.html#un-hallazgo-que-no-buscábamos",
+    "href": "polos.html#un-hallazgo-que-no-buscábamos",
+    "title": "El polo que desapareció",
+    "section": "Un hallazgo que no buscábamos",
+    "text": "Un hallazgo que no buscábamos\nLa modularidad cae sostenidamente: 0,706 el 17 de octubre, 0,504 el 18, y entre 0,356 y 0,383 los últimos días. La red se vuelve menos dividida a medida que avanza el estallido.\nEs lo contrario de lo que uno esperaría de una crisis política, y sugiere que el episodio funcionó como evento unificador y no polarizante — al menos dentro de lo que este corpus captura."
+  },
+  {
+    "objectID": "polos.html#una-advertencia",
+    "href": "polos.html#una-advertencia",
+    "title": "El polo que desapareció",
+    "section": "Una advertencia",
+    "text": "Una advertencia\nEl indicador es léxico, no ideológico. Clasifica cuentas por las consignas que usan, no por su posición: alguien que cite #YoApoyoAlPresidente para burlarse queda contado en ese polo. Con 31.431 publicaciones en total, un sesgo así no es despreciable."
   }
 ]
