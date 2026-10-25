@@ -37,3 +37,7 @@ output/figuras/*.pdf
 .Renviron
 .DS_Store
 Thumbs.db
+
+# Sitio Quarto: _site se publica en la rama gh-pages, no en main
+sitio/_site/
+sitio/.quarto/

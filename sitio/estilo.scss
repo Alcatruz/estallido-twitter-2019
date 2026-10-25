@@ -1,0 +1,20 @@
+/*-- scss:defaults --*/
+$primary: #c1121f;
+$body-color: #1d1f21;
+$link-color: #003049;
+$font-size-root: 17px;
+
+/*-- scss:rules --*/
+.navbar { border-bottom: 3px solid #c1121f; }
+.cifra {
+  font-size: 2.4rem; font-weight: 700; color: #c1121f; line-height: 1.1;
+}
+.cifra-pie { font-size: .85rem; color: #555; }
+.tarjetas {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1.1rem; margin: 1.8rem 0;
+}
+.tarjeta {
+  border-left: 4px solid #c1121f; padding: .5rem 0 .5rem .9rem; background: #fbfbfb;
+}
+blockquote { border-left: 4px solid #003049; color: #333; }

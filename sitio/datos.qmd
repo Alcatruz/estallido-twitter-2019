@@ -1,0 +1,93 @@
+---
+title: "Datos y código"
+---
+
+## El código
+
+Todo el procesamiento está en
+[github.com/Alcatruz/estallido-twitter-2019](https://github.com/Alcatruz/estallido-twitter-2019),
+en R. Catorce scripts numerados, de la lectura del archivo original a la
+construcción del paquete de publicación.
+
+```{r}
+#| include: false
+source("_comun.R")
+```
+
+| Script | Qué hace |
+|---|---|
+| `00_setup.R` | rutas, parámetros y utilidades comunes |
+| `01_rds_a_csv.R` | lee el archivo original, exporta CSV y muestra |
+| `01b_tabla_analisis.R` | tabla liviana en parquet |
+| `02_explorar_muestra.R` | exploración descriptiva |
+| `03_red_18oct.R` | red de retweets, comunidades y layout |
+| `04_red_pdf.R` | versiones vectoriales de la red |
+| `05_corpus_comunidades.R` | corpus y vocabulario por comunidad |
+| `06_distribucion_global.R` | series de los 19 días |
+| `07`–`08a`–`08` | padrón parlamentario y cuentas de X |
+| `09_clasificar_cuentas.R` | clases de cuenta y amplificación |
+| `10_terminos_recoleccion.R` | reconstrucción de la consulta |
+| `11_discurso_comunidades.R` | índice de contagio y discurso |
+| `12_eventos_gobierno.R` | estudio de eventos |
+| `13_paquete_publicacion.R` | paquete redistribuible |
+| `14_procedencia_consultas.R` | procedencia y validación |
+
+Las tablas y figuras del sitio están versionadas en el repositorio, así que
+**este sitio se reconstruye sin el corpus**.
+
+## Los datos
+
+El corpus no se publica como tal. Los términos de servicio de X restringen la
+redistribución del contenido de los tweets y de los campos de perfil.
+
+El [análisis de referencia sobre el tema](https://doi.org/10.1177/20539517261419333)
+(Golland et al., *Big Data & Society*, 2026) revisó ~4.000 datasets de Twitter
+registrados en DataCite: el 66% publica solo identificadores, y los propios
+autores concluyen que esos datasets quedan *"practically rendered useless for
+most purposes"*, porque rehidratarlos ya no es viable. Un estudio en *Political
+Analysis* midió que solo un tercio de los tweets de datasets sensibles sigue
+recuperable.
+
+Por eso el paquete previsto combina tres niveles:
+
+| Nivel | Contenido | Alcance |
+|---|---|---|
+| Abierto | identificadores, tiempos, tipo, idioma, cliente, red, comunidad, clase, hashtags, métricas, y todos los derivados propios | todas las cuentas, seudonimizadas |
+| Abierto | lo anterior más texto e identificador real | las 125 cuentas de **cargos públicos** |
+| Bajo solicitud | texto de cuentas ciudadanas | uso declarado |
+
+El criterio del corte es quién actuaba en público. Un parlamentario tuiteando
+sobre el estallido producía registro político; una persona que tuiteó esa
+semana y después borró su cuenta esperaba que eso desapareciera.
+
+Esa tensión no se resuelve, se administra: el valor archivístico del corpus
+viene justamente de preservar lo que ya no existe, y esa misma propiedad es el
+problema de privacidad.
+
+## Variables propias
+
+Lo que no existe en ningún otro corpus chileno de este período:
+
+- `consulta` — el término por el que entró cada tweet, recuperado
+- `comunidad_18oct` — comunidad en la red del 18 de octubre
+- `clase_cuenta` — política, medio o ciudadana
+- `es_cargo_publico`, `partido` — para los 171 cargos identificados
+- `solo_hashtag_fecha` — índice de contagio a nivel de tweet
+- `latencia_retweet_min` — minutos entre el original y su retweet
+
+## Limitaciones que cualquier reutilización debe declarar
+
+1. **Días truncados.** El 11 y el 29 de octubre están cortados por la ventana
+   de descarga.
+2. **Sesgo hacia la primera semana.** La lista de términos se fijó temprano y
+   el vocabulario de la protesta cambió; el 25 de octubre está subrepresentado.
+3. **Contaminación por hashtags de fecha.** 15,4% del corpus entró por
+   `#17oct`–`#22Oct`, y tres comunidades enteras no contienen vocabulario
+   chileno.
+4. **La clase "medio" es heurística**, no un registro: se equivoca en ambas
+   direcciones.
+
+## Cómo citar
+
+Mientras no haya DOI, citar el repositorio. El depósito con DOI y el data
+descriptor están en preparación.
