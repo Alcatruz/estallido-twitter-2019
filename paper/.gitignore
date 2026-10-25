@@ -1,0 +1,7 @@
+# Intermedios de LaTeX/Quarto
+*.aux
+*.log
+*.out
+*.tex
+.quarto/
+paper_files/
