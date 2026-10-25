@@ -317,6 +317,74 @@ rendimiento y no por el volumen: la clase política produce 451 textos únicos e
 19 días, cada uno de los cuales circula 265,9 veces, frente a 7,3 de un texto
 ciudadano.
 
+## Dinámica de los polos: cuándo desaparece la contraparte {#sec-polos}
+
+La estructura comunitaria permite una pregunta que el corpus responde con
+precisión: si existió una contraparte progobierno en la conversación y en qué
+momento dejó de existir. Se mide por tres vías independientes.
+
+La primera es léxica. Se definen dos repertorios de consigna a partir de
+hashtags verificados en el corpus —progobierno: `#YoApoyoAlPresidente`,
+`#CondenamosLaDelincuencia`, `#PazParaChile`; antigobierno: `#RenunciaPiñera`,
+`#PiñeraDictador`, `#QueSeVayanLosMilicos`, `#ChileViolatesHumanRights`, entre
+otros— y se calculan tasas diarias por 10.000 publicaciones, lo que neutraliza
+la enorme variación de volumen entre días. Se excluye del índice
+`#ChileSomosTodos`, pese a sus 136.888 apariciones, por haber sido empleado por
+ambas partes como consigna de unidad; asignarlo a un polo sería arbitrario.
+
+La segunda es de actores: cuentas del registro de cargos de cada coalición que
+aparecen cada día, publicando o siendo amplificadas.
+
+La tercera es estructural. Se reconstruye la red de retweets de cada uno de los
+16 días con volumen suficiente, se detectan comunidades y se clasifica cada
+comunidad según la composición de polo del contenido que escriben sus
+miembros. Se considera progobierno a toda comunidad que emita al menos 30
+consignas y en la que más de la mitad correspondan a ese repertorio.
+
+![Dinámica de los polos. (a) Tasas diarias de consigna por cada 10.000 publicaciones, en escala logarítmica. (b) Porcentaje de la red diaria en comunidades progobierno. (c) Modularidad de la red diaria.](fig/fig5_polos.pdf){#fig-polos width=100%}
+
+![Red de retweets de seis días. En negro las cuentas que portan consignas progobierno; en gris medio las antigobierno; en gris claro el resto. El 21 de octubre la comunidad progobierno es visible como cúmulo; desde el 23 solo quedan cuentas dispersas.](fig/fig6_redes.png){#fig-redes width=100%}
+
+```{r}
+#| label: tbl-polos
+#| tbl-cap: "Presencia estructural del polo progobierno, por día. Las consignas se expresan por cada 10.000 publicaciones; la columna de red, en porcentaje de nodos."
+red <- leer("red_por_dia.csv")
+p <- leer("polo_por_dia.csv")
+t <- merge(red[, .(dia, nodos, modularidad, com_progobierno,
+                   nodos_progobierno, pct_progobierno)],
+           p[, .(dia, pro_x10mil, anti_x10mil)], by = "dia")
+t <- t[dia %in% as.Date(c("2019-10-12","2019-10-17","2019-10-18","2019-10-19",
+                          "2019-10-20","2019-10-21","2019-10-23","2019-10-26","2019-10-28"))]
+kable(t[, .(Día = format(as.Date(dia), "%d-%b"), `Nodos` = fmt(nodos),
+            `Comun. progob.` = com_progobierno,
+            `Red progob.` = sprintf("%.2f", pct_progobierno),
+            `Consigna progob.` = pro_x10mil, `Consigna antigob.` = anti_x10mil,
+            Modularidad = modularidad)],
+      align = "lrrrrrr", booktabs = TRUE)
+```
+
+El polo progobierno desaparece dos veces. El 12 de octubre, antes del
+estallido, constituía el 20,7% de la red y sus consignas superaban a las
+opositoras. Entre el 13 y el 19 de octubre deja de existir como estructura:
+ninguna comunidad progobierno en siete días consecutivos. Reaparece el 20 y el
+21 —durante el estado de emergencia y los saqueos— alcanzando el 18,6% de la
+red y su máximo absoluto de consignas, y desde el 22 de octubre no vuelve a
+formar comunidad en ningún día.
+
+En el conjunto del corpus las consignas progobierno suman 31.431 publicaciones
+(0,51%) frente a 1.405.307 antigobierno (22,96%).
+
+Un resultado colateral merece atención: la modularidad de la red diaria
+decrece de forma sostenida, de 0,706 el 17 de octubre a valores entre 0,356 y
+0,383 en los últimos días. La red se vuelve *menos* dividida conforme avanza el
+ciclo, lo que sugiere un funcionamiento unificador y no polarizante del
+episodio, al menos dentro de lo que este corpus captura.
+
+Este resultado debe leerse con una advertencia: la clasificación es léxica y no
+ideológica. Una cuenta que cite una consigna progobierno para ridiculizarla
+queda contabilizada en ese polo, y con 31.431 publicaciones en total un sesgo
+de ese tipo no es despreciable.
+
 # Limitaciones {#sec-limitaciones}
 
 1. **Bordes truncados.** El 11 y el 29 de octubre contienen 168 y 4.203
@@ -338,11 +406,14 @@ ciudadano.
    procede de un registro, se detecta por vocabulario y presenta errores en
    ambas direcciones. Debe usarse como filtro y no como censo.
 
-5. **Perfil léxico de la clase política no interpretable.** Con 451 textos
+5. **La clasificación de polos es léxica, no ideológica.** Véase la
+   @sec-polos.
+
+6. **Perfil léxico de la clase política no interpretable.** Con 451 textos
    únicos, las medidas de especificidad quedan dominadas por un puñado de
    publicaciones virales.
 
-6. **Cobertura incompleta del padrón.** Se identifican 135 de 156 diputados en
+7. **Cobertura incompleta del padrón.** Se identifican 135 de 156 diputados en
    ejercicio (86,5%) y 6 de 16 ministros.
 
 # Declaración ética

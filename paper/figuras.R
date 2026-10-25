@@ -18,7 +18,10 @@ SAL <- "fig"
 dir.create(SAL, showWarnings = FALSE)
 leer <- function(f) fread(file.path(TAB, f), encoding = "UTF-8", na.strings = c("", "NA"))
 
-ROJO <- "#A4161A"; AZUL <- "#1B3A4B"; ARENA <- "#D9A066"; GRIS <- "grey60"
+# Paleta en escala de grises: la revista puede imprimir en blanco y negro, y
+# una figura que solo se distingue por color se vuelve ilegible. Donde dos
+# series comparten tono se las separa ademas por tipo de linea o simbolo.
+ROJO <- "grey20"; AZUL <- "grey45"; ARENA <- "grey72"; GRIS <- "grey60"
 
 tema <- theme_minimal(base_size = 9, base_family = "sans") +
   theme(panel.grid.minor = element_blank(),
@@ -155,3 +158,45 @@ p4b <- ggplot(rend, aes(grupo, circulacion_por_texto, fill = grupo)) +
 guardar(p4a / p4b + plot_layout(heights = c(1, 1.15)), "fig4_clases", 6.6, 3.8)
 
 message("\nFiguras generadas en paper/fig/")
+
+# --- Figura 5. Dinamica de los polos ----------------------------------------
+pol <- leer("polo_por_dia.csv")[, dia := as.Date(dia)]
+red <- leer("red_por_dia.csv")[, dia := as.Date(dia)]
+
+lg <- melt(pol[, .(dia, antigobierno = anti_x10mil, progobierno = pro_x10mil)],
+           id.vars = "dia", variable.name = "polo", value.name = "tasa")
+
+p5a <- ggplot(lg, aes(dia, tasa, linetype = polo, shape = polo)) +
+  geom_line(colour = "grey25", linewidth = 0.45) +
+  geom_point(colour = "grey15", size = 1.4) +
+  scale_linetype_manual(values = c(antigobierno = "solid", progobierno = "22")) +
+  scale_shape_manual(values = c(antigobierno = 16, progobierno = 1)) +
+  scale_x_date(date_breaks = "2 days", date_labels = "%d") +
+  scale_y_continuous(trans = "log1p", breaks = c(0, 3, 10, 30, 100, 300, 1000, 3000)) +
+  labs(x = NULL, y = "por 10.000 tweets (log)",
+       subtitle = "(a) Consignas de cada polo, corregidas por volumen diario")
+
+p5b <- ggplot(red, aes(dia, pct_progobierno)) +
+  geom_col(fill = "grey25", width = 0.7) +
+  geom_text(aes(label = ifelse(pct_progobierno > 0,
+                               sprintf("%.1f%%", pct_progobierno), "")),
+            vjust = -0.4, size = 2.3, colour = "grey20") +
+  scale_x_date(date_breaks = "2 days", date_labels = "%d") +
+  scale_y_continuous(expand = expansion(c(0, 0.22))) +
+  labs(x = "octubre de 2019", y = "% de la red",
+       subtitle = "(b) Cuentas en comunidades progobierno, por día")
+
+p5c <- ggplot(red, aes(dia, modularidad)) +
+  geom_line(colour = "grey25", linewidth = 0.45) +
+  geom_point(colour = "grey15", size = 1.4) +
+  scale_x_date(date_breaks = "2 days", date_labels = "%d") +
+  labs(x = "octubre de 2019", y = "modularidad",
+       subtitle = "(c) La red se vuelve menos dividida con el tiempo")
+
+guardar(p5a / (p5b | p5c) + plot_layout(heights = c(1, 1)), "fig5_polos", 6.6, 4.6)
+
+# La lamina de redes diarias se genera en R/17 (requiere el corpus) y se
+# reutiliza como mapa de bits: un PDF vectorial con 100.000 puntos por panel
+# seria inmanejable.
+file.copy("../output/figuras/red_por_dia.png", "fig/fig6_redes.png", overwrite = TRUE)
+message("  fig6_redes.png  (copiada de output/figuras/)")
