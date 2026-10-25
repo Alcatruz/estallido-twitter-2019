@@ -200,3 +200,27 @@ guardar(p5a / (p5b | p5c) + plot_layout(heights = c(1, 1)), "fig5_polos", 6.6, 4
 # seria inmanejable.
 file.copy("../output/figuras/red_por_dia.png", "fig/fig6_redes.png", overwrite = TRUE)
 message("  fig6_redes.png  (copiada de output/figuras/)")
+
+# --- Figura 7. Validacion del subconjunto limpio -----------------------------
+sv <- leer("subconjunto_validacion.csv")
+lg <- melt(sv[, .(conjunto,
+                  `Ubicación declara Chile` = `ubicacion declara Chile`,
+                  `Ubicación declara Venezuela` = `ubicacion declara Venezuela`,
+                  `Marcador léxico chileno` = `marcador lexico chileno`,
+                  `Marcador venezolano` = `marcador venezolano`,
+                  `País = Chile (geolocalizadas)` = `pais = Chile (geolocalizadas)`)],
+          id.vars = "conjunto", variable.name = "indicador", value.name = "pct")
+lg[, conjunto := factor(conjunto,
+     levels = c("Excluido", "Corpus completo", "Subconjunto limpio"))]
+
+p7 <- ggplot(lg, aes(conjunto, pct, fill = conjunto)) +
+  geom_col(width = 0.62, show.legend = FALSE) +
+  geom_text(aes(label = format(pct, decimal.mark = ",")), hjust = -0.2, size = 2.4) +
+  coord_flip() +
+  facet_wrap(~ indicador, scales = "free_x", ncol = 2) +
+  scale_fill_manual(values = c(`Excluido` = "grey75", `Corpus completo` = "grey50",
+                               `Subconjunto limpio` = "grey20")) +
+  scale_y_continuous(expand = expansion(c(0, 0.3))) +
+  labs(x = NULL, y = "% de las publicaciones")
+
+guardar(p7, "fig7_subconjunto", 6.6, 4.2)

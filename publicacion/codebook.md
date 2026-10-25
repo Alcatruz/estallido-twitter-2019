@@ -95,6 +95,45 @@ Nodos del componente gigante tras poda por k-core ≥ 2, con su comunidad
 | `fuerza_in` | retweets recibidos (grado ponderado) |
 | `x`, `y` | coordenadas del layout |
 
+### `subconjunto_limpio.csv.gz` — 6.119.933 filas
+Marca de pertenencia al subconjunto recomendado para análisis sustantivo del
+estallido. Una fila por publicación.
+
+| Variable | Tipo | Descripción |
+|---|---|---|
+| `status_id` | texto | identificador de la publicación |
+| `limpio` | lógico | `TRUE` si pasa ambas reglas |
+| `solo_fecha` | lógico | regla (a): trae hashtag de fecha y ningún término chileno |
+| `cuenta_contaminada` | lógico | regla (b): la cuenta pertenece a las comunidades 1, 2 u 8 |
+
+Las dos reglas se entregan por separado a propósito, porque capturan cosas
+distintas y pueden aplicarse sueltas:
+
+| Regla | Excluye | Corpus restante |
+|---|---|---|
+| (a) sola | 867.656 | 5.252.277 (85,8%) |
+| (b) sola | 938.325 | 5.181.608 (84,7%) |
+| ambas | 1.124.628 | **4.995.305 (81,6%)** |
+
+**Validación.** Seis indicadores que no intervienen en la regla de exclusión:
+
+| Indicador | Corpus completo | Limpio | Excluido |
+|---|---|---|---|
+| País = Chile (geolocalizadas) | 85,0% | 90,6% | 17,1% |
+| Ubicación declara Chile | 55,6% | 66,2% | 5,1% |
+| Ubicación declara Venezuela | 10,5% | 1,2% | 55,1% |
+| Idioma español | 92,7% | 92,2% | 95,1% |
+| Marcador léxico chileno | 6,8% | 8,2% | 0,5% |
+| Marcador venezolano | 7,8% | 0,9% | 38,6% |
+
+**Sobre-exclusión declarada.** La regla (b) retira toda la actividad de esas
+cuentas, incluida la que sí trata de Chile: entre lo excluido quedan 66.680
+usos de `#toquedequeda` y 50.569 de `#ChileDesperto`, casi todos de la
+comunidad 1 —medios estatales venezolanos que cubrieron el episodio—, cuyo
+índice de contaminación es 89,9% y no 100%. Tratar esa cobertura como ajena a
+la conversación chilena es una decisión interpretativa; quien sostenga que
+forma parte del fenómeno debe aplicar únicamente la regla (a).
+
 ### `cuentas_politicas.csv` — 171 filas
 Registro de cuentas de cargos en ejercicio en octubre de 2019: diputados,
 senadores, ministros, Presidente y presidentes de partido. Incluye la fuente de

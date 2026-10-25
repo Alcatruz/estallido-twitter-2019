@@ -121,9 +121,26 @@ message(sprintf("  red_retweets_18oct.csv -> %s aristas, %s nodos",
                 format(nrow(aristas), big.mark = "."),
                 format(nodos18[!is.na(id), .N], big.mark = ".")))
 
+# --- 4b. Subconjunto limpio recomendado -------------------------------------
+# Las marcas de R/18, para que quien reutilice el corpus pueda filtrar sin
+# tener que replicar el criterio ni decidirlo.
+f_sub <- file.path(RUTA_PROC, "subconjunto_limpio.parquet")
+if (file.exists(f_sub)) {
+  sub <- as.data.table(read_parquet(f_sub))
+  fwrite(sub, file.path(RUTA_PUB, "subconjunto_limpio.csv.gz"), compress = "gzip")
+  message(sprintf("  subconjunto_limpio.csv.gz -> %s publicaciones, %s en el subconjunto (%.1f%%)",
+                  format(nrow(sub), big.mark = "."),
+                  format(sum(sub$limpio), big.mark = "."),
+                  100 * mean(sub$limpio)))
+} else {
+  message("  (falta subconjunto_limpio.parquet: correr R/18 antes)")
+}
+
 # --- 5. Copias de lo ya calculado -------------------------------------------
 for (f in c("hashtags_corpus.csv", "terminos_recoleccion.csv",
-            "18oct_contagio_comunidades.csv", "global_por_dia.csv", "global_por_hora.csv"))
+            "18oct_contagio_comunidades.csv", "global_por_dia.csv",
+            "global_por_hora.csv", "subconjunto_validacion.csv",
+            "polo_por_dia.csv", "red_por_dia.csv"))
   file.copy(file.path(RUTA_TAB, f), file.path(RUTA_PUB, f), overwrite = TRUE)
 file.copy(file.path(RUTA_PROY, "data", "cuentas_politicas.csv"),
           file.path(RUTA_PUB, "cuentas_politicas.csv"), overwrite = TRUE)

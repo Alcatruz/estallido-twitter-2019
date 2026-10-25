@@ -287,6 +287,63 @@ marginal: solo el 1,99% de sus retweets alcanza cuentas chilenas, y apenas el
 influencia difieren en dos órdenes de magnitud, lo que advierte contra inferir
 influencia a partir del volumen.
 
+## Subconjunto recomendado y su validación {#sec-subconjunto}
+
+El corpus se entrega completo y etiquetado, de modo que admite dos usos. Quien
+estudie el artefacto de recolección dispone del material íntegro con la marca
+de ingreso ambiguo; quien investigue el estallido puede restringirse al
+subconjunto recomendado, definido aquí para que no tenga que fijar el criterio
+por su cuenta.
+
+La exclusión opera en dos reglas, almacenadas por separado para que puedan
+aplicarse sueltas:
+
+```{r}
+#| label: tbl-reglas
+#| tbl-cap: "Reglas de exclusión y material resultante."
+kable(data.table(
+  Regla = c("(a) hashtag de fecha y ningún término chileno",
+            "(b) cuenta de las comunidades 1, 2 u 8",
+            "ambas (subconjunto recomendado)"),
+  `Publicaciones excluidas` = c("867.656", "938.325", "1.124.628"),
+  `Corpus restante` = c("5.252.277 (85,8%)", "5.181.608 (84,7%)",
+                        "4.995.305 (81,6%)")),
+  align = "lrr", booktabs = TRUE)
+```
+
+La validación emplea seis indicadores que **no intervienen** en la regla de
+exclusión, de modo que el contraste no es circular: país de geolocalización,
+ubicación declarada en el perfil, idioma, y marcadores léxicos chilenos
+—`weón`, `cachai`, `po`, `pacos`— y venezolanos.
+
+![Validación del subconjunto recomendado. Los indicadores son independientes de la regla con que se construyó la exclusión.](fig/fig7_subconjunto.pdf){#fig-subconjunto width=100%}
+
+```{r}
+#| label: tbl-subval
+#| tbl-cap: "Indicadores de validación del subconjunto recomendado."
+sv <- leer("subconjunto_validacion.csv")
+kable(t(sv[, .(conjunto, `País = Chile (geo.)` = `pais = Chile (geolocalizadas)`,
+               `Ubic. declara Chile` = `ubicacion declara Chile`,
+               `Ubic. declara Venezuela` = `ubicacion declara Venezuela`,
+               `Marcador chileno` = `marcador lexico chileno`,
+               `Marcador venezolano` = `marcador venezolano`)]),
+      booktabs = TRUE)
+```
+
+El material excluido resulta 55,1% venezolano por ubicación declarada y 38,6%
+por marcador léxico, frente a 1,2% y 0,9% en el subconjunto recomendado. La
+separación opera en ambos sentidos: lo retirado es mayoritariamente ajeno y lo
+retenido es más chileno que el corpus de partida.
+
+**Sobre-exclusión declarada.** La regla (b) retira toda la actividad de esas
+cuentas, incluida la que sí trata de Chile. Entre el material excluido quedan
+66.680 usos de `#toquedequeda` y 50.569 de `#ChileDesperto`, casi todos
+atribuibles a la comunidad 1 —medios estatales venezolanos que cubrieron el
+episodio—, cuyo índice de contaminación es 89,9% y no 100%. La decisión de
+tratar esa cobertura como ajena a la conversación chilena es interpretativa, no
+técnica; quien sostenga que forma parte del fenómeno puede aplicar únicamente
+la regla (a).
+
 ## Estructura de la red y clases de cuenta
 
 Con los retweets del 18 de octubre se construye una red dirigida de 110.736
