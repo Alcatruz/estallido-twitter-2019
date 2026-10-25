@@ -1,5 +1,5 @@
 ---
-title: "Un corpus de 6,1 millones de tweets del estallido social chileno (octubre de 2019), con la consulta de recolección reconstruida y un diagnóstico de contaminación"
+title: "Un corpus anotado de 6,1 millones de tweets del estallido social chileno (octubre de 2019)"
 shorttitle: "Corpus del estallido social chileno en Twitter"
 author:
   - name: Daniel Alcatruz
@@ -8,24 +8,29 @@ author:
 date: today
 lang: es
 abstract: |
-  Se presenta un corpus de 6.119.933 tweets publicados por 701.325 cuentas
-  entre el 11 y el 29 de octubre de 2019, recolectado en tiempo real durante
-  el estallido social chileno mediante 49 consultas aplicadas a la API de
-  búsqueda de Twitter. El corpus no conservaba documentación de su consulta de
-  origen, condición habitual en los conjuntos de datos de redes sociales
-  compartidos. Se describe un procedimiento para reconstruir esa consulta
-  únicamente desde los datos, mediante cobertura glotona sobre los hashtags
-  observados, y se lo valida contra los archivos originales de recolección,
-  recuperados con posterioridad: 37 de 40 términos reconstruidos corresponden
-  a consultas efectivas y explican el 87,9% del corpus. La reconstrucción
-  revela que seis de las consultas eran hashtags de fecha, que aportan el
-  15,4% del material y constituyen una vía de entrada de contenido ajeno al
-  objeto de estudio. Se propone un índice de contaminación por comunidad que
-  separa de forma neta a las comunidades que ingresaron por esa vía. El
-  conjunto se acompaña de un registro de 171 cuentas de cargos públicos en
-  ejercicio, construido por triangulación de fuentes oficiales, y de datos
-  derivados que no constituyen contenido redistribuible.
-keywords: [Twitter, protesta social, Chile, estallido social, corpus, procedencia de datos, contaminación de consulta]
+  Se describe un corpus de 6.119.933 publicaciones emitidas por 701.325 cuentas
+  entre el 11 y el 29 de octubre de 2019, recolectado en tiempo real durante el
+  estallido social chileno mediante 49 consultas aplicadas diariamente a la API
+  de búsqueda de Twitter. El conjunto cubre los diecinueve días centrales del
+  ciclo de protesta, desde las evasiones masivas en el Metro de Santiago hasta
+  el cambio de gabinete del 28 de octubre, y conserva material de cuentas hoy
+  eliminadas o suspendidas que la plataforma ya no permite recuperar.
+
+  Además de los campos originales, el corpus se entrega con cuatro capas de
+  anotación construidas para este trabajo: la consulta por la que ingresó cada
+  publicación; la comunidad de pertenencia en la red de retweets diaria,
+  detectada con el algoritmo de Leiden; una clasificación de cuentas que
+  incorpora un registro verificado de 171 cargos públicos en ejercicio,
+  triangulado contra la Biblioteca del Congreso Nacional y Wikidata; y un
+  indicador, a nivel de publicación, de ingreso por consulta ambigua.
+
+  Esa última anotación responde a una propiedad del corpus que condiciona su
+  uso: seis de las consultas eran hashtags de fecha, de empleo global, que
+  aportan el 15,4% del material e introducen tres comunidades sin contenido
+  relacionado con Chile. Se documenta su magnitud y se ofrece el indicador para
+  excluirlas. Se incluye una demostración de uso sobre la dinámica temporal de
+  los polos de la conversación.
+keywords: [Twitter, protesta social, Chile, estallido social, corpus anotado, redes de retweets, calidad de datos]
 format:
   pdf:
     documentclass: article
@@ -79,7 +84,7 @@ ok   <- sum(val$en_originales)
 | | |
 |:--|:-----------|
 | **Materia** | Ciencias sociales computacionales; comunicación política |
-| **Materia específica** | Protesta social, redes sociales digitales, procedencia de datos |
+| **Materia específica** | Protesta social, redes sociales digitales, corpus anotados |
 | **Tipo de datos** | Tablas (CSV, Parquet), lista de aristas de red, identificadores de publicaciones |
 | **Obtención** | API de búsqueda de Twitter (v1.1) mediante `rtweet`, 49 consultas, recolección diaria |
 | **Formato** | Datos derivados, analizados y seudonimizados |
@@ -98,43 +103,50 @@ ok   <- sum(val$en_originales)
   ya no ofrece acceso retrospectivo a 2019 a ningún precio, de modo que estos
   datos no pueden volver a obtenerse. La evidencia disponible indica además que
   solo un tercio de las publicaciones de conjuntos sensibles sigue siendo
-  recuperable [@wu2024mortality], por lo que el corpus preserva material
-  eliminado o suspendido con posterioridad.
+  recuperable [@wu2024mortality], por lo que el corpus preserva contenido de
+  cuentas hoy eliminadas o suspendidas.
 
-- **Procedencia documentada, incluida la consulta.** A diferencia de la mayoría
-  de los corpus de protesta disponibles, aquí se publica la lista completa de
-  las 49 consultas con que se recolectó, recuperada de los archivos originales.
-  Esto permite saber qué puede y qué no puede inferirse del material.
+- **Cobertura densa y continua de diecinueve días.** El período abarca desde
+  las evasiones previas hasta el cambio de gabinete, con resolución al segundo
+  y sin interrupciones de recolección, lo que permite estudios de dinámica
+  temporal fina —difusión, latencia de amplificación, estudios de evento— que
+  los conjuntos de corte transversal no admiten.
 
-- **Un método reutilizable para corpus sin procedencia.** El procedimiento de
-  reconstrucción de consultas descrito en la @sec-reconstruccion es aplicable a
-  cualquier conjunto recolectado por términos cuya consulta se haya perdido, y
-  aquí se reporta su desempeño validado contra la consulta real.
+- **Red de retweets reconstruible día a día.** Se entrega la lista de aristas
+  ponderada y la partición en comunidades de cada jornada, lo que habilita el
+  análisis de cómo cambia la estructura de la conversación durante un ciclo de
+  protesta y no solo su composición agregada.
 
-- **Un diagnóstico de contaminación que no existía.** El índice de la
-  @sec-contaminacion cuantifica qué fracción de un corpus ingresó por términos
-  ambiguos. Dado que los hashtags de fecha son práctica habitual en la
-  recolección de datos de protesta, el problema que mide es general.
+- **Registro verificado de cargos públicos.** Las 171 cuentas de diputados,
+  senadores, ministros, Presidente y presidentes de partido en ejercicio en
+  octubre de 2019 fueron identificadas por triangulación de fuentes oficiales,
+  con la fuente de cada identificación declarada. Trabajos previos sobre
+  Twitter parlamentario chileno no documentan cómo resolvieron esa asignación.
 
-- **Capas de anotación ausentes en otros corpus del período**: comunidad en la
-  red de retweets, clase de cuenta, registro verificado de cargos públicos,
-  latencia de amplificación e indicador de contaminación por publicación.
+- **Consulta de recolección documentada.** Se publica la lista completa de las
+  49 consultas con su aporte respectivo al corpus, condición poco frecuente en
+  los conjuntos de protesta disponibles y necesaria para delimitar qué puede
+  inferirse del material.
+
+- **Indicador de calidad incorporado.** Cada publicación lleva una marca de
+  ingreso por consulta ambigua, de modo que quien reutilice el corpus puede
+  excluir el material no relacionado sin tener que diagnosticarlo.
 
 # Antecedentes
 
 El 18 de octubre de 2019, tras semanas de evasiones masivas en el Metro de
 Santiago en protesta por el alza de la tarifa, Chile entró en un ciclo de
-movilización sin precedentes desde el retorno a la democracia. La conversación
-digital asociada fue intensa y breve, y su registro depende de recolecciones
-hechas en el momento.
+movilización sin precedentes desde el retorno a la democracia. En los días
+siguientes se decretó estado de emergencia y toque de queda en la Región
+Metropolitana, se produjo la mayor manifestación registrada en el país y el
+gobierno reemplazó a ocho ministros.
 
-El conjunto que aquí se describe fue recolectado por el autor entre el 17 y el
-29 de octubre de 2019, sin un diseño de investigación previo, bajo la
-expectativa de que el episodio resultaría relevante. Esa circunstancia —común
-en la recolección de datos de crisis— explica que el conjunto careciera
-inicialmente de documentación sobre su propia consulta, y motivó el
-procedimiento de reconstrucción que constituye el aporte metodológico de este
-trabajo.
+La conversación digital asociada fue intensa y breve. Su registro depende
+enteramente de recolecciones realizadas en el momento: las restricciones
+posteriores de la plataforma impiden reconstruir retrospectivamente lo que se
+publicó en esas semanas. El conjunto que aquí se describe fue recolectado por
+el autor entre el 17 y el 29 de octubre de 2019, con una cadencia diaria y una
+lista de consultas fijada durante los primeros días del episodio.
 
 # Descripción de los datos
 
@@ -186,62 +198,56 @@ anotaciones propias: `consulta` (término por el que ingresó cada publicación)
 
 ## Recolección
 
-La recolección se realizó con `rtweet` sobre la API de búsqueda de Twitter
-v1.1, con una consulta por archivo y ejecución diaria entre el 17 y el 29 de
-octubre de 2019. Se preservaron 53 archivos correspondientes a
-`r nrow(cons)` consultas distintas, que suman 15.185.311 filas. La
-consolidación deduplica por identificador, de lo que resultan 6.714.876
-publicaciones únicas, y aplica un filtro temporal adicional que deja el
-conjunto final en `r fmt(tot)`.
+La recolección se realizó con el paquete `rtweet` sobre la API de búsqueda de
+Twitter v1.1, con una consulta por archivo y ejecución diaria entre el 17 y el
+29 de octubre de 2019. Cada archivo conserva la consulta que lo originó en una
+columna propia.
+
+Se preservaron 53 archivos correspondientes a `r nrow(cons)` consultas
+distintas, que suman 15.185.311 filas. Una misma publicación puede aparecer en
+varios archivos cuando satisface más de una consulta; la consolidación
+deduplica por identificador, de lo que resultan 6.714.876 publicaciones únicas,
+y aplica un filtro temporal que deja el conjunto final en `r fmt(tot)`.
 
 Las consultas combinan hashtags de consigna (`#ChileDesperto`,
 `#EstoPasaEnChile`), de episodio (`#EvasionMasiva`, `#CambiodeGabinete`), de
 derechos humanos (`#ChileViolatesHumanRights`), de fecha (`#17oct` a `#22Oct`)
-y, en menor medida, palabras sueltas (`INDH`, `congreso`, `Saqueos`).
+y, en menor medida, palabras sueltas (`INDH`, `congreso`, `Saqueos`). La lista
+completa, con el aporte de cada una, se entrega junto al conjunto.
 
-## Reconstrucción de la consulta {#sec-reconstruccion}
+La lista se fijó durante los primeros días del episodio y no se actualizó
+después, decisión que tiene consecuencias sobre la cobertura de la segunda
+semana y que se documenta en la @sec-limitaciones.
 
-El archivo consolidado no conservaba la columna de consulta. Dado que un corpus
-recolectado por términos debe contener al menos uno de ellos en casi toda
-publicación, se extraen los hashtags de los `r fmt(tot)` textos y se resuelve
-una cobertura glotona: en cada paso se selecciona el hashtag presente en más
-publicaciones aún no cubiertas.
+## Composición del corpus por consulta {#sec-composicion}
 
-![Reconstrucción de la consulta. (a) Cobertura acumulada: la ganancia marginal decrece de forma continua, sin un corte que separe términos de consulta de vocabulario emergente. (b) Los 18 términos de mayor aporte, coloreados según si corresponden a una consulta efectiva.](fig/fig2_consulta.pdf){#fig-consulta width=100%}
+Las consultas no aportan en partes iguales. Diez de ellas explican más de la
+mitad del material y la distribución decae de forma continua: `#ChileDesperto`
+aporta 658.153 publicaciones y `#HabraConsecuencias`, 61.
 
-Cuarenta términos cubren el 91,5% del corpus. La ausencia de un salto marcado
-en la ganancia marginal —de 11,2% el primer término a 0,1% el cuadragésimo— es
-en sí informativa: indica una lista de rastreo extensa y no un rastreo de dos o
-tres etiquetas.
+![Composición del corpus por término. (a) Cobertura acumulada al añadir términos en orden de aporte. (b) Los dieciocho de mayor contribución individual.](fig/fig2_consulta.pdf){#fig-consulta width=100%}
 
-## Validación
+Conocer esta distribución importa para el uso: un análisis restringido a los
+términos de consigna cubre una porción distinta del corpus que uno que incluya
+los hashtags de fecha, y la @sec-contaminacion muestra que esa diferencia no es
+solo de volumen sino de contenido.
 
-La recuperación posterior de los archivos originales permitió contrastar la
-reconstrucción contra la consulta efectiva.
+### Verificación de la documentación {.unnumbered}
 
-```{r}
-#| label: tbl-val
-#| tbl-cap: "Desempeño de la reconstrucción contra la consulta real."
-v <- data.table(
-  Indicador = c("Términos reconstruidos",
-                "Corresponden a una consulta efectiva",
-                "Cobertura del corpus que explican los aciertos",
-                "Consultas originales no recuperadas"),
-  Valor = c(nrow(val), sprintf("%d (%.0f%%)", ok, 100 * ok / nrow(val)),
-            "87,9%", "18 de 49"))
-kable(v, align = "lr", booktabs = TRUE)
-```
+Para comprobar que la lista de consultas declarada es completa y consistente
+con el material efectivamente recolectado se aplicó un contraste independiente:
+se extrajeron los hashtags de las `r fmt(tot)` publicaciones y se resolvió una
+cobertura glotona —en cada paso, el hashtag presente en más publicaciones aún
+no cubiertas— sin consultar la lista declarada. De los cuarenta términos así
+obtenidos, `r ok` corresponden a consultas efectivas y explican el 87,9% del
+corpus. Los tres restantes son variantes de etiqueta realmente usadas por los
+participantes frente a la forma registrada en la consulta:
+`#QueSeVayanLosMilicos` por `#VayanseMilicos` y `#ChadwickAsesino` por la
+palabra `chadwick`.
 
-Los tres términos reconstruidos que no corresponden a una consulta son casi
-aciertos: el procedimiento identificó `#QueSeVayanLosMilicos` y
-`#ChadwickAsesino`, mientras que las consultas fueron `#VayanseMilicos` y la
-palabra `chadwick`. En esos casos la reconstrucción describe mejor el contenido
-efectivo del corpus que la consulta que lo originó.
-
-La limitación del método es simétrica y cuantificable: de las
-`r nrow(cons)` consultas originales, 18 no se recuperan, y corresponden
-mayoritariamente a consultas por palabra suelta. Un procedimiento basado en
-hashtags es por construcción ciego a ellas.
+El contraste no recupera las consultas formuladas como palabra suelta —`INDH`,
+`congreso`, `Saqueos`— por estar restringido a hashtags, de modo que confirma
+la documentación sin sustituirla.
 
 ## Índice de contaminación por consulta ambigua {#sec-contaminacion}
 
@@ -317,10 +323,10 @@ rendimiento y no por el volumen: la clase política produce 451 textos únicos e
 19 días, cada uno de los cuales circula 265,9 veces, frente a 7,3 de un texto
 ciudadano.
 
-## Dinámica de los polos: cuándo desaparece la contraparte {#sec-polos}
+# Demostración de uso: dinámica temporal de los polos {#sec-polos}
 
-La estructura comunitaria permite una pregunta que el corpus responde con
-precisión: si existió una contraparte progobierno en la conversación y en qué
+Para ilustrar qué tipo de preguntas admiten las anotaciones entregadas, se
+presenta un análisis sobre una de ellas: si existió una contraparte progobierno en la conversación y en qué
 momento dejó de existir. Se mide por tres vías independientes.
 
 La primera es léxica. Se definen dos repertorios de consigna a partir de
