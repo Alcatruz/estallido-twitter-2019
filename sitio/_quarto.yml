@@ -18,6 +18,8 @@ website:
         text: La red del 18-O
       - href: contagio.qmd
         text: Comunidades contagiadas
+      - href: polos.qmd
+        text: El polo que desapareció
       - href: politicos.qmd
         text: La clase política
       - href: datos.qmd

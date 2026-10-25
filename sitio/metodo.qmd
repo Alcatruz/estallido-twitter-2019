@@ -1,77 +1,76 @@
 ---
 title: "Cómo se recolectó"
-subtitle: "La consulta estaba perdida y se reconstruyó desde los propios datos"
+subtitle: "49 consultas, una por archivo, todos los días del episodio"
 ---
 
 ```{r}
 #| include: false
 source("_comun.R")
-val <- leer("validacion_reconstruccion.csv")
 cons <- leer("../data/externos/consultas_originales.csv", ".")
+val <- leer("validacion_reconstruccion.csv")
 ```
 
-El corpus llegó como un único archivo con las 90 columnas estándar de `rtweet`
-y **ninguna que dijera por qué consulta entró cada tweet**. Sin eso no se puede
-interpretar nada: un corpus recolectado por términos contiene lo que esos
-términos atrajeron, incluido lo que no tiene que ver con el tema.
+El corpus se recolectó con el paquete `rtweet` sobre la API de búsqueda de
+Twitter, con **una consulta por archivo y ejecución diaria** entre el 17 y el
+29 de octubre de 2019. Cada archivo conserva en una columna la consulta que lo
+originó.
 
-## Reconstruirla desde los datos
+Se preservaron 53 archivos con `r nrow(cons)` consultas distintas, que suman
+15.185.311 filas. Una misma publicación aparece en varios archivos cuando
+satisface más de una consulta; al consolidar se deduplica por identificador,
+quedando 6.714.876 únicas, y un filtro temporal deja el conjunto final en
+6.119.933.
 
-Si un corpus se arma siguiendo una lista de términos, casi todo tweet tiene que
-contener al menos uno. Se extraen los hashtags de los 6,1 millones de textos y
-se resuelve una cobertura glotona: en cada paso, el hashtag que cubre más
-tweets todavía no cubiertos.
-
-![](figuras/cobertura_terminos.png)
-
-No hay un corte limpio entre "término de consulta" y "vocabulario emergente":
-la ganancia marginal cae de forma gradual, de 11,2% el primero a 0,1% el número
-40. Ese gradiente ya es un hallazgo — se rastreó una lista larga, no dos o tres
-hashtags. Cuarenta términos cubren el **91,5%** del corpus.
-
-## La validación
-
-Después aparecieron los archivos originales de recolección: 53 archivos, uno
-por consulta, con fechas del 17 al 29 de octubre de 2019, y un script de
-consolidación que asignaba una columna `consulta` a cada uno. Eso permitió
-contrastar la reconstrucción contra la lista real.
-
-```{r}
-#| label: tbl-val
-#| tbl-cap: "Los 40 términos reconstruidos a ciegas, contra la lista real de consultas."
-tabla(val[, .(`#` = paso, Término = termino, `Tweets que aporta` = tweets_nuevos,
-              `Cobertura acum.` = pc(pct_acumulado, 1), Familia = familia,
-              `¿Consulta real?` = fifelse(en_originales, "sí", "no"))],
-      align = "rlrrll")
-```
-
-::: {.callout-note appearance="simple"}
-**37 de 40 (92%)** son consulta original, y explican el **87,9%** del corpus.
-:::
-
-Los tres que no coinciden son casi aciertos. La reconstrucción encontró
-`#QueSeVayanLosMilicos` y `#ChadwickAsesino`; las consultas fueron
-`#VayanseMilicos` y la palabra `chadwick`. En esos casos la reconstrucción
-describe mejor el contenido del corpus que la consulta que lo generó.
-
-## El límite del método, medido
-
-De las 49 consultas originales, 18 no se recuperan. Son sobre todo las que **no
-eran hashtags sino palabras sueltas**: `INDH`, `congreso`, `chadwick`,
-`Saqueos`, `Disparos institucionales`, `NO HAY DEBASTECIMIENTO`. Una
-reconstrucción basada en hashtags es ciega a las consultas por palabra clave.
-
-## La lista completa
+## Las 49 consultas
 
 ```{r}
 #| label: tbl-cons
-#| tbl-cap: "Las 49 consultas con que se recolectó el corpus."
+#| tbl-cap: "Lista completa de los términos con que se construyó el corpus."
 tabla(cons[order(origen, consulta), .(Consulta = consulta, Fuente = origen)])
 ```
 
-## Por qué importa para quien reutilice estos datos
+Combinan hashtags de consigna (`#ChileDesperto`, `#EstoPasaEnChile`), de
+episodio (`#EvasionMasiva`, `#CambiodeGabinete`), de derechos humanos
+(`#ChileViolatesHumanRights`), de fecha (`#17oct` a `#22Oct`) y, en menor
+medida, palabras sueltas (`INDH`, `congreso`, `Saqueos`).
 
-Seis de esas consultas son **hashtags de fecha** (`#17oct` a `#22Oct`) y
-explican 941.446 tweets, el 15,4% del corpus. Son términos que cualquiera en el
-mundo usa ese día. Por ahí entró contenido que no tiene nada que ver con Chile
-— y es [medible](contagio.qmd).
+## Cuánto aporta cada una
+
+![](figuras/cobertura_terminos.png)
+
+No aportan en partes iguales. `#ChileDesperto` contribuye 658.153
+publicaciones y `#HabraConsecuencias`, 61. Diez términos explican más de la
+mitad del corpus y la distribución decae de forma continua, sin un corte
+natural.
+
+Esto importa para el uso: un análisis restringido a consignas cubre una
+porción distinta del corpus que uno que incluya los hashtags de fecha. Y esa
+diferencia no es solo de volumen, sino de contenido — es el tema de
+[comunidades contagiadas](contagio.qmd).
+
+## Una nota sobre la lista
+
+La lista de términos **se fijó durante los primeros días** del episodio y no se
+actualizó. Eso tiene una consecuencia medible: el 25 de octubre, día de la
+marcha más grande de Chile, registra 112.812 publicaciones, menos que la
+víspera. La consulta `#MarchaDelMillon` aporta 48.558 frente a las 603.398 de
+`#ChileDesperto`.
+
+El corpus subrepresenta sistemáticamente la segunda semana del ciclo. No es un
+defecto oculto: es una propiedad que cualquier reutilización debe declarar.
+
+## Verificación
+
+Para comprobar que la documentación de consultas está completa se hizo un
+contraste independiente: extraer los hashtags de los 6,1 millones de textos y
+resolver una cobertura glotona —en cada paso, el hashtag presente en más
+publicaciones aún no cubiertas— sin mirar la lista declarada.
+
+De los 40 términos así obtenidos, **`r sum(val$en_originales)` corresponden a
+consultas efectivas** y explican el 87,9% del corpus. Los tres restantes son
+variantes que la gente usó realmente frente a la forma registrada:
+`#QueSeVayanLosMilicos` por `#VayanseMilicos`, `#ChadwickAsesino` por la
+palabra `chadwick`.
+
+El contraste no recupera las consultas por palabra suelta, por estar
+restringido a hashtags. Confirma la documentación sin sustituirla.

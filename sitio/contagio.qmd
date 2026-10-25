@@ -70,6 +70,51 @@ retweets. Pero su penetración en la conversación chilena es:
 
 Presencia del 19%, influencia del 0,4%. Es un circuito paralelo que habla solo.
 
+## El subconjunto limpio
+
+El corpus no se entrega solo con la advertencia: se entrega con el corte hecho
+y validado, para que quien investigue el estallido no tenga que decidir el
+criterio ni replicarlo.
+
+La exclusión opera en dos reglas, guardadas por separado para poder aplicarse
+sueltas:
+
+| Regla | Excluye | Corpus restante |
+|---|---|---|
+| (a) hashtag de fecha y ningún término chileno | 867.656 | 5.252.277 (85,8%) |
+| (b) cuenta de las comunidades 1, 2 u 8 | 938.325 | 5.181.608 (84,7%) |
+| **ambas** (recomendado) | 1.124.628 | **4.995.305 (81,6%)** |
+
+```{r}
+#| label: tbl-val
+#| tbl-cap: "Indicadores que NO intervienen en la regla de exclusión, para que el contraste no sea circular."
+sv <- leer("subconjunto_validacion.csv")
+tabla(t(sv[, .(conjunto, `País = Chile (geo.)` = `pais = Chile (geolocalizadas)`,
+               `Ubic. declara Chile` = `ubicacion declara Chile`,
+               `Ubic. declara Venezuela` = `ubicacion declara Venezuela`,
+               `Marcador chileno` = `marcador lexico chileno`,
+               `Marcador venezolano` = `marcador venezolano`)]))
+```
+
+![](figuras/subconjunto_validacion.png)
+
+El material excluido es **55,1% venezolano** por ubicación declarada y 38,6%
+por léxico, contra 1,2% y 0,9% en el subconjunto. La separación opera en los
+dos sentidos: lo retirado es mayoritariamente ajeno, y lo retenido es más
+chileno que el corpus de partida.
+
+### Una sobre-exclusión que hay que declarar
+
+La regla (b) retira *toda* la actividad de esas cuentas, incluida la que sí
+trata de Chile. Entre lo excluido quedan **66.680 usos de `#toquedequeda` y
+50.569 de `#ChileDesperto`**, casi todos de la comunidad 1 — medios estatales
+venezolanos que cubrieron el episodio, cuyo índice de contaminación es 89,9% y
+no 100%.
+
+Tratar esa cobertura como ajena a la conversación chilena es una decisión
+interpretativa, no técnica. Quien sostenga que forma parte del fenómeno aplica
+únicamente la regla (a), y queda adentro.
+
 ## Por qué esto es generalizable
 
 El método no depende de este corpus. Cualquier dataset recolectado por

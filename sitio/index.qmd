@@ -95,8 +95,9 @@ fijó en la primera semana y para el 25 el vocabulario ya había cambiado.
 
 ## Qué hay en este sitio
 
-- [Cómo se recolectó](metodo.qmd) — la consulta original, perdida y reconstruida desde los datos
+- [Cómo se recolectó](metodo.qmd) — las 49 consultas, y cuánto aporta cada una
 - [La red del 18-O](red.qmd) — 56.724 cuentas, 143 comunidades
-- [Comunidades contagiadas](contagio.qmd) — quiénes entraron por la puerta equivocada
+- [Comunidades contagiadas](contagio.qmd) — quiénes entraron por la puerta equivocada, y el subconjunto limpio
+- [El polo que desapareció](polos.qmd) — cuándo dejó de existir la contraparte progobierno
 - [La clase política](politicos.qmd) — 171 cargos identificados y su peso real
 - [Datos y código](datos.qmd)
