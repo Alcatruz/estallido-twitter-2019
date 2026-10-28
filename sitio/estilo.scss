@@ -1,20 +1,102 @@
 /*-- scss:defaults --*/
-$primary: #c1121f;
-$body-color: #1d1f21;
-$link-color: #003049;
-$font-size-root: 17px;
+// Paleta y tipografia tomadas de los posts de Daniel Alcatruz
+// (boric-kast-camara y hermanos), para que este sitio se vea parte de la misma
+// serie: cuerpo en serif, titulos en sans, fondo calido, modo claro y oscuro.
+
+$serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif !default;
+$sans:  system-ui, -apple-system, "Segoe UI", Roboto, sans-serif !default;
+
+$font-family-sans-serif: $serif;
+$headings-font-family:   $sans;
+$font-size-root:         19px;
+$line-height-base:       1.6;
+
+$page:    #f9f9f7;
+$surface: #fcfcfb;
+$ink:     #0b0b0b;
+$ink-2:   #52514e;
+$muted:   #898781;
+$grid:    #e1e0d9;
+$axis:    #c3c2b7;
+
+$izq:    #e34948;
+$der:    #2a78d6;
+$sen:    #eb6834;
+$neutro: #b5b3ab;
+$link:   #1c5cab;
+
+$body-bg:    $page;
+$body-color: $ink;
+$link-color: $link;
+$primary:    $izq;
+
+$toc-font-size: 14px;
 
 /*-- scss:rules --*/
-.navbar { border-bottom: 3px solid #c1121f; }
-.cifra {
-  font-size: 2.4rem; font-weight: 700; color: #c1121f; line-height: 1.1;
+:root {
+  --page: #f9f9f7;  --surface: #fcfcfb;
+  --ink: #0b0b0b;   --ink-2: #52514e;  --muted: #898781;
+  --grid: #e1e0d9;  --axis: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.10);
+  --izq: #e34948;   --der: #2a78d6;    --sen: #eb6834;
+  --neutro: #b5b3ab; --link: #1c5cab;
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
-.cifra-pie { font-size: .85rem; color: #555; }
-.tarjetas {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 1.1rem; margin: 1.8rem 0;
+
+body { font-family: var(--serif); background: var(--page); color: var(--ink); }
+
+// Medida de lectura: 680 px para el texto, 920 para lo que necesita aire.
+main.content { max-width: 680px; }
+.column-page, .column-screen-inset, figure.figure { max-width: 920px; }
+
+h1, h2, h3, h4, h5, .navbar, .quarto-title-block .subtitle,
+.sidebar, .toc-active, caption, .table { font-family: var(--sans); }
+
+#title-block-header .title {
+  font-weight: 700; font-size: clamp(32px, 6vw, 48px); line-height: 1.05;
+  letter-spacing: -0.02em; text-wrap: balance; margin-bottom: 14px;
 }
-.tarjeta {
-  border-left: 4px solid #c1121f; padding: .5rem 0 .5rem .9rem; background: #fbfbfb;
+#title-block-header .subtitle {
+  font-family: var(--serif); font-size: 21px; line-height: 1.45;
+  color: var(--ink-2); text-wrap: pretty;
 }
-blockquote { border-left: 4px solid #003049; color: #333; }
+.quarto-title-meta, .quarto-title-banner { font-family: var(--sans); font-size: 14px; color: var(--muted); }
+
+h2 { font-size: 24px; font-weight: 700; margin: 56px 0 12px; letter-spacing: -0.005em; }
+h3 { font-size: 17px; font-weight: 700; margin: 32px 0 8px; }
+p  { margin: 0 0 18px; text-wrap: pretty; }
+
+.navbar {
+  background: var(--surface) !important;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+}
+.navbar .navbar-brand { font-weight: 700; letter-spacing: -0.01em; }
+.navbar .nav-link { color: var(--ink-2) !important; }
+.navbar .nav-link:hover, .navbar .nav-link.active { color: var(--izq) !important; }
+
+.table { font-size: 15px; }
+.table > :not(caption) > * > * { border-color: var(--border); }
+thead th { border-bottom: 1.5px solid var(--axis) !important; color: var(--ink); }
+
+blockquote {
+  border-left: 3px solid var(--izq); color: var(--ink-2);
+  font-style: normal; padding-left: 16px;
+}
+
+// Cifras destacadas, en la linea de los posts
+.cifra { font-family: var(--sans); font-size: 2.3rem; font-weight: 700;
+         color: var(--izq); line-height: 1.05; letter-spacing: -0.02em; }
+.cifra-pie { font-family: var(--sans); font-size: 13px; color: var(--muted);
+             letter-spacing: 0.04em; text-transform: uppercase; }
+.tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.2rem; margin: 2rem 0; }
+.tarjeta { border-top: 2px solid var(--izq); padding-top: .6rem; }
+
+.Reactable { font-family: var(--sans); font-size: 14px; }
+.visNetwork, .vis-network { background: var(--surface); border: 1px solid var(--border); }
+
+#quarto-margin-sidebar, #TOC { font-family: var(--sans); font-size: 13px; }
+.footer, .nav-footer { font-family: var(--sans); font-size: 13px; color: var(--muted);
+                       background: var(--surface); border-top: 1px solid var(--border); }

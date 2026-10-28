@@ -31,7 +31,9 @@ website:
 
 format:
   html:
-    theme: [cosmo, estilo.scss]
+    theme:
+      light: [cosmo, estilo.scss]
+      dark: [cosmo, estilo-oscuro.scss]
     toc: true
     toc-title: "En esta página"
     lang: es

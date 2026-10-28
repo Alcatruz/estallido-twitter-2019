@@ -47,8 +47,10 @@ nombre.
 ```{r}
 #| label: red
 #| column: page
-paleta <- c("#c1121f", "#003049", "#2a9d8f", "#f4a261", "#5c374c",
-            "#6a994e", "#457b9d", "#9c6644")
+# Paleta de la casa: izq, der, sen y neutro, mas tonos derivados para las
+# comunidades satelite.
+paleta <- c("#e34948", "#2a78d6", "#eb6834", "#5d5c57",
+            "#b5b3ab", "#1c5cab", "#898781", "#c3c2b7")
 coms <- sort(unique(nodos$com))
 col_com <- setNames(paleta[(seq_along(coms) - 1) %% length(paleta) + 1], coms)
 
@@ -66,7 +68,7 @@ nd <- data.frame(
     ifelse(is.na(nodos$partido), "", paste0(" · ", nodos$partido)),
     fmt(nodos$rt_recibidos), fmt(nodos$audiencia), nodos$com),
   color.background = col_com[as.character(nodos$com)],
-  color.border = ifelse(nodos$es_cargo, "#111111", "#ffffff"),
+  color.border = ifelse(nodos$es_cargo, "#0b0b0b", "#fcfcfb"),
   borderWidth = ifelse(nodos$es_cargo, 3, 1),
   stringsAsFactors = FALSE)
 
@@ -74,11 +76,12 @@ ed <- data.frame(from = ar$from, to = ar$to,
                  value = ar$jaccard, title = paste0("Jaccard ", ar$jaccard),
                  stringsAsFactors = FALSE)
 
-visNetwork(nd, ed, height = "640px", width = "100%") |>
+visNetwork(nd, ed, height = "640px", width = "100%",
+           background = "#fcfcfb") |>
   visIgraphLayout(layout = "layout_with_fr", randomSeed = 2019) |>
   visNodes(scaling = list(min = 8, max = 48),
            font = list(size = 0), shadow = FALSE) |>
-  visEdges(color = list(color = "#cfcfcf", highlight = "#333333"),
+  visEdges(color = list(color = "#e1e0d9", highlight = "#52514e"),
            smooth = FALSE, width = 0.4) |>
   visOptions(highlightNearest = list(enabled = TRUE, degree = 1, hover = FALSE),
              nodesIdSelection = list(enabled = TRUE, main = "Buscar una cuenta")) |>
