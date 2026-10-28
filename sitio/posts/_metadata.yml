@@ -1,7 +1,0 @@
-freeze: false
-format:
-  html:
-    toc: true
-    toc-title: "En esta página"
-    code-fold: true
-    code-summary: "ver código"
