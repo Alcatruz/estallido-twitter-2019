@@ -35,6 +35,55 @@
     "text": "Vocabulario propio de cada comunidad\n\nMedido por sobrerrepresentación frente al resto del día, no por frecuencia bruta: las palabras más frecuentes serían las mismas en todas las comunidades."
   },
   {
+    "objectID": "posts/red-audiencias/index.html",
+    "href": "posts/red-audiencias/index.html",
+    "title": "Quién comparte público con quién",
+    "section": "",
+    "text": "La red de retweets es radial: miles de cuentas pequeñas apuntando a unas pocas grandes. Eso la hace difícil de leer, porque las cuentas grandes casi no se retuitean entre sí. De las 431 cuentas más amplificadas del 18 de octubre, solo 151 tenían algún retweet directo con otra del grupo.\nHay otra forma de mirarlo que sí muestra estructura: conectar dos cuentas cuando las retuitea la misma gente."
+  },
+  {
+    "objectID": "posts/red-audiencias/index.html#la-proyección-por-audiencia",
+    "href": "posts/red-audiencias/index.html#la-proyección-por-audiencia",
+    "title": "Quién comparte público con quién",
+    "section": "La proyección por audiencia",
+    "text": "La proyección por audiencia\nPara cada par de cuentas se cuenta cuántas personas retuitearon a ambas. Dos cuentas quedan vinculadas si esa audiencia compartida alcanza al menos el 8% de la audiencia de la menor del par — un umbral relativo, porque uno absoluto premiaría a las cuentas grandes solo por su tamaño.\nEl resultado tenía 16.857 vínculos sobre 429 cuentas, grado medio 78: una mancha ilegible. Así que se conservan los seis vínculos más fuertes de cada cuenta, medidos por Jaccard, y se toma la unión. Quedan 2.169.\nLa red está además limpia: fuera las comunidades 1, 2 y 8, que entraron por hashtag de fecha y no hablan del estallido."
+  },
+  {
+    "objectID": "posts/red-audiencias/index.html#el-mapa",
+    "href": "posts/red-audiencias/index.html#el-mapa",
+    "title": "Quién comparte público con quién",
+    "section": "El mapa",
+    "text": "El mapa\nArrastra para mover, rueda para hacer zoom, haz clic en una cuenta para aislar su vecindario. El buscador de arriba a la izquierda ubica una cuenta por nombre.\n\n\nver código\npaleta &lt;- c(\"#c1121f\", \"#003049\", \"#2a9d8f\", \"#f4a261\", \"#5c374c\",\n            \"#6a994e\", \"#457b9d\", \"#9c6644\")\ncoms &lt;- sort(unique(nodos$com))\ncol_com &lt;- setNames(paleta[(seq_along(coms) - 1) %% length(paleta) + 1], coms)\n\nnodos[, grupo := paste0(\"Comunidad \", com)]\nnd &lt;- data.frame(\n  id    = nodos$cuenta,\n  label = nodos$cuenta,\n  group = nodos$grupo,\n  value = nodos$rt_recibidos,\n  title = sprintf(\n    \"&lt;b&gt;@%s&lt;/b&gt;&lt;br&gt;%s%s&lt;br&gt;Retweets recibidos: %s&lt;br&gt;Audiencia: %s cuentas&lt;br&gt;Comunidad %d\",\n    nodos$cuenta,\n    ifelse(nodos$clase == \"politica\", \"Cargo público\",\n           ifelse(nodos$clase == \"medio\", \"Medio o institución\", \"Cuenta ciudadana\")),\n    ifelse(is.na(nodos$partido), \"\", paste0(\" · \", nodos$partido)),\n    fmt(nodos$rt_recibidos), fmt(nodos$audiencia), nodos$com),\n  color.background = col_com[as.character(nodos$com)],\n  color.border = ifelse(nodos$es_cargo, \"#111111\", \"#ffffff\"),\n  borderWidth = ifelse(nodos$es_cargo, 3, 1),\n  stringsAsFactors = FALSE)\n\ned &lt;- data.frame(from = ar$from, to = ar$to,\n                 value = ar$jaccard, title = paste0(\"Jaccard \", ar$jaccard),\n                 stringsAsFactors = FALSE)\n\nvisNetwork(nd, ed, height = \"640px\", width = \"100%\") |&gt;\n  visIgraphLayout(layout = \"layout_with_fr\", randomSeed = 2019) |&gt;\n  visNodes(scaling = list(min = 8, max = 48),\n           font = list(size = 0), shadow = FALSE) |&gt;\n  visEdges(color = list(color = \"#cfcfcf\", highlight = \"#333333\"),\n           smooth = FALSE, width = 0.4) |&gt;\n  visOptions(highlightNearest = list(enabled = TRUE, degree = 1, hover = FALSE),\n             nodesIdSelection = list(enabled = TRUE, main = \"Buscar una cuenta\")) |&gt;\n  visInteraction(hideEdgesOnDrag = TRUE, tooltipDelay = 120) |&gt;\n  visPhysics(enabled = FALSE)\n\n\n\n\n\n\nLos puntos grandes son las cuentas más retuiteadas. El borde negro marca a los cargos públicos: son 14 de 429, y se ven concentrados en una sola zona del mapa."
+  },
+  {
+    "objectID": "posts/red-audiencias/index.html#las-comunidades-del-núcleo",
+    "href": "posts/red-audiencias/index.html#las-comunidades-del-núcleo",
+    "title": "Quién comparte público con quién",
+    "section": "Las comunidades del núcleo",
+    "text": "Las comunidades del núcleo\n\n\nver código\nresumen &lt;- nodos[, .(Cuentas = .N,\n                     `Retweets recibidos` = sum(rt_recibidos),\n                     `Cargos públicos` = sum(es_cargo),\n                     `Medios` = sum(clase == \"medio\"),\n                     `Cuenta más amplificada` = cuenta[which.max(rt_recibidos)]),\n                 by = .(Comunidad = com)][order(-Cuentas)]\nreactable(resumen, defaultPageSize = 8, highlight = TRUE, compact = TRUE,\n          columns = list(\n            `Retweets recibidos` = colDef(format = colFormat(separators = TRUE))))\n\n\n\n\nTabla 1\n\n\n\n\n\n\n\n\n\n\nDos comunidades concentran casi todo: la 1 con 227 cuentas y la 2 con 162. Las demás son satélites de diez o veinte cuentas."
+  },
+  {
+    "objectID": "posts/red-audiencias/index.html#buscar-una-cuenta",
+    "href": "posts/red-audiencias/index.html#buscar-una-cuenta",
+    "title": "Quién comparte público con quién",
+    "section": "Buscar una cuenta",
+    "text": "Buscar una cuenta\n\n\nver código\ntb &lt;- nodos[order(-rt_recibidos),\n            .(Cuenta = cuenta, Comunidad = com,\n              Clase = fifelse(clase == \"politica\", \"Cargo público\",\n                       fifelse(clase == \"medio\", \"Medio\", \"Ciudadana\")),\n              Cargo = fifelse(is.na(cargo), \"\", cargo),\n              Partido = fifelse(is.na(partido), \"\", partido),\n              `RT recibidos` = rt_recibidos,\n              `Audiencia` = audiencia)]\nreactable(tb, searchable = TRUE, defaultPageSize = 12, highlight = TRUE,\n          compact = TRUE, striped = TRUE,\n          defaultSorted = list(`RT recibidos` = \"desc\"),\n          columns = list(\n            Cuenta = colDef(cell = function(v) htmltools::tags$a(\n              href = paste0(\"https://x.com/\", v), target = \"_blank\", paste0(\"@\", v))),\n            `RT recibidos` = colDef(format = colFormat(separators = TRUE)),\n            `Audiencia` = colDef(format = colFormat(separators = TRUE))))\n\n\n\n\nTabla 2"
+  },
+  {
+    "objectID": "posts/red-audiencias/index.html#qué-mirar",
+    "href": "posts/red-audiencias/index.html#qué-mirar",
+    "title": "Quién comparte público con quién",
+    "section": "Qué mirar",
+    "text": "Qué mirar\nLos cargos públicos están juntos y son pocos. Catorce de 429 cuentas, y el borde negro los muestra agrupados en una misma región. La conversación del 18-O no se organizó alrededor de ellos.\nLos medios tampoco dominan. Son 37 de 429. El grueso del núcleo —378 cuentas— son cuentas ciudadanas sin cargo ni medio detrás.\nY hay dos públicos, no uno. Las dos comunidades grandes comparten poca audiencia entre sí pese a estar las dos dentro de la conversación chilena. Una es el núcleo político-ciudadano; la otra, el fandom K-pop que reconvirtió su infraestructura en red de documentación."
+  },
+  {
+    "objectID": "posts/red-audiencias/index.html#sobre-nombrar-cuentas",
+    "href": "posts/red-audiencias/index.html#sobre-nombrar-cuentas",
+    "title": "Quién comparte público con quién",
+    "section": "Sobre nombrar cuentas",
+    "text": "Sobre nombrar cuentas\nEl umbral de entrada son 100 retweets recibidos ese día. Las cuentas que lo superan son actores públicos de esa conversación, y se las nombra igual que en el resto del sitio. Las que están por debajo no aparecen acá, y en el paquete de datos van seudonimizadas."
+  },
+  {
     "objectID": "politicos.html",
     "href": "politicos.html",
     "title": "La clase política",
@@ -278,5 +327,12 @@
     "title": "El polo que desapareció",
     "section": "Una advertencia",
     "text": "Una advertencia\nEl indicador es léxico, no ideológico. Clasifica cuentas por las consignas que usan, no por su posición: alguien que cite #YoApoyoAlPresidente para burlarse queda contado en ese polo. Con 31.431 publicaciones en total, un sesgo así no es despreciable."
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Posts",
+    "section": "",
+    "text": "Quién comparte público con quién\n\n\nLas 429 cuentas más amplificadas del 18 de octubre, conectadas por su audiencia compartida. Interactivo.\n\n\n\n\n\n28 de octubre, 2026\n\n6 minutos\n\n\n\n\nNo hay resultados"
   }
 ]
