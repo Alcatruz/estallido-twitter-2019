@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datos y código</title>
+<meta name="description" content="Qué contiene el paquete de datos del corpus del estallido, cómo está seudonimizado y qué limitaciones debe declarar cualquier reutilización.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="Datos y código">
+<meta property="og:description" content="Qué contiene el paquete, cómo está seudonimizado y qué limitaciones hay que declarar.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+
+<nav class="navegacion"><div class="ancho nav-caja">
+  <a class="nav-sitio" href="../">El estallido en Twitter</a>
+  <div class="nav-enlaces">
+    <a href="../">El corpus</a>
+    <a href="../metodo/">Recolección</a>
+    <a href="../red/">La red del 18-O</a>
+    <a href="../contagio/">Contagio</a>
+    <a href="../polos/">Los polos</a>
+    <a href="../politicos/">La clase política</a>
+    <a href="./" aria-current="page">Datos y código</a>
+  </div>
+</div></nav>
+
+<main>
+
+<header class="cabecera col">
+  <p class="antetitulo">El paquete</p>
+  <h1>Datos y código</h1>
+  <p class="bajada">Qué se entrega, qué no se puede entregar, cómo está seudonimizado y qué limitaciones debe declarar cualquiera que lo reutilice.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 28 de octubre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <h2>El paquete de datos</h2>
+  <p>El corpus no se publica como tal: los términos de servicio de X restringen la redistribución del contenido de las publicaciones. Lo que se entrega son los identificadores más <b>derivados que no son contenido</b>, incluidas las capas de anotación construidas para este trabajo.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-archivos"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 1.</b> Contenido del paquete. Son 132 MB. El depósito con DOI está en preparación.</figcaption>
+</figure>
+
+<div class="col">
+  <div class="recuadro">
+    <p><b>Una advertencia sobre los identificadores.</b> Desde que la API de X dejó de tener acceso gratuito, rehidratar un corpus a partir de identificadores es inviable para la mayoría de los usuarios. Los derivados existen precisamente por eso: son lo que queda utilizable cuando la rehidratación deja de ser una opción.</p>
+  </div>
+
+  <h2>Dos usos declarados</h2>
+  <p>El corpus se entrega completo <b>y</b> etiquetado, lo que habilita dos cosas distintas sin forzar a elegir:</p>
+  <ul class="notas">
+    <li>Quien investigue <b>el estallido</b> se restringe al subconjunto recomendado, 4.995.305 publicaciones validadas como chilenas.</li>
+    <li>Quien estudie <b>el artefacto de recolección</b> —cómo una consulta con términos ambiguos captura conversaciones paralelas— dispone del material íntegro con la contaminación marcada publicación por publicación.</li>
+  </ul>
+  <p>Entregar solo la versión limpia cerraría la segunda puerta sin abrir ninguna.</p>
+
+  <h2>Variables propias</h2>
+  <p>Lo que no existe en ningún otro corpus chileno del período:</p>
+  <ul class="notas">
+    <li><code>consulta</code> — el término por el que ingresó cada publicación</li>
+    <li><code>comunidad_18oct</code> — comunidad en la red de retweets</li>
+    <li><code>clase_cuenta</code> — política, medio o ciudadana</li>
+    <li><code>es_cargo_publico</code>, <code>partido</code> — para los 171 cargos identificados</li>
+    <li><code>limpio</code>, <code>solo_fecha</code>, <code>cuenta_contaminada</code> — marcas de calidad</li>
+    <li><code>latencia_retweet_min</code> — minutos entre el original y su retweet</li>
+  </ul>
+
+  <h2>Seudonimización</h2>
+  <p>Las cuentas de cargos públicos conservan su identificador: un cargo público actuando en público no tiene expectativa de anonimato, y su trazabilidad es parte del valor del dato. Las otras 701.978 pasan a un hash estable con sal, consistente entre archivos para que la red siga siendo analizable.</p>
+
+  <p>La antigüedad de cuenta va en año y los seguidores en orden de magnitud, porque su combinación exacta permite reidentificar una cuenta aunque se oculte el nombre.</p>
+
+  <p>Hay una tensión que no se resuelve y conviene nombrar: el valor archivístico del corpus viene de preservar material que ya no existe en la plataforma —cuentas borradas, suspendidas, arrepentidas— y esa misma propiedad es el problema de privacidad.</p>
+
+  <h2>El código</h2>
+  <p>Veinte scripts en R, de la lectura del archivo original a la construcción del paquete y a los datos que lee este sitio, en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+
+  <p>Las tablas y figuras están versionadas en el repositorio, de modo que <b>este sitio y el manuscrito se reconstruyen sin el corpus</b>.</p>
+
+  <h2>Limitaciones</h2>
+  <ol class="notas">
+    <li><b>Días truncados.</b> El 11 y el 29 de octubre están cortados por la ventana de recolección: 168 y 4.203 publicaciones.</li>
+    <li><b>Sesgo hacia la primera semana.</b> La lista de consultas se fijó temprano y el vocabulario de la protesta cambió; el 25 de octubre está subrepresentado.</li>
+    <li><b>Contaminación por consulta ambigua.</b> 15,4% del corpus entró por <code>#17oct</code>–<code>#22Oct</code>. Marcada y excluible.</li>
+    <li><b>La clase “medio” es heurística</b>, no un registro: se equivoca en ambas direcciones.</li>
+    <li><b>La clasificación de polos es léxica, no ideológica.</b></li>
+    <li><b>Cobertura del padrón incompleta</b>: 135 de 156 diputados, 6 de 16 ministros.</li>
+  </ol>
+
+  <h2>Cómo citar</h2>
+  <p>Mientras no haya DOI, citar el repositorio. El artículo de datos está en preparación.</p>
+</div>
+
+<hr>
+<footer class="col">
+  <p>Datos recolectados en octubre de 2019. Código y tablas en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+</footer>
+</article>
+</main>
+
+<script src="../sitio.js"></script>
+<script>
+(function () {
+  "use strict";
+  var U = window.U;
+  if (!U) return;
+  var A = [
+    ["tweet_ids.txt.gz", "los 6.119.933 identificadores", "6.119.933"],
+    ["subconjunto_limpio.csv.gz", "marca de pertenencia al subconjunto recomendado", "6.119.933"],
+    ["cuentas.csv", "cuentas seudonimizadas, con clase y antigüedad", "702.103"],
+    ["red_retweets_18oct.csv", "aristas ponderadas del 18 de octubre", "407.387"],
+    ["nodos_18oct.csv", "nodos con comunidad y coordenadas de layout", "56.724"],
+    ["cuentas_politicas.csv", "cargos en ejercicio, con fuente de identificación", "171"],
+    ["padron_diputados_2018_2022.csv", "personas que ejercieron en el período", "162"],
+    ["terminos_recoleccion.csv", "las consultas con su aporte propio", "40"],
+    ["serie_temporal.csv", "volumen por día, hora y tipo de publicación", "1.244"],
+    ["hashtags_corpus.csv", "frecuencia de los hashtags más usados", "300"],
+    ["18oct_contagio_comunidades.csv", "índice de contagio por comunidad", "8"]
+  ];
+  U.tabla("#tabla-archivos", [
+    ["Archivo", function (f) { return "<code>" + f[0] + "</code>"; }, "texto"],
+    ["Contenido", function (f) { return f[1]; }, "texto"],
+    ["Filas", function (f) { return f[2]; }]
+  ], A);
+})();
+</script>
+</body>
+</html>

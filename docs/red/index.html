@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La red del 18-O</title>
+<meta name="description" content="56.724 cuentas y ocho comunidades en un solo día, y un mapa interactivo de quién comparte público con quién.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="La red del 18-O">
+<meta property="og:description" content="56.724 cuentas y ocho comunidades en un solo día, y un mapa interactivo de quién comparte público con quién.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+
+<nav class="navegacion"><div class="ancho nav-caja">
+  <a class="nav-sitio" href="../">El estallido en Twitter</a>
+  <div class="nav-enlaces">
+    <a href="../">El corpus</a>
+    <a href="../metodo/">Recolección</a>
+    <a href="./" aria-current="page">La red del 18-O</a>
+    <a href="../contagio/">Contagio</a>
+    <a href="../polos/">Los polos</a>
+    <a href="../politicos/">La clase política</a>
+    <a href="../codigo/">Datos y código</a>
+  </div>
+</div></nav>
+
+<main>
+
+<header class="cabecera col">
+  <p class="antetitulo">Análisis de redes · 18 de octubre de 2019</p>
+  <h1>La red del 18-O</h1>
+  <p class="bajada">Un día concentra el 8,6% del corpus. Con sus retweets se arma una red de 110.736 cuentas en la que aparecen, separadas, dos conversaciones que no se parecen en nada.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 28 de octubre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <p>El 18 de octubre concentra <b>524.528 publicaciones</b>, el 8,6% del corpus en 1 de 19 días. Con los retweets de ese día se construye una red dirigida: quien retuitea apunta a quien es retuiteado.</p>
+</div>
+
+<div class="tarjetas ancho">
+  <div class="tarjeta"><div class="cifra">110.736</div><div class="cifra-pie">cuentas en la red completa</div></div>
+  <div class="tarjeta"><div class="cifra">407.387</div><div class="cifra-pie">aristas ponderadas</div></div>
+  <div class="tarjeta"><div class="cifra">0,505</div><div class="cifra-pie">modularidad (Leiden)</div></div>
+  <div class="tarjeta"><div class="cifra">78,6%</div><div class="cifra-pie">de los RT son intracomunidad</div></div>
+</div>
+
+<figure class="ancho">
+  <div class="grafico imagen"><img src="../figuras/18oct_red.png" alt="Red de retweets del 18 de octubre de 2019, 56.724 cuentas tras la poda por k-core, coloreadas por comunidad"></div>
+  <figcaption><b>Figura 1.</b> La red del día tras la poda por <i>k-core</i> ≥ 2: 56.724 cuentas del componente gigante, con las comunidades de Leiden en color y un layout de <i>sparse stress</i>.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Quiénes son</h2>
+  <p>Las dos mayores son el núcleo político-ciudadano chileno y, en segundo lugar, el <b>fandom K-pop</b>. No es un error de clasificación: los handles y las biografías no dejan duda, y sus tweets ese día son reporte de represión, no contenido de fandom.</p>
+
+  <blockquote>
+    <p>“tenían barricadas y los/as estudiantes la sacaron rápido para que la ambulancia pasara” — 3.003 retweets</p>
+    <p>“a este caballero se lo llevan por abrir las puertas de su casa para resguardar a transeúntes de las lacrimógenas” — 2.360 retweets</p>
+  </blockquote>
+
+  <p>Y amplifican rápido: <b>37 minutos</b> de mediana entre el tweet original y su retweet, contra 95 del núcleo político. Una infraestructura de coordinación ya montada, reconvertida en red de documentación.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-com"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 1.</b> Las ocho comunidades mayores del 18 de octubre. El porcentaje de Chile y de Venezuela se calcula sobre las cuentas que declaran ubicación.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Quién habla con quién</h2>
+  <p>Cada fila de la matriz suma 100%: a qué comunidades dirige sus retweets. Las chilenas conversan —la 11 manda 35% de sus RT a la 10, la 6 manda 26%, la 5 manda 22%— y la comunidad 10 es el sumidero común del día.</p>
+
+  <p>Tres comunidades, en cambio, están <b>cerradas sobre sí mismas</b>: 97%, 97% y 91% de sus retweets son internos. De eso trata <a href="../contagio/">la página siguiente</a>.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-dialogo"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 2.</b> Matriz de diálogo. Cada fila es la comunidad que retuitea y suma 100%; la intensidad del fondo es la proporción. La diagonal oscura es la cohesión interna.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Las cuentas más amplificadas</h2>
+  <p>Veinte cuentas concentran la atención del día. Solo una es de un cargo electo.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-autoridades" class="lienzo" role="img" aria-label="Las veinte cuentas más retuiteadas del 18 de octubre"></div></div>
+  <figcaption><b>Figura 2.</b> Retweets recibidos el 18 de octubre por las veinte cuentas más amplificadas, con el color de su comunidad.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Quién comparte público con quién</h2>
+  <p>La red de retweets es radial: miles de cuentas pequeñas apuntando a unas pocas grandes. Eso la hace difícil de leer, porque las cuentas grandes <b>casi no se retuitean entre sí</b>. De las 431 cuentas más amplificadas del 18 de octubre, solo 151 tenían algún retweet directo con otra del grupo.</p>
+
+  <p>Hay otra forma de mirarlo que sí muestra estructura: conectar dos cuentas cuando <b>las retuitea la misma gente</b>.</p>
+
+  <div class="recuadro">
+    <p><b>Cómo se construye.</b> Para cada par de cuentas se cuenta cuántas personas retuitearon a ambas. Dos cuentas quedan vinculadas si esa audiencia compartida alcanza al menos el 8% de la audiencia de la menor del par — un umbral relativo, porque uno absoluto premiaría a las cuentas grandes solo por su tamaño.</p>
+    <p>El resultado tenía 16.857 vínculos sobre 429 cuentas, grado medio 78: una mancha ilegible. Así que se conservan los <b>seis vínculos más fuertes de cada cuenta</b>, medidos por Jaccard, y se toma la unión. Quedan 2.169.</p>
+    <p>La red está además limpia: fuera las comunidades que <a href="../contagio/">entraron por hashtag de fecha</a> y no hablan del estallido.</p>
+  </div>
+
+  <h2>El mapa</h2>
+  <p>Haz clic en una cuenta para aislar su vecindario, o búscala por nombre. Los puntos grandes son las más retuiteadas; el borde oscuro marca a los cargos públicos.</p>
+</div>
+
+<figure class="ancho">
+  <div class="controles">
+    <input type="search" id="buscar" list="cuentas" placeholder="Buscar una cuenta…" aria-label="Buscar una cuenta en el mapa">
+    <datalist id="cuentas"></datalist>
+    <button type="button" id="limpiar">Ver todo</button>
+    <button type="button" id="cargos" aria-pressed="false">Solo cargos públicos</button>
+    <span id="estado"></span>
+  </div>
+  <div class="grafico"><div id="fig-red" class="lienzo" role="img" aria-label="Mapa de las 429 cuentas más amplificadas conectadas por su audiencia compartida"></div></div>
+  <div class="leyenda" id="leyenda"></div>
+  <figcaption><b>Figura 3.</b> Las 429 cuentas más amplificadas del 18 de octubre, unidas cuando comparten audiencia. Posición por <i>stress majorization</i> sobre las distancias del grafo; tamaño por retweets recibidos.</figcaption>
+</figure>
+
+<div class="col">
+  <p><b>Los cargos públicos están juntos y son pocos.</b> Catorce de 429, y todos en la misma comunidad. La conversación del 18-O no se organizó alrededor de ellos.</p>
+
+  <p><b>Los medios tampoco dominan.</b> Son 37 de 429. El grueso del núcleo —378 cuentas— son cuentas ciudadanas sin cargo ni medio detrás.</p>
+
+  <p><b>Y hay dos públicos, no uno.</b> Las dos comunidades grandes comparten poca audiencia entre sí pese a estar las dos dentro de la conversación chilena. Una es el núcleo político-ciudadano; la otra, el fandom que reconvirtió su infraestructura en red de documentación.</p>
+</div>
+
+<figure class="ancho">
+  <div class="controles">
+    <input type="search" id="buscar-tabla" placeholder="Filtrar la tabla…" aria-label="Filtrar las cuentas del núcleo">
+    <span id="estado-tabla"></span>
+  </div>
+  <div class="tabla-envoltura alta"><table id="tabla-nucleo"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 3.</b> Las 429 cuentas del núcleo, ordenadas por retweets recibidos ese día.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Vocabulario propio de cada comunidad</h2>
+  <p>Medido por sobrerrepresentación frente al resto del día, no por frecuencia bruta: las palabras más frecuentes serían las mismas en todas las comunidades.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico imagen"><img src="../figuras/18oct_palabras_caracteristicas.png" alt="Palabras características de cada comunidad del 18 de octubre, por sobrerrepresentación"></div>
+  <figcaption><b>Figura 4.</b> Palabras características de cada comunidad, por especificidad léxica con suavizado de Laplace.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Sobre nombrar cuentas</h2>
+  <p>El umbral de entrada al núcleo son 100 retweets recibidos ese día. Las cuentas que lo superan son actores públicos de esa conversación, y se las nombra igual que en el resto del sitio. Las que están por debajo no aparecen acá, y en el <a href="../codigo/">paquete de datos</a> van seudonimizadas.</p>
+</div>
+
+<hr>
+<footer class="col">
+  <p>Datos recolectados en octubre de 2019. Código y tablas en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+</footer>
+</article>
+</main>
+
+<script src="../datos/datos.js"></script>
+<script src="../datos/red.js"></script>
+<script src="../sitio.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ES, R = window.ESRED, U = window.U;
+  if (!D || !R || !U) return;
+
+  /* --- Tabla de comunidades ------------------------------------------- */
+  U.tabla("#tabla-com", [
+    ["Com.", function (f) { return f.com; }],
+    ["Cuentas", function (f) { return U.num(f.cuentas); }],
+    ["% Chile", function (f) { return U.pct(f.chile); }],
+    ["% Venezuela", function (f) { return U.pct(f.vzla); }],
+    ["RT recibidos", function (f) { return U.num(f.rt); }],
+    ["Latencia mediana", function (f) { return U.num(f.lat) + " min"; }],
+    ["Cuentas principales", function (f) { return f.top; }, "texto"]
+  ], D.comunidades);
+
+  /* --- Matriz de diálogo, sombreada por intensidad --------------------- */
+  (function () {
+    var G = D.dialogo;
+    var th = "<tr><th>Retuitea ↓ · a →</th>" + G.coms.map(function (c) {
+      return "<th>" + c + "</th>";
+    }).join("") + "</tr>";
+    var tb = G.hubs.map(function (h, i) {
+      return "<tr><td>" + h + "</td>" + G.m[i].map(function (v) {
+        var a = Math.min(100, Math.round(Math.pow(v / 100, 0.6) * 100));
+        var st = "background: color-mix(in srgb, var(--ink) " + a + "%, transparent);";
+        if (a > 52) st += " color: var(--surface);";
+        return '<td class="celda" style="' + st + '">' + (v >= 0.5 ? U.num(v) : "·") + "</td>";
+      }).join("") + "</tr>";
+    }).join("");
+    document.querySelector("#tabla-dialogo thead").innerHTML = th;
+    document.querySelector("#tabla-dialogo tbody").innerHTML = tb;
+  })();
+
+  /* --- Tabla del núcleo, filtrable ------------------------------------- */
+  var NOMBRE = { c: "Ciudadana", m: "Medio", p: "Cargo público" };
+  var nodos = R.nodos.slice().sort(function (a, b) { return b.rt - a.rt; });
+  var COLS = [
+    ["Cuenta", function (f) {
+      return '<a href="https://x.com/' + f.c + '" target="_blank" rel="noopener">@' + f.c + "</a>";
+    }],
+    ["Com.", function (f) { return f.com; }],
+    ["Clase", function (f) { return NOMBRE[f.cl]; }, "texto"],
+    ["Cargo", function (f) { return f.cargo; }, "texto"],
+    ["Partido", function (f) { return f.pa; }, "texto"],
+    ["RT recibidos", function (f) { return U.num(f.rt); }],
+    ["Audiencia", function (f) { return U.num(f.aud); }]
+  ];
+  var cajaTabla = document.getElementById("buscar-tabla");
+  var estadoTabla = document.getElementById("estado-tabla");
+  function pintarTabla(q) {
+    q = (q || "").trim().toLowerCase();
+    var f = q ? nodos.filter(function (n) {
+      return n.c.toLowerCase().indexOf(q) >= 0 ||
+             (n.cargo || "").toLowerCase().indexOf(q) >= 0 ||
+             (n.pa || "").toLowerCase().indexOf(q) >= 0;
+    }) : nodos;
+    U.tabla("#tabla-nucleo", COLS, f);
+    estadoTabla.textContent = f.length === nodos.length
+      ? U.num(nodos.length) + " cuentas"
+      : U.num(f.length) + " de " + U.num(nodos.length);
+  }
+  cajaTabla.addEventListener("input", function () { pintarTabla(cajaTabla.value); });
+  pintarTabla("");
+
+  if (!window.Plotly) return;
+
+  /* --- Figura 2: autoridades ------------------------------------------- */
+  function figAut(T) {
+    var P = U.paleta(T);
+    var coms = Array.from(new Set(D.autoridades.map(function (a) { return a.com; }))).sort();
+    var A = D.autoridades.slice().sort(function (a, b) { return a.rt - b.rt; });
+    var data = [{
+      type: "bar", orientation: "h",
+      y: A.map(function (a) { return "@" + a.cuenta; }),
+      x: A.map(function (a) { return a.rt; }),
+      marker: { color: A.map(function (a) { return P[coms.indexOf(a.com) % P.length]; }) },
+      customdata: A.map(function (a) { return [a.com, U.num(a.hubs)]; }),
+      hovertemplate: "<b>%{y}</b> · comunidad %{customdata[0]}<br>%{x:,} retweets de %{customdata[1]} cuentas distintas<extra></extra>"
+    }];
+    var corto = U.angosto("fig-autoridades");
+    var layout = U.base(T, {
+      height: 560, bargap: 0.32, showlegend: false,
+      margin: { l: corto ? 110 : 140, r: 16, t: 24, b: 48 },
+      xaxis: U.eje(T, { rangemode: "tozero", title: "Retweets recibidos el 18 de octubre" }),
+      yaxis: U.eje(T, { showgrid: false, tickfont: { color: T.ink2, size: corto ? 10.5 : 12 } })
+    });
+    Plotly.react("fig-autoridades", data, layout, U.CONFIG);
+  }
+
+  /* --- Figura 3: el mapa de audiencia compartida ----------------------- */
+  var ETIQ = {
+    1: "Fandom K-pop", 2: "Núcleo político-ciudadano",
+    3: "Medios y comentaristas", 4: "Satélite 4", 5: "Satélite 5"
+  };
+  var coms = Array.from(new Set(R.nodos.map(function (n) { return n.com; }))).sort(function (a, b) { return a - b; });
+  var vecinos = {}, incidentes = {};
+  R.nodos.forEach(function (n, i) { vecinos[i] = {}; incidentes[i] = []; });
+  R.aristas.forEach(function (e, k) {
+    vecinos[e[0]][e[1]] = 1; vecinos[e[1]][e[0]] = 1;
+    incidentes[e[0]].push(k); incidentes[e[1]].push(k);
+  });
+  var maxRT = Math.max.apply(null, R.nodos.map(function (n) { return n.rt; }));
+  var tam = R.nodos.map(function (n) { return 6 + 30 * Math.sqrt(n.rt / maxRT); });
+  var top = R.nodos.map(function (n) { return n.rt; }).slice().sort(function (a, b) { return b - a; })[11];
+  var sel = null, soloCargos = false;
+
+  function colores(T) {
+    var P = [T.der, T.izq, T.sen, T.neutro, T.ink2];
+    var m = {};
+    coms.forEach(function (c, i) { m[c] = P[i % P.length]; });
+    return m;
+  }
+
+  function aristasXY(lista) {
+    var x = [], y = [];
+    lista.forEach(function (k) {
+      var e = R.aristas[k];
+      x.push(R.nodos[e[0]].x, R.nodos[e[1]].x, null);
+      y.push(R.nodos[e[0]].y, R.nodos[e[1]].y, null);
+    });
+    return { x: x, y: y };
+  }
+
+  function opacidades() {
+    return R.nodos.map(function (n, i) {
+      if (soloCargos) return n.cargo ? 1 : 0.12;
+      if (sel === null) return 0.92;
+      return (i === sel || vecinos[sel][i]) ? 1 : 0.1;
+    });
+  }
+
+  function figRed(T) {
+    var col = colores(T);
+    var todas = aristasXY(R.aristas.map(function (_, k) { return k; }));
+    var dest = aristasXY(sel === null ? [] : incidentes[sel]);
+    var data = [
+      {
+        type: "scatter", mode: "lines", x: todas.x, y: todas.y, hoverinfo: "skip",
+        line: { color: T.grid, width: 0.6 }, showlegend: false,
+        opacity: sel === null && !soloCargos ? 1 : 0.35
+      },
+      {
+        type: "scatter", mode: "lines", x: dest.x, y: dest.y, hoverinfo: "skip",
+        line: { color: T.ink2, width: 1.1 }, showlegend: false
+      },
+      {
+        type: "scatter", mode: "markers+text", showlegend: false,
+        x: R.nodos.map(function (n) { return n.x; }),
+        y: R.nodos.map(function (n) { return n.y; }),
+        text: R.nodos.map(function (n) { return n.rt >= top ? "@" + n.c : ""; }),
+        textposition: "top center",
+        textfont: { color: T.ink2, size: 10 },
+        marker: {
+          size: tam, sizemode: "diameter",
+          color: R.nodos.map(function (n) { return col[n.com]; }),
+          opacity: opacidades(),
+          line: {
+            color: R.nodos.map(function (n) { return n.cargo ? T.ink : T.surface; }),
+            width: R.nodos.map(function (n) { return n.cargo ? 2 : 0.8; })
+          }
+        },
+        customdata: R.nodos.map(function (n, i) {
+          return [n.c, NOMBRE[n.cl] + (n.cargo ? " · " + n.cargo : "") + (n.pa ? " · " + n.pa : ""),
+                  U.num(n.rt), U.num(n.aud), ETIQ[n.com] || ("Comunidad " + n.com),
+                  Object.keys(vecinos[i]).length];
+        }),
+        hovertemplate: "<b>@%{customdata[0]}</b><br>%{customdata[1]}<br>" +
+          "Retweets recibidos: %{customdata[2]}<br>Audiencia: %{customdata[3]} cuentas<br>" +
+          "%{customdata[4]} · %{customdata[5]} vínculos<extra></extra>"
+      }
+    ];
+    var alto = U.ancho("fig-red");
+    var layout = U.base(T, {
+      height: Math.max(420, Math.min(660, Math.round(alto * 0.72))),
+      margin: { l: 8, r: 8, t: 8, b: 8 }, hovermode: "closest",
+      xaxis: U.eje(T, { visible: false, showgrid: false }),
+      yaxis: U.eje(T, { visible: false, showgrid: false, scaleanchor: "x", scaleratio: 1 })
+    });
+    Plotly.react("fig-red", data, layout, U.CONFIG).then(function (gd) {
+      if (gd.__clic) return;
+      gd.__clic = true;
+      gd.on("plotly_click", function (ev) {
+        var p = ev.points && ev.points[0];
+        if (!p || p.curveNumber !== 2) return;
+        soloCargos = false;
+        document.getElementById("cargos").setAttribute("aria-pressed", "false");
+        sel = (sel === p.pointIndex) ? null : p.pointIndex;
+        estado();
+        figRed(U.tok());
+      });
+    });
+  }
+
+  /* --- Controles -------------------------------------------------------- */
+  var caja = document.getElementById("buscar");
+  var est = document.getElementById("estado");
+  document.getElementById("cuentas").innerHTML = nodos.map(function (n) {
+    return "<option value=\"" + n.c + "\">";
+  }).join("");
+
+  function estado() {
+    if (soloCargos) {
+      est.textContent = "14 cargos públicos resaltados";
+    } else if (sel === null) {
+      est.textContent = "429 cuentas, 2.169 vínculos";
+    } else {
+      var n = R.nodos[sel];
+      est.textContent = "@" + n.c + " y sus " + Object.keys(vecinos[sel]).length + " vecinos";
+    }
+  }
+
+  caja.addEventListener("change", function () {
+    var q = caja.value.trim().toLowerCase();
+    var i = -1;
+    R.nodos.forEach(function (n, k) { if (n.c.toLowerCase() === q) i = k; });
+    if (i < 0) R.nodos.forEach(function (n, k) {
+      if (i < 0 && q && n.c.toLowerCase().indexOf(q) === 0) i = k;
+    });
+    if (i < 0) { est.textContent = q ? "sin coincidencias" : ""; return; }
+    soloCargos = false;
+    document.getElementById("cargos").setAttribute("aria-pressed", "false");
+    sel = i; estado(); figRed(U.tok());
+  });
+
+  document.getElementById("limpiar").addEventListener("click", function () {
+    sel = null; soloCargos = false; caja.value = "";
+    document.getElementById("cargos").setAttribute("aria-pressed", "false");
+    estado(); figRed(U.tok());
+  });
+
+  document.getElementById("cargos").addEventListener("click", function () {
+    soloCargos = !soloCargos; sel = null; caja.value = "";
+    this.setAttribute("aria-pressed", String(soloCargos));
+    estado(); figRed(U.tok());
+  });
+
+  function leyenda(T) {
+    var col = colores(T);
+    var cuenta = {};
+    R.nodos.forEach(function (n) { cuenta[n.com] = (cuenta[n.com] || 0) + 1; });
+    document.getElementById("leyenda").innerHTML = coms.map(function (c) {
+      return '<span><i class="punto" style="background:' + col[c] + '"></i>' +
+             (ETIQ[c] || ("Comunidad " + c)) + " · " + cuenta[c] + "</span>";
+    }).join("") +
+    '<span><i class="punto" style="background:transparent;border:2px solid ' + T.ink + '"></i>cargo público · 14</span>';
+  }
+
+  estado();
+  U.alRedibujar(function () { var T = U.tok(); figAut(T); figRed(T); leyenda(T); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El polo que desapareció</title>
+<meta name="description" content="Cuándo dejó de existir la contraparte progobierno en el estallido chileno, medido día a día y en la estructura de la red de retweets.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="El polo que desapareció">
+<meta property="og:description" content="Cuándo dejó de existir la contraparte progobierno, día a día y en la red de retweets.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+
+<nav class="navegacion"><div class="ancho nav-caja">
+  <a class="nav-sitio" href="../">El estallido en Twitter</a>
+  <div class="nav-enlaces">
+    <a href="../">El corpus</a>
+    <a href="../metodo/">Recolección</a>
+    <a href="../red/">La red del 18-O</a>
+    <a href="../contagio/">Contagio</a>
+    <a href="./" aria-current="page">Los polos</a>
+    <a href="../politicos/">La clase política</a>
+    <a href="../codigo/">Datos y código</a>
+  </div>
+</div></nav>
+
+<main>
+
+<header class="cabecera col">
+  <p class="antetitulo">Estructura de la conversación</p>
+  <h1>El polo que desapareció</h1>
+  <p class="bajada">Una conversación política tiene normalmente dos polos que se ignoran mutuamente. En este corpus eso ocurre solo en algunos días, y se puede fechar con precisión cuándo deja de ocurrir.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 28 de octubre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <div class="recuadro">
+    <p><b>Cómo se mide.</b> Dos repertorios de consigna verificados en el corpus. Progobierno: <code>#YoApoyoAlPresidente</code>, <code>#CondenamosLaDelincuencia</code>, <code>#PazParaChile</code>. Antigobierno: <code>#RenunciaPiñera</code>, <code>#PiñeraDictador</code>, <code>#QueSeVayanLosMilicos</code>, <code>#ChileViolatesHumanRights</code>. Se expresan como tasa por cada 10.000 publicaciones, para neutralizar la enorme variación de volumen entre días.</p>
+  </div>
+
+  <h2>En las consignas</h2>
+  <p>El 12 de octubre, antes del estallido, <b>las consignas progobierno superaban a las opositoras</b>. El 17 y el 18 desaparecen, con razones de 143 a 1 y 805 a 1. Reaparecen el 19 al 21 —la contramovilización tras los saqueos y el estado de emergencia— y el 21 alcanzan su máximo absoluto, 201,8 por diez mil. Desde el 22 se derrumban: 431 a 1 el día 23, 508 a 1 el día 26.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-polos" class="lienzo" role="img" aria-label="Consignas progobierno y antigobierno por cada 10.000 publicaciones, por día"></div></div>
+  <figcaption><b>Figura 1.</b> Consignas de cada polo por cada 10.000 publicaciones, en escala logarítmica. Los días sin ninguna consigna progobierno quedan como vacío en la serie. La banda gris marca los tres días en que el polo progobierno todavía existe como comunidad en la red.</figcaption>
+</figure>
+
+<div class="col">
+  <p>En el conjunto del corpus son 31.431 publicaciones progobierno (0,51%) frente a 1.405.307 antigobierno (22,96%).</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-polos"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 1.</b> Consignas de cada polo por cada 10.000 publicaciones y razón entre ambas.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>En la estructura de la red</h2>
+  <p>Más decisivo que el conteo es si el polo existe como <b>comunidad</b>. Se reconstruyó la red de retweets de cada uno de los 16 días con volumen suficiente y se clasificó cada comunidad por la composición de polo del contenido que escriben sus miembros.</p>
+
+  <p>Una comunidad progobierno aparece en <b>exactamente tres días</b>: el 12 de octubre (20,7% de la red), el 20 (18,6%) y el 21 (6,1%). Cero en los otros trece.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-red" class="lienzo" role="img" aria-label="Porcentaje de la red diaria en comunidades progobierno y modularidad de la red, por día"></div></div>
+  <figcaption><b>Figura 2.</b> Proporción de la red de cada día que pertenece a una comunidad progobierno, y modularidad de esa red sobre el eje derecho. Las barras aparecen tres veces en dieciséis días.</figcaption>
+</figure>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-red"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 2.</b> Presencia estructural del polo progobierno, por día.</figcaption>
+</figure>
+
+<figure class="ancho">
+  <div class="grafico imagen"><img src="../figuras/red_por_dia.png" alt="Las dieciséis redes diarias de retweets, con las cuentas progobierno marcadas en negro"></div>
+  <figcaption><b>Figura 3.</b> Las dieciséis redes diarias. En las láminas se ve directo: el 17 y el 19 no hay un solo punto oscuro con estructura; el 21 hay un cúmulo denso abajo a la derecha, una comunidad reconocible; del 23 en adelante quedan puntos sueltos, dispersos, sin agruparse en ninguna parte.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Desapareció dos veces</h2>
+  <p>Esa es la forma del fenómeno, y es más interesante que una sola fecha. El polo se evapora cuando estalla la crisis (13 al 19 de octubre), <b>vuelve</b> durante el estado de emergencia, y se extingue definitivamente desde el 22.</p>
+
+  <h2>Un hallazgo que no buscábamos</h2>
+  <p>La <b>modularidad cae sostenidamente</b>: 0,706 el 17 de octubre, 0,504 el 18, y entre 0,356 y 0,383 los últimos días. La red se vuelve <i>menos</i> dividida a medida que avanza el estallido.</p>
+
+  <p>Es lo contrario de lo que uno esperaría de una crisis política, y sugiere que el episodio funcionó como evento unificador y no polarizante — al menos dentro de lo que este corpus captura.</p>
+
+  <h2>Una advertencia</h2>
+  <p>El indicador es <b>léxico, no ideológico</b>. Clasifica cuentas por las consignas que usan, no por su posición: alguien que cite <code>#YoApoyoAlPresidente</code> para burlarse queda contado en ese polo. Con 31.431 publicaciones en total, un sesgo así no es despreciable.</p>
+</div>
+
+<hr>
+<footer class="col">
+  <p>Datos recolectados en octubre de 2019. Código y tablas en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+</footer>
+</article>
+</main>
+
+<script src="../datos/datos.js"></script>
+<script src="../sitio.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ES, U = window.U;
+  if (!D || !U) return;
+
+  U.tabla("#tabla-polos", [
+    ["Día", function (f) { return U.fecha(f.d, true); }],
+    ["Publicaciones", function (f) { return U.num(f.t); }],
+    ["Progob. ×10.000", function (f) { return U.num(f.pro10k); }],
+    ["Antigob. ×10.000", function (f) { return U.num(f.anti10k); }],
+    ["Razón anti/pro", function (f) { return U.num(f.razon) + " a 1"; }]
+  ], D.polo, function (f) { return f.d === "2019-10-21"; });
+
+  U.tabla("#tabla-red", [
+    ["Día", function (f) { return U.fecha(f.d, true); }],
+    ["Nodos", function (f) { return U.num(f.nodos); }],
+    ["Comunidades", function (f) { return U.num(f.coms); }],
+    ["Comun. progob.", function (f) { return f.compro || '<span class="vacio">0</span>'; }],
+    ["% de la red", function (f) { return f.pctpro ? U.pct(f.pctpro) : null; }],
+    ["Modularidad", function (f) { return U.num(f.mod, 3); }]
+  ], D.redDia, function (f) { return f.compro > 0; });
+
+  if (!window.Plotly) return;
+  var PRO = ["2019-10-12", "2019-10-20", "2019-10-21"];
+
+  function bandas(T) {
+    return PRO.map(function (d) {
+      var t = new Date(d + "T00:00:00").getTime();
+      return {
+        type: "rect", xref: "x", yref: "paper",
+        x0: t - 43200000, x1: t + 43200000, y0: 0, y1: 1,
+        fillcolor: T.grid, opacity: 0.55, line: { width: 0 }, layer: "below"
+      };
+    });
+  }
+
+  function figPolos(T) {
+    var x = D.polo.map(function (f) { return f.d; });
+    var data = [
+      {
+        type: "scatter", mode: "lines+markers", name: "Antigobierno", x: x,
+        y: D.polo.map(function (f) { return f.anti10k || null; }),
+        line: { color: T.izq, width: 2 },
+        marker: { size: 7, color: T.izq, line: { color: T.surface, width: 1.5 } },
+        customdata: D.polo.map(function (f) { return [U.num(f.anti), U.num(f.t)]; }),
+        hovertemplate: "<b>%{x|%d-%b}</b> · antigobierno<br>%{y:.1f} por diez mil<br>%{customdata[0]} de %{customdata[1]} publicaciones<extra></extra>"
+      },
+      {
+        type: "scatter", mode: "lines+markers", name: "Progobierno", x: x,
+        y: D.polo.map(function (f) { return f.pro10k || null; }),
+        line: { color: T.der, width: 2 }, connectgaps: false,
+        marker: { size: 7, color: T.der, line: { color: T.surface, width: 1.5 } },
+        customdata: D.polo.map(function (f) { return [U.num(f.pro), U.num(f.t)]; }),
+        hovertemplate: "<b>%{x|%d-%b}</b> · progobierno<br>%{y:.1f} por diez mil<br>%{customdata[0]} de %{customdata[1]} publicaciones<extra></extra>"
+      }
+    ];
+    var layout = U.base(T, {
+      height: U.angosto("fig-polos") ? 360 : 420, shapes: bandas(T),
+      margin: { l: 58, r: 16, t: 44, b: 52 },
+      xaxis: U.eje(T, { type: "date", tickformat: "%d-%b", dtick: 86400000 * 2, tickangle: 0, showgrid: false, showline: true }),
+      yaxis: U.eje(T, { type: "log", title: "Consignas por cada 10.000 publicaciones" }),
+      annotations: [{
+        text: "el polo existe<br>como comunidad", xref: "x", yref: "paper",
+        x: "2019-10-20T12:00:00", y: 1, yanchor: "bottom", yshift: 4,
+        showarrow: false, font: { color: T.muted, size: 11 }
+      }]
+    });
+    Plotly.react("fig-polos", data, layout, U.CONFIG);
+  }
+
+  function figRed(T) {
+    var x = D.redDia.map(function (f) { return f.d; });
+    var data = [
+      {
+        type: "bar", name: "% de la red en comunidad progobierno", x: x,
+        y: D.redDia.map(function (f) { return f.pctpro; }),
+        marker: { color: T.der },
+        customdata: D.redDia.map(function (f) { return [U.num(f.nodos), f.compro, U.num(f.nodospro)]; }),
+        hovertemplate: "<b>%{x|%d-%b}</b><br>%{customdata[1]} comunidad(es) progobierno<br>%{customdata[2]} de %{customdata[0]} nodos · %{y:.1f}%<extra></extra>"
+      },
+      {
+        type: "scatter", mode: "lines+markers", name: "Modularidad", yaxis: "y2", x: x,
+        y: D.redDia.map(function (f) { return f.mod; }),
+        line: { color: T.ink, width: 1.8 },
+        marker: { size: 6, color: T.ink, line: { color: T.surface, width: 1.5 } },
+        customdata: D.redDia.map(function (f) { return U.num(f.coms); }),
+        hovertemplate: "Modularidad %{y:.3f} · %{customdata} comunidades<extra></extra>"
+      }
+    ];
+    var layout = U.base(T, {
+      height: U.angosto("fig-red") ? 360 : 400, bargap: 0.4,
+      margin: { l: 56, r: 52, t: 44, b: 52 },
+      xaxis: U.eje(T, { type: "date", tickformat: "%d-%b", dtick: 86400000 * 2, tickangle: 0, showgrid: false, showline: true }),
+      yaxis: U.eje(T, { range: [0, 25], ticksuffix: "%", dtick: 5 }),
+      yaxis2: U.eje(T, { overlaying: "y", side: "right", range: [0, 0.8], dtick: 0.2, showgrid: false })
+    });
+    Plotly.react("fig-red", data, layout, U.CONFIG);
+  }
+
+  U.alRedibujar(function () { var T = U.tok(); figPolos(T); figRed(T); });
+})();
+</script>
+</body>
+</html>

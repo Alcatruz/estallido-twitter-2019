@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El estallido en Twitter</title>
+<meta name="description" content="Un corpus de 6.119.933 publicaciones recolectadas día a día durante el estallido social chileno de octubre de 2019.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="El estallido en Twitter">
+<meta property="og:description" content="Un corpus de 6.119.933 publicaciones recolectadas día a día durante el estallido social chileno de octubre de 2019.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+
+<nav class="navegacion"><div class="ancho nav-caja">
+  <a class="nav-sitio" href="./">El estallido en Twitter</a>
+  <div class="nav-enlaces">
+    <a href="./" aria-current="page">El corpus</a>
+    <a href="metodo/">Recolección</a>
+    <a href="red/">La red del 18-O</a>
+    <a href="contagio/">Contagio</a>
+    <a href="polos/">Los polos</a>
+    <a href="politicos/">La clase política</a>
+    <a href="codigo/">Datos y código</a>
+  </div>
+</div></nav>
+
+<main>
+
+<header class="cabecera col">
+  <p class="antetitulo">Un corpus de octubre de 2019 · Chile</p>
+  <h1>El estallido en Twitter</h1>
+  <p class="bajada">Seis millones de publicaciones recolectadas día a día mientras ocurría la mayor crisis social desde el retorno a la democracia, con las anotaciones necesarias para saber qué se puede y qué no se puede hacer con ellas.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 28 de octubre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <p>El 18 de octubre de 2019 Chile entró en la mayor crisis social desde el retorno a la democracia. Estos datos se recolectaron mientras ocurría, día a día, sin saber en qué iba a terminar. Hoy no se pueden volver a obtener: la API de X no permite ir hacia atrás a octubre de 2019, y ya no hay forma de reconstruir lo que se borró desde entonces.</p>
+</div>
+
+<div class="tarjetas ancho">
+  <div class="tarjeta"><div class="cifra">6.119.933</div><div class="cifra-pie">publicaciones</div></div>
+  <div class="tarjeta"><div class="cifra">701.325</div><div class="cifra-pie">cuentas</div></div>
+  <div class="tarjeta"><div class="cifra">87,5%</div><div class="cifra-pie">son retweets</div></div>
+  <div class="tarjeta"><div class="cifra">19</div><div class="cifra-pie">días, 11 al 29 de octubre</div></div>
+</div>
+
+<div class="col">
+  <h2>Seis millones de tweets, 755 mil textos</h2>
+  <p>La cifra grande engaña si se lee mal. De los 6.119.933 registros, solo <b>764.154 fueron compuestos por alguien</b>; el resto son retweets de esos mismos textos. Los textos distintos son 755.220.</p>
+
+  <p>De las 701.325 cuentas, apenas <b>178.474 escribieron algo propio</b>. Tres de cada cuatro aparecen únicamente amplificando o siendo amplificadas.</p>
+
+  <p>La distinción no es cosmética: define el denominador. Para estudiar difusión —quién amplifica a quién, a qué velocidad— cada retweet es un evento y el denominador son los 6,1 millones. Para estudiar discurso, el denominador son los 755.220 textos, o un tweet viral con 5.000 retweets pesaría 5.000 veces.</p>
+
+  <h2>Los 19 días</h2>
+  <p>El peak no es el 18 de octubre sino el <b>19</b>, con 1.096.576 publicaciones, el doble del 18. La explosión ocurre el viernes por la noche y se descarga el sábado.</p>
+</div>
+
+<figure class="ancho">
+  <div class="controles">
+    <span>Escala:</span>
+    <button type="button" id="b-lineal" aria-pressed="true">Lineal</button>
+    <button type="button" id="b-log" aria-pressed="false">Logarítmica</button>
+  </div>
+  <div class="grafico"><div id="fig-dias" class="lienzo" role="img" aria-label="Publicaciones por día y tipo, 11 al 29 de octubre de 2019"></div></div>
+  <figcaption><b>Figura 1.</b> Publicaciones por día, separadas en originales, citas y retweets. En escala logarítmica se ve que el volumen sube tres órdenes de magnitud entre el 14 y el 19 de octubre. Al pasar el cursor aparece el desglose del día.</figcaption>
+</figure>
+
+<div class="col">
+  <p>Lo estable es la mezcla: entre 84% y 90% de lo publicado son retweets todos los días. El volumen sube 300 veces entre el 14 y el 19 de octubre y la proporción apenas se mueve. La estructura de participación no cambia con la intensidad.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-dias"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 1.</b> Volumen diario por tipo de publicación, hora de Chile. Los días 11 y 29 están truncados por la ventana de recolección.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>El día chileno</h2>
+  <p>Agregando los 19 días por hora local aparece una curva de vigilia normal, con el mínimo a las 5 de la mañana y el máximo a las 20 horas. No hay rastro de actividad nocturna automatizada, que es lo primero que se mira cuando se sospecha de un corpus de protesta.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-horas" class="lienzo" role="img" aria-label="Publicaciones por hora local de Chile, agregando los 19 días"></div></div>
+  <figcaption><b>Figura 2.</b> Publicaciones por hora local de Chile, acumulando los 19 días. La línea es la proporción de retweets en cada hora, sobre el eje derecho: sube de madrugada, cuando casi nadie escribe y el poco tráfico es amplificación.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Dos bordes que no hay que leer como actividad</h2>
+  <p>El 11 y el 29 de octubre están <b>truncados</b> por la ventana de descarga: 168 y 4.203 publicaciones. No son días tranquilos, son días cortados.</p>
+
+  <p>Y el 25 de octubre, día de la marcha más grande de Chile, registra 112.812 publicaciones, menos que el día anterior. Eso no es plausible como actividad real. La explicación está en <a href="metodo/">cómo se recolectó</a>: la lista de términos se fijó en la primera semana y para el 25 el vocabulario ya había cambiado.</p>
+
+  <div class="recuadro">
+    <p><b>Qué se publica.</b> Los términos de servicio de X no permiten redistribuir el contenido de las publicaciones. Lo que se entrega son los identificadores más los derivados que no son contenido: series temporales, estructura de red, frecuencias léxicas, el registro de cargos públicos y las marcas de calidad construidas para este trabajo. El detalle está en <a href="codigo/">datos y código</a>.</p>
+  </div>
+
+  <h2>Qué hay en este sitio</h2>
+  <ul class="notas">
+    <li><a href="metodo/">Cómo se recolectó</a> — las 49 consultas, cuánto aporta cada una y la verificación de que la lista está completa.</li>
+    <li><a href="red/">La red del 18-O</a> — 56.724 cuentas, ocho comunidades grandes y un mapa interactivo de quién comparte público con quién.</li>
+    <li><a href="contagio/">Comunidades contagiadas</a> — quiénes entraron por la puerta equivocada, cómo medirlo y el subconjunto limpio validado.</li>
+    <li><a href="polos/">El polo que desapareció</a> — cuándo dejó de existir la contraparte progobierno, por día y en la estructura de la red.</li>
+    <li><a href="politicos/">La clase política</a> — 171 cargos identificados contra el padrón real, y su peso efectivo en la conversación.</li>
+    <li><a href="codigo/">Datos y código</a> — el paquete, las variables propias, la seudonimización y las limitaciones.</li>
+  </ul>
+</div>
+
+<hr>
+<footer class="col">
+  <p>Datos recolectados en octubre de 2019. Código y tablas en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+</footer>
+</article>
+</main>
+
+<script src="datos/datos.js"></script>
+<script src="sitio.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ES, U = window.U;
+  if (!D || !U) return;
+
+  U.tabla("#tabla-dias", [
+    ["Día", function (f) { return U.fecha(f.d, true); }],
+    ["Original", function (f) { return U.num(f.o); }],
+    ["Cita", function (f) { return U.num(f.c); }],
+    ["Retweet", function (f) { return U.num(f.r); }],
+    ["Total", function (f) { return U.num(f.t); }],
+    ["% RT", function (f) { return U.pct(f.pct); }]
+  ], D.dia, function (f) { return f.d === "2019-10-19"; });
+
+  if (!window.Plotly) return;
+  var log = false;
+
+  function figDias(T) {
+    var x = D.dia.map(function (f) { return f.d; });
+    var tipos = [["r", "Retweets", T.neutro], ["c", "Citas", T.sen], ["o", "Originales", T.izq]];
+    var data = tipos.map(function (t) {
+      return {
+        type: "bar", name: t[1], x: x,
+        y: D.dia.map(function (f) { return f[t[0]]; }),
+        marker: { color: t[2] },
+        customdata: D.dia.map(function (f) { return [U.num(f.t), U.pct(f.pct)]; }),
+        hovertemplate: "<b>%{x|%d-%b}</b> · " + t[1] + " %{y:,}<br>Total del día %{customdata[0]} · %{customdata[1]} retweets<extra></extra>"
+      };
+    });
+    var layout = U.base(T, {
+      height: U.angosto("fig-dias") ? 340 : 400, barmode: "stack", bargap: 0.25,
+      margin: { l: 58, r: 16, t: 40, b: 56 },
+      xaxis: U.eje(T, { type: "date", tickformat: "%d-%b", dtick: 86400000 * 2, tickangle: 0, showgrid: false, showline: true }),
+      yaxis: U.eje(T, log ? { type: "log", dtick: 1, title: "Publicaciones (escala log)" }
+                          : { rangemode: "tozero", title: "Publicaciones" })
+    });
+    Plotly.react("fig-dias", data, layout, U.CONFIG);
+  }
+
+  function figHoras(T) {
+    var x = D.hora.map(function (f) { return f.h; });
+    var data = [{
+      type: "bar", name: "Publicaciones", x: x,
+      y: D.hora.map(function (f) { return f.t; }),
+      marker: { color: T.neutro },
+      customdata: D.hora.map(function (f) { return [U.num(f.o), U.num(f.r)]; }),
+      hovertemplate: "<b>%{x}:00</b><br>Total %{y:,}<br>Originales %{customdata[0]} · retweets %{customdata[1]}<extra></extra>"
+    }, {
+      type: "scatter", mode: "lines", name: "% retweets", yaxis: "y2", x: x,
+      y: D.hora.map(function (f) { return f.pct; }),
+      line: { color: T.izq, width: 2 },
+      hovertemplate: "%{y:.1f}% retweets<extra></extra>"
+    }];
+    var layout = U.base(T, {
+      height: U.angosto("fig-horas") ? 320 : 360,
+      margin: { l: 58, r: 52, t: 40, b: 48 },
+      xaxis: U.eje(T, { dtick: 3, ticksuffix: "h", showgrid: false, showline: true, title: "Hora local de Chile" }),
+      yaxis: U.eje(T, { rangemode: "tozero", title: "Publicaciones" }),
+      yaxis2: U.eje(T, { overlaying: "y", side: "right", range: [80, 95], ticksuffix: "%", showgrid: false })
+    });
+    Plotly.react("fig-horas", data, layout, U.CONFIG);
+  }
+
+  var bl = document.getElementById("b-lineal"), bg = document.getElementById("b-log");
+  function escala(v) {
+    log = v;
+    bl.setAttribute("aria-pressed", String(!v));
+    bg.setAttribute("aria-pressed", String(v));
+    figDias(U.tok());
+  }
+  bl.addEventListener("click", function () { escala(false); });
+  bg.addEventListener("click", function () { escala(true); });
+
+  U.alRedibujar(function () { var T = U.tok(); figDias(T); figHoras(T); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo se recolectó</title>
+<meta name="description" content="Las 49 consultas con que se armó el corpus del estallido, cuánto aporta cada una, y la verificación de que la documentación está completa.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="Cómo se recolectó">
+<meta property="og:description" content="Las 49 consultas con que se armó el corpus del estallido, y cuánto aporta cada una.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+
+<nav class="navegacion"><div class="ancho nav-caja">
+  <a class="nav-sitio" href="../">El estallido en Twitter</a>
+  <div class="nav-enlaces">
+    <a href="../">El corpus</a>
+    <a href="./" aria-current="page">Recolección</a>
+    <a href="../red/">La red del 18-O</a>
+    <a href="../contagio/">Contagio</a>
+    <a href="../polos/">Los polos</a>
+    <a href="../politicos/">La clase política</a>
+    <a href="../codigo/">Datos y código</a>
+  </div>
+</div></nav>
+
+<main>
+
+<header class="cabecera col">
+  <p class="antetitulo">Procedencia del corpus</p>
+  <h1>Cómo se recolectó</h1>
+  <p class="bajada">Cuarenta y nueve consultas, una por archivo, ejecutadas todos los días del episodio. Cuánto aporta cada una, y por qué el corpus subrepresenta la segunda semana.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 28 de octubre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <p>El corpus se recolectó con el paquete <code>rtweet</code> sobre la API de búsqueda de Twitter, con <b>una consulta por archivo y ejecución diaria</b> entre el 17 y el 29 de octubre de 2019. Cada archivo conserva en una columna la consulta que lo originó.</p>
+
+  <p>Se preservaron 53 archivos con 49 consultas distintas, que suman 15.185.311 filas. Una misma publicación aparece en varios archivos cuando satisface más de una consulta; al consolidar se deduplica por identificador, quedando 6.714.876 únicas, y un filtro temporal deja el conjunto final en 6.119.933.</p>
+
+  <h2>Cuánto aporta cada una</h2>
+  <p>No aportan en partes iguales. <code>#ChileDesperto</code> contribuye 658.153 publicaciones y <code>#HabraConsecuencias</code>, 61. Diez términos explican más de la mitad del corpus y la distribución decae de forma continua, sin un corte natural.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-cobertura" class="lienzo" role="img" aria-label="Aporte propio de cada término y cobertura acumulada del corpus"></div></div>
+  <figcaption><b>Figura 1.</b> Aporte propio de cada término —publicaciones que ese término cubre y que ninguno anterior cubría— y cobertura acumulada del corpus sobre el eje derecho. El color indica la familia del término.</figcaption>
+</figure>
+
+<div class="col">
+  <p>Esto importa para el uso: un análisis restringido a consignas cubre una porción distinta del corpus que uno que incluya los hashtags de fecha. Y esa diferencia no es solo de volumen, sino de contenido — es el tema de <a href="../contagio/">comunidades contagiadas</a>.</p>
+
+  <h2>Las 49 consultas</h2>
+  <p>Combinan hashtags de consigna (<code>#ChileDesperto</code>, <code>#EstoPasaEnChile</code>), de episodio (<code>#EvasionMasiva</code>, <code>#CambiodeGabinete</code>), de derechos humanos (<code>#ChileViolatesHumanRights</code>), de fecha (<code>#17oct</code> a <code>#22Oct</code>) y, en menor medida, palabras sueltas (<code>INDH</code>, <code>congreso</code>, <code>Saqueos</code>).</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura alta"><table id="tabla-consultas"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 1.</b> Lista completa de los términos con que se construyó el corpus. Cuarenta y tres vienen de la columna <code>consulta</code> que los archivos conservan; seis se recuperan del nombre del archivo, que en tres casos consolidó varias consultas.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Una nota sobre la lista</h2>
+  <p>La lista de términos <b>se fijó durante los primeros días</b> del episodio y no se actualizó. Eso tiene una consecuencia medible: el 25 de octubre, día de la marcha más grande de Chile, registra 112.812 publicaciones, menos que la víspera. La consulta <code>#MarchaDelMillon</code> aporta 48.558 frente a las 603.398 de <code>#ChileDesperto</code>.</p>
+
+  <p>El corpus subrepresenta sistemáticamente la segunda semana del ciclo. No es un defecto oculto: es una propiedad que cualquier reutilización debe declarar.</p>
+
+  <h2>Verificación</h2>
+  <p>Para comprobar que la documentación de consultas está completa se hizo un contraste independiente: extraer los hashtags de los 6,1 millones de textos y resolver una cobertura glotona —en cada paso, el hashtag presente en más publicaciones aún no cubiertas— <b>sin mirar la lista declarada</b>.</p>
+
+  <p>De los 40 términos así obtenidos, <b>37 corresponden a consultas efectivas</b> y explican el 87,9% del corpus. Los tres restantes son variantes que la gente usó realmente frente a la forma registrada: <code>#QueSeVayanLosMilicos</code> por <code>#VayanseMilicos</code>, <code>#ChadwickAsesino</code> por la palabra <code>chadwick</code>.</p>
+
+  <p>El contraste no recupera las consultas por palabra suelta, por estar restringido a hashtags. Confirma la documentación sin sustituirla.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura alta"><table id="tabla-terminos"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 2.</b> Secuencia de cobertura glotona. Las tres filas marcadas son los términos que la reconstrucción encontró y que no figuran como consulta: variantes de uso, no consultas olvidadas.</figcaption>
+</figure>
+
+<hr>
+<footer class="col">
+  <p>Datos recolectados en octubre de 2019. Código y tablas en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+</footer>
+</article>
+</main>
+
+<script src="../datos/datos.js"></script>
+<script src="../sitio.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ES, U = window.U;
+  if (!D || !U) return;
+
+  var FAM = {
+    consigna: "Consigna", fecha: "Fecha", evasion: "Evasión", ddhh: "DD.HH.",
+    gobierno: "Gobierno", movilizacion: "Movilización", ingles: "Inglés", otro: "Otros"
+  };
+  var ORDEN = ["consigna", "fecha", "gobierno", "movilizacion", "evasion", "ddhh", "ingles", "otro"];
+
+  U.tabla("#tabla-consultas", [
+    ["Consulta", function (f) { return "<code>" + f.q + "</code>"; }, "texto"],
+    ["Procedencia", function (f) { return f.src; }, "texto"]
+  ], D.consultas);
+
+  U.tabla("#tabla-terminos", [
+    ["#", function (f) { return f.paso; }],
+    ["Término", function (f) { return "<code>" + f.term + "</code>"; }, "texto"],
+    ["Familia", function (f) { return FAM[f.fam] || f.fam; }, "texto"],
+    ["Aporte propio", function (f) { return U.num(f.nuevos); }],
+    ["Cobertura acum.", function (f) { return U.pct(f.acum, 2); }],
+    ["¿Es consulta?", function (f) { return f.ok ? "sí" : "<b>variante</b>"; }]
+  ], D.terminos, function (f) { return !f.ok; });
+
+  if (!window.Plotly) return;
+
+  function fig(T) {
+    var P = U.paleta(T);
+    var col = {};
+    ORDEN.forEach(function (f, i) { col[f] = P[i % P.length]; });
+    var corto = U.angosto("fig-cobertura");
+    var data = ORDEN.filter(function (f) {
+      return D.terminos.some(function (t) { return t.fam === f; });
+    }).map(function (f) {
+      var s = D.terminos.filter(function (t) { return t.fam === f; });
+      return {
+        type: "bar", name: FAM[f], x: s.map(function (t) { return t.term; }),
+        y: s.map(function (t) { return t.nuevos; }), marker: { color: col[f] },
+        customdata: s.map(function (t) { return [U.pct(t.acum, 2), t.ok ? "consulta documentada" : "variante de uso"]; }),
+        hovertemplate: "<b>%{x}</b><br>Aporte propio %{y:,}<br>Cobertura acumulada %{customdata[0]}<br>%{customdata[1]}<extra></extra>"
+      };
+    });
+    data.push({
+      type: "scatter", mode: "lines", name: "Cobertura acumulada", yaxis: "y2",
+      x: D.terminos.map(function (t) { return t.term; }),
+      y: D.terminos.map(function (t) { return t.acum; }),
+      line: { color: T.ink, width: 1.8 },
+      hovertemplate: "Acumulado %{y:.2f}%<extra></extra>"
+    });
+    var layout = U.base(T, {
+      height: corto ? 520 : 470, barmode: "stack", bargap: 0.3,
+      margin: { l: 58, r: 50, t: 44, b: corto ? 110 : 118 },
+      xaxis: U.eje(T, {
+        categoryorder: "array",
+        categoryarray: D.terminos.map(function (t) { return t.term; }),
+        tickangle: -60, showgrid: false, showline: true,
+        tickfont: { color: T.muted, size: corto ? 8 : 9.5 }
+      }),
+      yaxis: U.eje(T, { rangemode: "tozero", title: "Publicaciones que solo ese término cubre" }),
+      yaxis2: U.eje(T, { overlaying: "y", side: "right", range: [0, 100], ticksuffix: "%", showgrid: false }),
+      legend: { orientation: "h", x: 1, xanchor: "right", y: 1.02, yanchor: "bottom", font: { color: T.ink2, size: 11.5 } }
+    });
+    Plotly.react("fig-cobertura", data, layout, U.CONFIG);
+  }
+
+  U.alRedibujar(function () { fig(U.tok()); });
+})();
+</script>
+</body>
+</html>

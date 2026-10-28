@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comunidades contagiadas</title>
+<meta name="description" content="Qué entró al corpus del estallido por la puerta equivocada, cómo medirlo, y el subconjunto limpio validado con indicadores externos.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="Comunidades contagiadas">
+<meta property="og:description" content="Qué entró al corpus del estallido por la puerta equivocada, y cómo medirlo.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+
+<nav class="navegacion"><div class="ancho nav-caja">
+  <a class="nav-sitio" href="../">El estallido en Twitter</a>
+  <div class="nav-enlaces">
+    <a href="../">El corpus</a>
+    <a href="../metodo/">Recolección</a>
+    <a href="../red/">La red del 18-O</a>
+    <a href="./" aria-current="page">Contagio</a>
+    <a href="../polos/">Los polos</a>
+    <a href="../politicos/">La clase política</a>
+    <a href="../codigo/">Datos y código</a>
+  </div>
+</div></nav>
+
+<main>
+
+<header class="cabecera col">
+  <p class="antetitulo">Calidad del corpus</p>
+  <h1>Comunidades contagiadas</h1>
+  <p class="bajada">Seis de las 49 consultas son hashtags de fecha, y los usa cualquiera en el mundo ese día. Medir cuánto de este corpus de protesta chilena no habla de protesta chilena resulta más fácil de lo esperado.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 28 de octubre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <p>Seis de las 49 consultas con que se armó el corpus son <b>hashtags de fecha</b>: <code>#17oct</code>, <code>#18Oct</code>, <code>#19Oct</code>, <code>#20Oct</code>, <code>#21Oct</code>, <code>#22Oct</code>. Explican 941.446 publicaciones, el 15,4% del total. Y son términos que cualquiera en el mundo usa ese día, hable de lo que hable.</p>
+
+  <h2>Un índice de contagio</h2>
+  <p>Para cada comunidad se mide qué fracción de sus tweets trae hashtag de fecha pero <b>ningún término chileno de la consulta</b>. Si una comunidad entró por el vocabulario del estallido, esa fracción es cercana a cero. Si entró por la puerta genérica, es cercana a uno.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-contagio" class="lienzo" role="img" aria-label="Índice de contagio por comunidad del 18 de octubre"></div></div>
+  <figcaption><b>Figura 1.</b> Para cada comunidad del 18 de octubre, qué proporción de sus publicaciones trae vocabulario chileno de la consulta y qué proporción entró <b>solo</b> por hashtag de fecha. No hay zona gris entre los dos grupos.</figcaption>
+</figure>
+
+<div class="col">
+  <p>La separación es total:</p>
+  <ul class="notas">
+    <li><b>Comunidad 8</b> — Guardia Nacional Bolivariana de Venezuela. <b>Cero</b> tweets con vocabulario chileno. El 100% entró por hashtag de fecha.</li>
+    <li><b>Comunidad 2</b> — medios venezolanos opositores. 98,7%.</li>
+    <li><b>Comunidad 1</b> — medios estatales chavistas, incluido teleSUR. 89,9%.</li>
+    <li><b>Comunidades chilenas</b> — entre 0,0% y 0,6%.</li>
+  </ul>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-contagio"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 1.</b> Índice de contagio por comunidad, 18 de octubre de 2019.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Lo que ya se veía en la red</h2>
+  <p>Esas tres comunidades eran justamente las que aparecían <b>aisladas</b> en la <a href="../red/">matriz de diálogo</a>: 97%, 97% y 91% de retweets internos. Lo que ahí se leía como aislamiento estructural, acá tiene una causa concreta: no estaban en la misma conversación porque nunca entraron a ella.</p>
+
+  <p>Sus hashtags lo confirman. La comunidad 1 empuja <code>#VenezuelaEsDDHH</code> con 24.047 menciones y tweets que dicen literalmente “¡LA ETIQUETA DEL DÍA!”. La comunidad 2 habla de presos políticos venezolanos y de lluvias en Caracas.</p>
+
+  <p>En total son <b>10.828 cuentas y 74.130 retweets</b> que conviene excluir antes de cualquier análisis sustantivo del estallido.</p>
+
+  <h2>Presencia no es influencia</h2>
+  <p>El bloque suma el 19,1% de los nodos de la red y el 18,9% del volumen de retweets. Pero su penetración en la conversación chilena es mínima: <b>1,99%</b> de los retweets del bloque llegan a cuentas chilenas, y solo el <b>0,42%</b> de los retweets chilenos amplifican a cuentas del bloque.</p>
+
+  <p>Presencia del 19%, influencia del 0,4%. Es un circuito paralelo que habla solo.</p>
+
+  <h2>El subconjunto limpio</h2>
+  <p>El corpus no se entrega solo con la advertencia: se entrega con el corte hecho y validado, para que quien investigue el estallido no tenga que decidir el criterio ni replicarlo.</p>
+
+  <p>La exclusión opera en dos reglas, guardadas por separado para poder aplicarse sueltas.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-reglas"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 2.</b> Las dos reglas de exclusión y su efecto. La fila destacada es el subconjunto recomendado.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>La validación</h2>
+  <p>El contraste usa <b>seis indicadores que no intervienen en la regla de exclusión</b>, para que no sea circular: geolocalización, ubicación declarada en el perfil, idioma y marcadores léxicos de cada país.</p>
+</div>
+
+<figure class="ancho">
+  <div class="controles">
+    <span>Ver:</span>
+    <button type="button" id="b-todo" aria-pressed="true">Los tres conjuntos</button>
+    <button type="button" id="b-par" aria-pressed="false">Limpio vs. excluido</button>
+  </div>
+  <div class="grafico"><div id="fig-validacion" class="lienzo" role="img" aria-label="Seis indicadores externos en el corpus completo, el subconjunto limpio y el material excluido"></div></div>
+  <figcaption><b>Figura 2.</b> Indicadores que no participan de la regla de exclusión, en el corpus completo, en el subconjunto recomendado y en el material retirado. El idioma español es el control: se mantiene alto en los tres, porque el material excluido es hispanohablante — simplemente no es chileno.</figcaption>
+</figure>
+
+<div class="col">
+  <p>El material excluido es <b>55,1% venezolano</b> por ubicación declarada y 38,6% por léxico, contra 1,2% y 0,9% en el subconjunto. La separación opera en los dos sentidos: lo retirado es mayoritariamente ajeno, y lo retenido es más chileno que el corpus de partida.</p>
+
+  <div class="recuadro">
+    <p><b>Una sobre-exclusión que hay que declarar.</b> La regla (b) retira <i>toda</i> la actividad de esas cuentas, incluida la que sí trata de Chile. Entre lo excluido quedan 66.680 usos de <code>#toquedequeda</code> y 50.569 de <code>#ChileDesperto</code>, casi todos de la comunidad 1 — medios estatales venezolanos que cubrieron el episodio, cuyo índice de contaminación es 89,9% y no 100%.</p>
+    <p>Tratar esa cobertura como ajena a la conversación chilena es una decisión interpretativa, no técnica. Quien sostenga que forma parte del fenómeno aplica únicamente la regla (a), y queda adentro.</p>
+  </div>
+
+  <h2>Por qué esto es generalizable</h2>
+  <p>El método no depende de este corpus. Cualquier conjunto de datos recolectado por hashtags —y los de protesta casi siempre incluyen hashtags de fecha— puede medir qué fracción de sus datos entró por términos ambiguos. Hasta donde sabemos, ningún corpus público de Twitter publica ese diagnóstico.</p>
+</div>
+
+<hr>
+<footer class="col">
+  <p>Datos recolectados en octubre de 2019. Código y tablas en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+</footer>
+</article>
+</main>
+
+<script src="../datos/datos.js"></script>
+<script src="../sitio.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ES, U = window.U;
+  if (!D || !U) return;
+
+  U.tabla("#tabla-contagio", [
+    ["Comunidad", function (f) { return f.com; }],
+    ["Tweets", function (f) { return U.num(f.tweets); }],
+    ["% con hashtag de fecha", function (f) { return U.pct(f.fecha); }],
+    ["% con término chileno", function (f) { return U.pct(f.chile); }],
+    ["% SOLO fecha", function (f) { return U.pct(f.solo); }]
+  ], D.contagio, function (f) { return f.solo > 50; });
+
+  var REGLAS = [
+    { r: "(a) hashtag de fecha y ningún término chileno", ex: 867656, q: 5252277, p: 85.8, rec: false },
+    { r: "(b) cuenta de las comunidades 1, 2 u 8", ex: 938325, q: 5181608, p: 84.7, rec: false },
+    { r: "Ambas (recomendado)", ex: 1124628, q: 4995305, p: 81.6, rec: true }
+  ];
+  U.tabla("#tabla-reglas", [
+    ["Regla", function (f) { return f.r; }, "texto"],
+    ["Excluye", function (f) { return U.num(f.ex); }],
+    ["Corpus restante", function (f) { return U.num(f.q); }],
+    ["% del corpus", function (f) { return U.pct(f.p); }]
+  ], REGLAS, function (f) { return f.rec; });
+
+  if (!window.Plotly) return;
+
+  function figContagio(T) {
+    var C = D.contagio.slice().reverse();
+    var y = C.map(function (f) { return "Com. " + f.com; });
+    var data = [
+      {
+        type: "bar", orientation: "h", name: "Con término chileno", y: y,
+        x: C.map(function (f) { return f.chile; }), marker: { color: T.der },
+        customdata: C.map(function (f) { return U.num(f.tweets); }),
+        hovertemplate: "<b>%{y}</b> · %{customdata} tweets<br>Con vocabulario chileno %{x:.1f}%<extra></extra>"
+      },
+      {
+        type: "bar", orientation: "h", name: "Solo hashtag de fecha", y: y,
+        x: C.map(function (f) { return f.solo; }), marker: { color: T.izq },
+        customdata: C.map(function (f) { return U.num(f.tweets); }),
+        hovertemplate: "<b>%{y}</b> · %{customdata} tweets<br>Solo hashtag de fecha %{x:.1f}%<extra></extra>"
+      }
+    ];
+    var layout = U.base(T, {
+      height: 420, barmode: "group", bargap: 0.28, bargroupgap: 0.1,
+      margin: { l: 76, r: 16, t: 44, b: 48 },
+      xaxis: U.eje(T, { range: [0, 103], ticksuffix: "%", dtick: 25, title: "Publicaciones de la comunidad" }),
+      yaxis: U.eje(T, { showgrid: false, tickfont: { color: T.ink2, size: 12.5 } })
+    });
+    Plotly.react("fig-contagio", data, layout, U.CONFIG);
+  }
+
+  var par = false;
+  function figValidacion(T) {
+    var IND = [
+      ["geo", "País = Chile (geolocalizadas)"],
+      ["ubcl", "Ubicación declara Chile"],
+      ["ubve", "Ubicación declara Venezuela"],
+      ["lexcl", "Marcador léxico chileno"],
+      ["lexve", "Marcador léxico venezolano"],
+      ["es", "Idioma español"]
+    ];
+    var COL = { "Corpus completo": T.neutro, "Subconjunto limpio": T.der, "Excluido": T.izq };
+    var sets = par
+      ? D.validacion.filter(function (v) { return v.conj !== "Corpus completo"; })
+      : D.validacion;
+    var y = IND.map(function (i) { return i[1]; });
+    var data = sets.map(function (v) {
+      return {
+        type: "bar", orientation: "h", name: v.conj, y: y,
+        x: IND.map(function (i) { return v[i[0]]; }),
+        marker: { color: COL[v.conj] },
+        customdata: IND.map(function () { return U.num(v.n); }),
+        hovertemplate: "<b>" + v.conj + "</b> · %{customdata} publicaciones<br>%{y}: %{x:.1f}%<extra></extra>"
+      };
+    });
+    var corto = U.angosto("fig-validacion");
+    var layout = U.base(T, {
+      height: corto ? 480 : 420, barmode: "group", bargap: 0.3, bargroupgap: 0.06,
+      margin: { l: corto ? 140 : 200, r: 16, t: 44, b: 48 },
+      xaxis: U.eje(T, { range: [0, 100], ticksuffix: "%", dtick: 25 }),
+      yaxis: U.eje(T, { autorange: "reversed", showgrid: false, tickfont: { color: T.ink2, size: corto ? 11 : 12.5 } })
+    });
+    Plotly.react("fig-validacion", data, layout, U.CONFIG);
+  }
+
+  var bt = document.getElementById("b-todo"), bp = document.getElementById("b-par");
+  function vista(v) {
+    par = v;
+    bt.setAttribute("aria-pressed", String(!v));
+    bp.setAttribute("aria-pressed", String(v));
+    figValidacion(U.tok());
+  }
+  bt.addEventListener("click", function () { vista(false); });
+  bp.addEventListener("click", function () { vista(true); });
+
+  U.alRedibujar(function () { var T = U.tok(); figContagio(T); figValidacion(T); });
+})();
+</script>
+</body>
+</html>

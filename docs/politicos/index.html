@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La clase política</title>
+<meta name="description" content="171 cuentas de cargos en ejercicio identificadas contra el padrón real, y su peso efectivo en la conversación del estallido.">
+<meta name="author" content="Daniel Alcatruz">
+<meta property="og:title" content="La clase política">
+<meta property="og:description" content="171 cargos identificados contra el padrón real, y su peso efectivo en la conversación del estallido.">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+
+<nav class="navegacion"><div class="ancho nav-caja">
+  <a class="nav-sitio" href="../">El estallido en Twitter</a>
+  <div class="nav-enlaces">
+    <a href="../">El corpus</a>
+    <a href="../metodo/">Recolección</a>
+    <a href="../red/">La red del 18-O</a>
+    <a href="../contagio/">Contagio</a>
+    <a href="../polos/">Los polos</a>
+    <a href="./" aria-current="page">La clase política</a>
+    <a href="../codigo/">Datos y código</a>
+  </div>
+</div></nav>
+
+<main>
+
+<header class="cabecera col">
+  <p class="antetitulo">Quién habla y a quién escuchan</p>
+  <h1>La clase política</h1>
+  <p class="bajada">Ciento setenta y un cargos en ejercicio, identificados contra el padrón real. Una cuenta política recibe 152 veces más retweets que una ciudadana, y aun así la clase entera concentra el 2,2% de la amplificación.</p>
+  <p class="firma"><a href="https://github.com/Alcatruz">Daniel Alcatruz</a> · 28 de octubre de 2026</p>
+</header>
+
+<article>
+<div class="col">
+  <p>Identificar a los políticos en un corpus de 702.103 cuentas no se hace adivinando handles. Se parte del padrón real —diputados, senadores, ministros, Presidente y presidentes de partido en ejercicio en octubre de 2019— y se cruza contra tres fuentes: las reseñas biográficas de la Biblioteca del Congreso Nacional, Wikidata, y búsqueda por nombre validada contra la biografía.</p>
+
+  <p>De los 156 diputados en ejercicio durante la ventana del corpus, <b>135 tienen cuenta identificada (87%)</b>, 65 confirmadas por dos fuentes independientes.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-cargos"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 1.</b> Cuentas identificadas por cargo en ejercicio en octubre de 2019.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>El peso real</h2>
+  <p>Dos lecturas que apuntan en direcciones opuestas, y las dos son ciertas.</p>
+
+  <p>Una cuenta política recibe <b>956 retweets</b>, una ciudadana <b>6</b>. Es una ventaja de 152 veces por cuenta.</p>
+
+  <p>Pero la clase política concentra apenas el <b>2,2% de la amplificación total</b>. De las 15 cuentas más retuiteadas del corpus completo, <b>una sola</b> es de un cargo electo. El estallido amplificó abrumadoramente a cuentas sin cargo.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-clases" class="lienzo" role="img" aria-label="Composición del corpus por clase de cuenta, en cuentas, publicaciones y retweets"></div></div>
+  <figcaption><b>Figura 1.</b> Cómo se reparten las tres clases de cuenta en tres denominadores distintos. La franja de los cargos públicos es visible solo en los retweets recibidos, y aun ahí es delgada.</figcaption>
+</figure>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-clases"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 2.</b> Las tres clases de cuenta y su participación. La clase <i>medio</i> es una heurística de vocabulario, no un registro: se equivoca en ambas direcciones.</figcaption>
+</figure>
+
+<div class="col">
+  <h2>Escriben poco y viaja lejos</h2>
+  <p>La clase política produce <b>451 textos únicos</b> en 19 días y obtiene 119.921 retweets. Un texto suyo circula 36 veces más que uno ciudadano. No amplifica por volumen sino por rendimiento.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-rendimiento" class="lienzo" role="img" aria-label="Circulación obtenida por cada texto único, según la clase de la cuenta"></div></div>
+  <figcaption><b>Figura 2.</b> Retweets obtenidos por cada texto propio. El denominador son los textos únicos, no las publicaciones: un tweet viral cuenta una vez.</figcaption>
+</figure>
+
+<div class="col">
+  <p>Eso tiene una consecuencia metodológica incómoda: con 451 textos <b>no se puede construir un perfil léxico</b>. La especificidad termina premiando rarezas de dos o tres tweets virales. Esa medición está calculada en el repositorio pero marcada como no interpretable.</p>
+
+  <h2>Dónde están en la red</h2>
+  <p>Las 125 cuentas políticas presentes el 18 de octubre están <b>todas dentro de una sola comunidad</b>, donde son el 8,8% de los tweets. Cero en las otras siete. En el <a href="../red/">mapa de audiencia compartida</a> se ve igual: los catorce cargos que entran al núcleo caen todos en el mismo bloque.</p>
+
+  <h2>Asimetría por partido</h2>
+  <p>La lectura fácil sería “la derecha no estaba”, pero no se sostiene: RN supera al PPD, la DC y el PS. Lo que muestran los datos es otra cosa — la conversación amplificó al PC y al Frente Amplio, y dejó afuera por igual al gobierno y a la ex-Concertación.</p>
+</div>
+
+<figure class="ancho">
+  <div class="grafico"><div id="fig-partidos" class="lienzo" role="img" aria-label="Presencia en el corpus y amplificación por partido"></div></div>
+  <figcaption><b>Figura 3.</b> Cada punto es un partido con cuatro diputados o más. En el eje horizontal, qué proporción de sus diputados aparece en el corpus; en el vertical, cuántos retweets recibe en promedio cada uno de sus diputados, en escala logarítmica. El tamaño es el número de diputados.</figcaption>
+</figure>
+
+<div class="col">
+  <p>Y hay dos formas distintas de quedar fuera. El PS tiene al 94% de sus diputados presentes en el corpus pero casi nadie los retuitea: <b>tuitearon y no los escucharon</b>. La UDI tiene al 25%: <b>directamente no estaban</b>.</p>
+</div>
+
+<figure class="ancho">
+  <div class="tabla-envoltura"><table id="tabla-partidos"><thead></thead><tbody></tbody></table></div>
+  <figcaption><b>Tabla 3.</b> Diputados en ejercicio: presencia en el corpus y amplificación recibida, por partido.</figcaption>
+</figure>
+
+<hr>
+<footer class="col">
+  <p>Datos recolectados en octubre de 2019. Código y tablas en <a href="https://github.com/Alcatruz/estallido-twitter-2019">github.com/Alcatruz/estallido-twitter-2019</a>.</p>
+</footer>
+</article>
+</main>
+
+<script src="../datos/datos.js"></script>
+<script src="../sitio.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-basic-dist-min@2.35.2/plotly-basic.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ES, U = window.U;
+  if (!D || !U) return;
+
+  var NOM = { politica: "Cargos públicos", medio: "Medios e instituciones", ciudadana: "Cuentas ciudadanas" };
+  var CARGO = {
+    diputado: "Diputados", senador: "Senadores", ministro: "Ministros",
+    "ministro-desde-28oct": "Ministros (asumen el 28 de octubre)",
+    "ministro-hasta-28oct": "Ministros (salen el 28 de octubre)",
+    presidente: "Presidente de la República",
+    "presidente-partido": "Presidentes de partido"
+  };
+
+  U.tabla("#tabla-cargos", [
+    ["Cargo", function (f) { return CARGO[f.cargo] || f.cargo; }, "texto"],
+    ["Cuentas", function (f) { return U.num(f.n); }]
+  ], D.cargos);
+
+  U.tabla("#tabla-clases", [
+    ["Clase", function (f) { return NOM[f.clase]; }, "texto"],
+    ["Cuentas", function (f) { return U.num(f.cuentas); }],
+    ["% cuentas", function (f) { return U.pct(f.pctc, 2); }],
+    ["% publicaciones", function (f) { return U.pct(f.pctt, 2); }],
+    ["% retweets", function (f) { return U.pct(f.pctrt, 2); }],
+    ["RT por cuenta", function (f) { return U.num(f.rtxc); }]
+  ], D.clases, function (f) { return f.clase === "politica"; });
+
+  U.tabla("#tabla-partidos", [
+    ["Partido", function (f) { return f.p; }, "texto"],
+    ["Diputados", function (f) { return f.dips; }],
+    ["En el corpus", function (f) { return f.corpus; }],
+    ["% presentes", function (f) { return U.pct(f.pctp, 0); }],
+    ["RT recibidos", function (f) { return U.num(f.rt); }],
+    ["RT por diputado", function (f) { return U.num(f.rtxd); }]
+  ], D.partidos);
+
+  if (!window.Plotly) return;
+
+  function figClases(T) {
+    var COL = { politica: T.izq, medio: T.sen, ciudadana: T.neutro };
+    var ejes = [["pctc", "Cuentas"], ["pctt", "Publicaciones emitidas"], ["pctrt", "Retweets recibidos"]];
+    var y = ejes.map(function (e) { return e[1]; });
+    var data = ["ciudadana", "medio", "politica"].map(function (k) {
+      var f = D.clases.filter(function (c) { return c.clase === k; })[0];
+      return {
+        type: "bar", orientation: "h", name: NOM[k], y: y,
+        x: ejes.map(function (e) { return f[e[0]]; }),
+        marker: { color: COL[k] },
+        customdata: ejes.map(function (e) { return U.pct(f[e[0]], 2); }),
+        hovertemplate: "<b>" + NOM[k] + "</b> · %{y}<br>%{customdata}<extra></extra>"
+      };
+    });
+    var corto = U.angosto("fig-clases");
+    var layout = U.base(T, {
+      height: corto ? 300 : 280, barmode: "stack", bargap: 0.42,
+      margin: { l: corto ? 110 : 150, r: 16, t: 44, b: 44 },
+      xaxis: U.eje(T, { range: [0, 100], ticksuffix: "%", dtick: 25 }),
+      yaxis: U.eje(T, { autorange: "reversed", showgrid: false, tickfont: { color: T.ink2, size: corto ? 11 : 12.5 } })
+    });
+    Plotly.react("fig-clases", data, layout, U.CONFIG);
+  }
+
+  function figRendimiento(T) {
+    var COL = { politica: T.izq, medio: T.sen, ciudadana: T.neutro };
+    var R = D.rendimiento.slice().sort(function (a, b) { return a.cxt - b.cxt; });
+    var data = [{
+      type: "bar", orientation: "h", showlegend: false,
+      y: R.map(function (f) { return NOM[f.grupo]; }),
+      x: R.map(function (f) { return f.cxt; }),
+      marker: { color: R.map(function (f) { return COL[f.grupo]; }) },
+      text: R.map(function (f) { return U.num(f.cxt, 1); }),
+      textposition: "outside", textfont: { color: T.ink2, size: 12 },
+      customdata: R.map(function (f) { return [U.num(f.textos), U.num(f.circ)]; }),
+      hovertemplate: "<b>%{y}</b><br>%{customdata[0]} textos únicos<br>%{customdata[1]} retweets<br>%{x:.1f} por texto<extra></extra>"
+    }];
+    var corto = U.angosto("fig-rendimiento");
+    var layout = U.base(T, {
+      height: 240, bargap: 0.45,
+      margin: { l: corto ? 110 : 150, r: 40, t: 24, b: 44 },
+      xaxis: U.eje(T, { range: [0, 300], title: "Retweets por texto propio" }),
+      yaxis: U.eje(T, { showgrid: false, tickfont: { color: T.ink2, size: corto ? 11 : 12.5 } })
+    });
+    Plotly.react("fig-rendimiento", data, layout, U.CONFIG);
+  }
+
+  function figPartidos(T) {
+    var IZQ = ["PC", "RD", "CS", "PH", "PS", "PPD", "DC"];
+    var P = D.partidos.filter(function (f) { return f.p !== "otros / sin dato"; });
+    var maxd = Math.max.apply(null, P.map(function (f) { return f.dips; }));
+    var data = [{
+      type: "scatter", mode: "markers+text", showlegend: false,
+      x: P.map(function (f) { return f.pctp; }),
+      y: P.map(function (f) { return f.rtxd; }),
+      text: P.map(function (f) { return f.p; }),
+      textposition: "middle right", textfont: { color: T.ink, size: 13 },
+      marker: {
+        size: P.map(function (f) { return 10 + 24 * Math.sqrt(f.dips / maxd); }),
+        sizemode: "diameter",
+        color: P.map(function (f) { return IZQ.indexOf(f.p) >= 0 ? T.izq : T.der; }),
+        opacity: 0.85, line: { color: T.surface, width: 1.5 }
+      },
+      customdata: P.map(function (f) { return [f.dips, f.corpus, U.num(f.rt)]; }),
+      hovertemplate: "<b>%{text}</b> · %{customdata[0]} diputados<br>" +
+        "%{customdata[1]} presentes en el corpus (%{x:.0f}%)<br>" +
+        "%{customdata[2]} retweets · %{y:,} por diputado<extra></extra>"
+    }];
+    var layout = U.base(T, {
+      height: U.angosto("fig-partidos") ? 400 : 440,
+      margin: { l: 62, r: 40, t: 24, b: 54 },
+      xaxis: U.eje(T, { range: [10, 108], ticksuffix: "%", dtick: 20, title: "Diputados del partido presentes en el corpus" }),
+      yaxis: U.eje(T, { type: "log", title: "Retweets por diputado" })
+    });
+    Plotly.react("fig-partidos", data, layout, U.CONFIG);
+  }
+
+  U.alRedibujar(function () {
+    var T = U.tok(); figClases(T); figRendimiento(T); figPartidos(T);
+  });
+})();
+</script>
+</body>
+</html>
