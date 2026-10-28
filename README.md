@@ -7,33 +7,63 @@ del estallido social chileno (octubre 2019 en adelante).
 
 ```
 estallido_data/
-├── estallido_data.Rproj
-├── informe_corpus.qmd        reporte Quarto sobre el CORPUS COMPLETO
-├── R/
-│   ├── 00_setup.R            rutas, parametros y utilidades comunes
-│   ├── 01_rds_a_csv.R        lee el .rds -> CSV completo + muestra aleatoria
-│   ├── 01b_tabla_analisis.R  tabla liviana (parquet) para el corpus completo
-│   ├── 02_explorar_muestra.R exploracion descriptiva sobre la muestra
-│   ├── 03_red_18oct.R        red de retweets del 18-O (Leiden, sparse stress)
-│   ├── 04_red_pdf.R          red en PDF vectorial, con y sin etiquetas
-│   ├── 05_corpus_comunidades.R  cuentas fuertes y corpus por comunidad
-│   ├── 06_distribucion_global.R tweets y retweets en los 19 dias
-│   ├── 07_politicos.R        cruce preliminar padron-corpus por nombre
-│   ├── 08a_padron_diputados.R padron 2018-2022 reconciliado (BCN + Wikidata)
-│   └── 08_cuentas_diputados.R cuenta de X de cada diputado y presencia en corpus
-├── scripts/
-│   ├── bajar_resenas_bcn.py  descarga las resenas BCN y extrae la cuenta de X
-│   └── wikidata_diputados.rq consulta SPARQL de diputados con usuario de X
-├── data/
-│   ├── externos/             insumos descargados: nomina y resenas BCN, Wikidata
-│   ├── padron_diputados_2018_2022.csv   162 personas, 156 en ejercicio oct-2019
-│   ├── roster_politicos_2019.csv        padron preliminar (tiene errores, ver 08a)
-│   ├── raw/                  (el .rds original vive en la raiz del proyecto)
-│   └── processed/            CSV completo, muestra .csv y .rds
-├── output/
-│   ├── figuras/              graficos .png
-│   └── tablas/               reportes y tablas .csv
-└── tw_chile_social_crisis.rds   ~1.4 GB, comprimido con gzip
++- estallido_data.Rproj
++- informe_corpus.qmd        reporte Quarto sobre el CORPUS COMPLETO
++- R/
+|  +- 00_setup.R             rutas, parametros y utilidades comunes
+|  +- 01_rds_a_csv.R         lee el .rds -> CSV completo + muestra aleatoria
+|  +- 01b_tabla_analisis.R   tabla liviana (parquet) para el corpus completo
+|  +- 02_explorar_muestra.R  exploracion descriptiva sobre la muestra
+|  +- 03_red_18oct.R         red de retweets del 18-O (Leiden, sparse stress)
+|  +- 04_red_pdf.R           red en PDF vectorial, con y sin etiquetas
+|  +- 05_corpus_comunidades.R  cuentas fuertes y corpus por comunidad
+|  +- 06_distribucion_global.R tweets y retweets en los 19 dias
+|  +- 07_politicos.R         cruce preliminar padron-corpus por nombre
+|  +- 08a_padron_diputados.R padron 2018-2022 reconciliado (BCN + Wikidata)
+|  +- 08_cuentas_diputados.R cuenta de X de cada diputado y presencia en corpus
+|  +- 09_clasificar_cuentas.R  clases politica / medio / ciudadana
+|  +- 10_terminos_recoleccion.R  reconstruccion glotona de los terminos
+|  +- 11_discurso_comunidades.R  especificidad lexica por comunidad y clase
+|  +- 12_eventos_gobierno.R  estudio de eventos con control circadiano
+|  +- 13_paquete_publicacion.R  el paquete seudonimizado para deposito
+|  +- 14_procedencia_consultas.R  las 49 consultas de los archivos originales
+|  +- 15_espacio_latente.R   por que no hay eje ideologico estimable
+|  +- 16_polo_temporal.R     repertorios de consigna por dia
+|  +- 17_red_por_dia.R       las 16 redes diarias y el polo progobierno
+|  +- 18_subconjunto_limpio.R  las dos reglas de exclusion y su validacion
+|  +- 19_nucleo_red.R        nucleo legible por audiencia compartida
+|  +- 20_sitio.R             datos del sitio (docs/datos/*.js)
++- scripts/
+|  +- bajar_resenas_bcn.py   descarga las resenas BCN y extrae la cuenta de X
+|  +- wikidata_diputados.rq  consulta SPARQL de diputados con usuario de X
++- data/
+|  +- externos/              insumos descargados: nomina y resenas BCN, Wikidata
+|  +- cuentas_politicas.csv  171 cargos en ejercicio en octubre de 2019
+|  +- padron_diputados_2018_2022.csv   162 personas, 156 en ejercicio oct-2019
+|  +- raw/                   (el .rds original vive en la raiz del proyecto)
+|  +- processed/             CSV completo, muestra, parquet y el paquete
++- paper/                    el articulo de datos (LaTeX via Quarto)
++- docs/                     el sitio publicado con GitHub Pages
++- output/
+|  +- figuras/               graficos .png
+|  +- tablas/                reportes y tablas .csv
++- tw_chile_social_crisis.rds   ~1.4 GB, comprimido con gzip
+```
+
+## El sitio
+
+<https://alcatruz.github.io/estallido-twitter-2019/>
+
+Son paginas HTML escritas a mano en `docs/`, que GitHub Pages sirve desde
+`main` con la carpeta `/docs`. Los graficos son Plotly y leen los datos de
+`docs/datos/datos.js` y `docs/datos/red.js`, que genera `R/20_sitio.R` desde
+las tablas versionadas de `output/tablas` y `data`. Es decir: **el sitio se
+reconstruye sin el corpus**.
+
+Para verlo en local basta servir la carpeta:
+
+```bash
+python -m http.server 4173 --directory docs
 ```
 
 ## Como correrlo
