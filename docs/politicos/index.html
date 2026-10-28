@@ -88,7 +88,7 @@
 
 <figure class="ancho">
   <div class="grafico"><div id="fig-partidos" class="lienzo" role="img" aria-label="Presencia en el corpus y amplificación por partido"></div></div>
-  <figcaption><b>Figura 3.</b> Cada punto es un partido con cuatro diputados o más. En el eje horizontal, qué proporción de sus diputados aparece en el corpus; en el vertical, cuántos retweets recibe en promedio cada uno de sus diputados, en escala logarítmica. El tamaño es el número de diputados.</figcaption>
+  <figcaption><b>Figura 3.</b> Cada punto es un partido con cuatro diputados o más. En el eje horizontal, qué proporción de sus diputados aparece en el corpus; en el vertical, cuántos retweets recibe en promedio cada uno de sus diputados, en escala logarítmica. El tamaño es el número de diputados. El <b>PPD</b> no recibe ningún retweet, que el eje logarítmico no puede representar: va dibujado con punto hueco en el piso del eje.</figcaption>
 </figure>
 
 <div class="col">
@@ -201,28 +201,40 @@
     var IZQ = ["PC", "RD", "CS", "PH", "PS", "PPD", "DC"];
     var P = D.partidos.filter(function (f) { return f.p !== "otros / sin dato"; });
     var maxd = Math.max.apply(null, P.map(function (f) { return f.dips; }));
+    // El PPD recibe cero retweets y el eje logaritmico no admite el cero, asi
+    // que ese punto va al piso del eje, hueco, y el hover declara el valor real.
+    var PISO = 11;
     var data = [{
       type: "scatter", mode: "markers+text", showlegend: false,
       x: P.map(function (f) { return f.pctp; }),
-      y: P.map(function (f) { return f.rtxd; }),
+      y: P.map(function (f) { return f.rtxd > 0 ? f.rtxd : PISO; }),
       text: P.map(function (f) { return f.p; }),
       textposition: "middle right", textfont: { color: T.ink, size: 13 },
       marker: {
         size: P.map(function (f) { return 10 + 24 * Math.sqrt(f.dips / maxd); }),
         sizemode: "diameter",
+        symbol: P.map(function (f) { return f.rtxd > 0 ? "circle" : "circle-open"; }),
         color: P.map(function (f) { return IZQ.indexOf(f.p) >= 0 ? T.izq : T.der; }),
-        opacity: 0.85, line: { color: T.surface, width: 1.5 }
+        opacity: 0.85,
+        line: {
+          color: P.map(function (f) {
+            return f.rtxd > 0 ? T.surface : (IZQ.indexOf(f.p) >= 0 ? T.izq : T.der);
+          }),
+          width: 2
+        }
       },
-      customdata: P.map(function (f) { return [f.dips, f.corpus, U.num(f.rt)]; }),
+      customdata: P.map(function (f) {
+        return [f.dips, f.corpus, U.num(f.rt), U.num(f.rtxd)];
+      }),
       hovertemplate: "<b>%{text}</b> · %{customdata[0]} diputados<br>" +
         "%{customdata[1]} presentes en el corpus (%{x:.0f}%)<br>" +
-        "%{customdata[2]} retweets · %{y:,} por diputado<extra></extra>"
+        "%{customdata[2]} retweets · %{customdata[3]} por diputado<extra></extra>"
     }];
     var layout = U.base(T, {
       height: U.angosto("fig-partidos") ? 400 : 440,
       margin: { l: 62, r: 40, t: 24, b: 54 },
       xaxis: U.eje(T, { range: [10, 108], ticksuffix: "%", dtick: 20, title: "Diputados del partido presentes en el corpus" }),
-      yaxis: U.eje(T, { type: "log", title: "Retweets por diputado" })
+      yaxis: U.eje(T, { type: "log", range: [Math.log10(8), Math.log10(7000)], title: "Retweets por diputado" })
     });
     Plotly.react("fig-partidos", data, layout, U.CONFIG);
   }
