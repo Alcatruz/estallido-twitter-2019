@@ -1,0 +1,10 @@
+---
+title: "Posts"
+subtitle: "Análisis sobre el corpus, uno a la vez"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  fields: [date, title, description, reading-time]
+  date-format: "D [de] MMMM, YYYY"
+---

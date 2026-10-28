@@ -22,6 +22,8 @@ website:
         text: El polo que desapareció
       - href: politicos.qmd
         text: La clase política
+      - href: posts.qmd
+        text: Posts
       - href: datos.qmd
         text: Datos y código
   page-footer:
