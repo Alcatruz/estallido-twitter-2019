@@ -19,8 +19,8 @@ data/processed/*
 # pesa 86 MB y no tiene por que vivir en el repositorio. El codebook si.
 
 # ---------------------------------------------------------------------------
-# Salidas: las figuras PNG y las tablas chicas si se versionan, porque son el
-# resultado del analisis y no se pueden regenerar sin el corpus de 7 GB.
+# Salidas: las figuras PNG se versionan. Las tablas .csv no, aunque no se
+# pueden regenerar sin el corpus de 7 GB.
 # Los PDF vectoriales de la red pesan 23 MB entre los tres y salen de R/04.
 # ---------------------------------------------------------------------------
 output/figuras/*.pdf
@@ -39,5 +39,6 @@ output/figuras/*.pdf
 Thumbs.db
 
 # El sitio (docs/) SI se versiona: GitHub Pages lo sirve desde main/docs.
-# Lo unico que no es el servidor local de previsualizacion.
-.claude/settings.local.json
+
+# Ningun CSV de datos se versiona
+*.csv

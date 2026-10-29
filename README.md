@@ -57,8 +57,8 @@ estallido_data/
 Son paginas HTML escritas a mano en `docs/`, que GitHub Pages sirve desde
 `main` con la carpeta `/docs`. Los graficos son Plotly y leen los datos de
 `docs/datos/datos.js` y `docs/datos/red.js`, que genera `R/20_sitio.R` desde
-las tablas versionadas de `output/tablas` y `data`. Es decir: **el sitio se
-reconstruye sin el corpus**.
+las tablas de `output/tablas` y `data`. Esas tablas no están en el repositorio,
+pero con ellas **el sitio se reconstruye sin el corpus**.
 
 Para verlo en local basta servir la carpeta:
 
